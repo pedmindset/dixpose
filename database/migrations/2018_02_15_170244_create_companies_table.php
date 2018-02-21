@@ -19,8 +19,8 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('subdomain');
             $table->string('email')->unique();
-            $table->integer('phone1');
-            $table->integer('phone2')->nullable();
+            $table->bigInteger('phone1');
+            $table->bigInteger('phone2')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('region')->nullable();

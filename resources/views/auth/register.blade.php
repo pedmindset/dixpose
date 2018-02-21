@@ -29,7 +29,7 @@
                             <label for="company" class="col-md-4 col-form-label text-md-right">Company name</label>
 
                             <div class="col-md-6">
-                                <input id="company" type="text" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ old('company') }}" placeholder="Name" required autofocus>
+                                <input id="company" type="text" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ old('company') }}" placeholder="Company Name" required autofocus>
 
                                 @if ($errors->has('company'))
                                     <span class="invalid-feedback">
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="company" class="col-md-4 col-form-label text-md-right">Sub Domain</label>
+                            <label for="subdomain" class="col-md-4 col-form-label text-md-right">Sub Domain</label>
 
                             <div class="col-md-6">
                                 <input id="subdomain" type="text" class="form-control{{ $errors->has('subdomain') ? ' is-invalid' : '' }}" name="subdomain" value="{{ old('subdomain') }}" placeholder="subdomain.dixpose.com" required autofocus>
@@ -57,7 +57,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Name" required>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
@@ -68,10 +68,24 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="tel" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" placeholder="233241582764" required>
+
+                                @if ($errors->has('phone'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Name" required>
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">
@@ -85,7 +99,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Name" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required>
                             </div>
                         </div>
 

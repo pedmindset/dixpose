@@ -13,6 +13,11 @@ class Bin extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+
+
+    public function company(){
+        return $this->belongsTo('App\Company');
+    }
     
 
 }

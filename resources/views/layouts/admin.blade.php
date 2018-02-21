@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -12,9 +12,9 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="#">
-    <title>Admin Section</title>
+    <title>{{ config('app.name', 'Dixpose') }} @yield('title')</title>
     <!-- Custom CSS -->
-    <link href="dist/css/style.min.css" rel="stylesheet">
+    @include('layouts.style')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -22,7 +22,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="skin-default fixed-layout boxed">
+<body class="skin-megna fixed-layout boxed">
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
@@ -37,96 +37,57 @@
         <!-- ============================================================== -->
         <div id="main-wrapper">
             <!-- ============================================================== -->
-            <!-- Topbar header - style you can find in pages.scss -->
-            <!-- ============================================================== -->
-            <header class="topbar">
-                <!-- ============================================================== -->
-                <!-- Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html">
-                            <!-- Logo icon -->
-                            <b>
-                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                                <!-- Dark Logo icon -->
-                                <img src="images/logo-icon.png" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo icon -->
-                                <img src="images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                            </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
-                            <span>
-                                <!-- dark Logo text -->
-                                <img src="images/logo-text.png" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo text -->
-                                <img src="images/logo-light-text.png" class="light-logo" alt="homepage" />
-                            </span>
-                        </a>
-                    </div>
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        
+
+                     @include('layouts.header')
                     <!-- ============================================================== -->
-                    <!-- End Logo -->
+                    <!-- Left Sidebar - style you can find in sidebar.scss  -->
                     <!-- ============================================================== -->
-            </header>
+        
+
+                     @include('layouts.sidebar')
+
             <!-- ============================================================== -->
-            <!-- End Topbar header -->
+            <!-- End Left Sidebar - style you can find in sidebar.scss  -->
             <!-- ============================================================== -->
-        </div>
-  
         <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!--  Page wrapper  -->
         <!-- ============================================================== -->
-
-        @include('layouts.sidebar')
-
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-
-        <!-- ============================================================== -->
-
+        <div class="page-wrapper">
+                <!-- ============================================================== -->
+                <!-- Container fluid  -->
+                <!-- ============================================================== -->
+                <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                     @yield('content')
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Container fluid  -->
+                <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
         
         <!-- ============================================================== -->
-        <!-- Start Page Content -->
+        <!-- footer -->
         <!-- ============================================================== -->
-        @yield('content')
+        @include('layouts.footer')
         <!-- ============================================================== -->
-        <!-- End PAge Content -->
+        <!-- End footer -->
         <!-- ============================================================== -->
-     
-<!-- ============================================================== -->
-<!-- End Page wrapper  -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
-<!-- footer -->
-<!-- ============================================================== -->
-          @include('layouts.footer')
-<!-- ============================================================== -->
-<!-- End footer -->
-<!-- ============================================================== -->
         </div>
-<!-- ============================================================== -->
-<!-- End Page wrapper  -->
-<!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
 
-<!-- All Jquery -->
+        <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="node_modules/jquery/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="node_modules/popper/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="dist/js/perfect-scrollbar.jquery.min.js"></script>
-    <!--Wave Effects -->
-    <script src="dist/js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="dist/js/sidebarmenu.js"></script>
-    <!--stickey kit -->
-    <script src="node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="node_modules/sparkline/jquery.sparkline.min.js"></script>
-    <!--Custom JavaScript -->
-    <script src="dist/js/custom.min.js"></script>
-
-   
+    @include('layouts.script')
 </body>
 
 </html>

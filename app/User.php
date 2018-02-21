@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'comapany', 'subdomain', 'phone'
     ];
 
     /**
@@ -28,16 +28,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     public function proifle(){
         return $this->hasOne('App\Models\Profile');
     }
 
+
     public function company(){
-        return $this->hasOne('App\Models\Company');
+        return $this->hasOne('App\Models\Company', 'company_id');
     }
 
-    public function roles(){
-        return $this->belongsTomany('App\Models\Role');
-    }
-
+   
+ 
 }
+

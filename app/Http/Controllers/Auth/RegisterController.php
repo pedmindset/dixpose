@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\User;
+use App\Models\Company;
+use App\Models\Profile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\Subdomain;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -28,8 +31,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+    
+    protected $redirectTo = '/dashboard';
     /**
      * Create a new controller instance.
      *
@@ -48,10 +51,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'company.required' => 'Please enter the name of your Company'
+            
+        ];
+
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|confirmed|alpha_dash',
+            'company' => 'required|string|max:255',
+            'subdomain' => 'required|string|max:15|alpha_dash|unique:companies,subdomain',
+            'phone' => 'required|integer|min:13'
         ]);
     }
 
@@ -63,10 +74,37 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $user = new User;
+        $company = new Company;
+        $profile = new Profile;
+
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->save();
+
+        
+        $company->user()->associate($user)->save([
+            $company->name = $data['company'],
+            $company->subdomain = $data['subdomain'],
+            $company->email = $data['email'],
+            $company->phone1 = $data['phone']
         ]);
+
+        $profile->user()->associate($user)->save([
+            $profile->company_id = $company->id,
+            $profile->email = $data['email'],
+            $profile->phone1 = $data['phone'],
+
+        ]);
+
+        $newUser = User::find($user->id);
+        $newUser->company_id = $company->id;
+        $newUser->save();
+
+        return $user;
+
     }
+
+
 }

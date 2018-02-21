@@ -27,7 +27,7 @@ class VerifyCompany
 
         //check if the subdomain belongs to a company
         $company = Company::find(1);
-        $subdomain = $company->user()->where('subdomain', $company_subdomain)->firstOrFial();
+        $subdomain = $company->users()->where('subdomain', $company_subdomain)->firstOrFail();
 
 
         return $next($request);

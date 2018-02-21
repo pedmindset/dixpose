@@ -13,4 +13,14 @@ class ServiceZone extends Model
 
     protected $dates = ['deleted_at'];
 
+
+    public function company(){
+        return belongsTo('App\Models\Company');
+    }
+
+    public function zone(){
+        return belongsTo('App\Models\Zone');
+    }
+
 }
+

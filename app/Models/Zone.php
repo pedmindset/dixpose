@@ -13,4 +13,13 @@ class Zone extends Model
 
     protected $dates = ['deleted_at'];
 
+
+    public function company(){
+        return $this->belongsTo('App\Models\Company');
+    }
+
+    public function service_zone(){
+        return $this->hasMany('App\Models\ServiceZone');
+    }
 }
+

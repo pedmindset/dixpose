@@ -11,11 +11,6 @@ trait BelongsToCompany
     {
         parent::boot();
 
-        static::creating(function($model)
-        {
-            $model->company_id = Auth::user()->company_id;
-        });
-
         static::addGlobalScope(new CompanyScope);
     }
 }

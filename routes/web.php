@@ -13,15 +13,24 @@
 
 Route::Auth();
 
-Route::domain('{subdomain}.dixpose.dev')->group(function(){
-    
-    Route::get('/', function($subdomain){
-        return $subdomain;
-    })->middleware('verify.company');
-
+Route::middleware('auth')->group(function(){
+      
+    Route::get('/dashboard', 'AppController@index')->name('dashboard')->middleware('auth');
+    Route::resource('zones', 'ZoneController')->middleware('auth');
+    Route::resource('servicezones', 'ServiceZoneController')->middleware('auth');
+    Route::resource('bins', 'BinController')->middleware('auth');
+    Route::resource('customers', 'CustomerController')->middleware('auth');
 });
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('users/{id}', function ($id) {
+    $zone = App\Models\Zone::where('company_id', Auth::user()->company_id)
+    ->where('id', $id)->first();
+    
+});
 
-Route::get('/logout', 'HomeController@logout')->name('logout');
+
+Route::get('/logout', 'AppController@logout')->name('logout');
+
+

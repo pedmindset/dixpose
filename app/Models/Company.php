@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 
 
 class Company extends Model
@@ -13,15 +14,26 @@ class Company extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function owner(){
-        return $this->belongsTo('App\User');
+  
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id');
     }
 
-    public static function boot(){
-        parent::boot();
-        static::creating(function ($model){
-            $model->user_id = App\Models\User::where('id', $model->user_id);
-        });
+    public function zone(){
+        return $this->hasMany('App\Zone');
+    }
+
+    public function service_zone(){
+        return $this->hasMany('App\ServiceZone');
+    }
+
+    public function bin(){
+        return $this->hasMany('App\Bin');
+    }
+    
+
+    public function customer(){
+        return $this->hasMany('App\Customer');
     }
 
 }
