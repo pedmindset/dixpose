@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Service Zones')
+@section('title', 'Edit Sector')
 
-@section('style')
+@section('styles')
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Edit Service Zones</h4>
+                <h4 class="card-title">Edit Sector</h4>
                 <h6 class="card-subtitle"></a></h6>
                      @if (session('status'))
                             <div class="alert alert-success">
@@ -22,15 +22,15 @@
                          @csrf
                          @method('PUT')
                             <div class="form-group">
-                                <label for="name">Service Zone Name<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" value="{{ $service_zone->name }}" placeholder="Enter Service Zone Name" required data-validation-required-message ="Please Enter the Zone Name">
+                                <label for="name">Sector Name<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" value="{{ $service_zone->name }}" placeholder="Enter Sector Name" required data-validation-required-message ="Please Enter the Zone Name">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Zone<span class="text-danger">*</span></label>
                                     <select name="zone" class="form-control custom-select {{ $errors->has('zone') ? ' is-invalid' : '' }}" required data-validation-required-message ="Please Select the Zone Name">
-                                            
-                                            <option value="{{$service_zone->id}}">{{$service_zone->name}}</option>
-                                           
+                                        @foreach($zones as $zone)
+                                            <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                        @endforeach
                                     </select>
                                 <small class="form-control-feedback text-danger"> Select Zone </small> 
                             </div>
@@ -60,7 +60,7 @@
         </div>
 @endsection
 
-@section('script')
+@section('scripts')
 <script src="{{ asset('dist/js/pages/validation.js') }}"></script>
 <script>
 ! function(window, document, $) {

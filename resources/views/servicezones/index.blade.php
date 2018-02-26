@@ -13,7 +13,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                        <h4 class="card-title">View Service Zones</h4>
+                        <h4 class="card-title">View Sectors</h4>
+                             @if (session('status'))
+                            <div class="alert alert-success">
+                                
+                                {{ session('status') }}
+                           </div>
+                     @endif
                         <h6 class="card-subtitle">{{ $i = '' }}</a></h6>
                         <div class="card-actions">
                         <a class="" data-action="collapse"><i class="ti-minus"></i></a>
@@ -25,7 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
-                                        <th>Service Zone Name</th>
+                                        <th>Sector Name</th>
                                         <th>Description </th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -44,7 +50,7 @@
                                                     
                                              </td>
                                              <td class="text-nowrap">
-                                             <form action="{{ action('ZoneController@destroy',$zone->id) }}" method="POST">
+                                             <form action="{{ action('ServiceZoneController@destroy',$zone->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                  <button class="" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i></button>

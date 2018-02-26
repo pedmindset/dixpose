@@ -14,6 +14,12 @@
             <div class="card">
                 <div class="card-header">
                         <h4 class="card-title">View Zones</h4>
+                         @if (session('status'))
+                            <div class="alert alert-success">
+                                
+                                {{ session('status') }}
+                           </div>
+                        @endif
                         <h6 class="card-subtitle">{{ $i = '' }}</a></h6>
                         <div class="card-actions">
                         <a class="" data-action="collapse"><i class="ti-minus"></i></a>

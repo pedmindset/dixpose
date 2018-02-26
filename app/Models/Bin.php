@@ -16,8 +16,11 @@ class Bin extends Model
 
 
     public function company(){
-        return $this->belongsTo('App\Company');
+        return $this->belongsTo('App\Models\Company');
     }
     
+    public function customer(){
+        return $this->belongsToMany('App\Models\Customer');
+    }
 
 }

@@ -22,7 +22,7 @@ class CreateProfilesTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('picture')->nullable();
-            $table->bigInteger('phone1');
+            $table->bigInteger('phone1')->nullable();
             $table->bigInteger('phone2')->nullable();
             $table->string('email')->unique();
             $table->string('address')->nullable();

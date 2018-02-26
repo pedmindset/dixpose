@@ -20,8 +20,8 @@ class CreateCustomerValidateCollectionsTable extends Migration
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->integer('company_id')->unsigned()->index();;
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->string('status');
-            $table->text('remarks');
+            $table->string('status')->nullable();
+            $table->text('remarks')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

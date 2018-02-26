@@ -16,7 +16,7 @@ class CreateZonesTable extends Migration
             $table->increments('id');
             $table->integer('company_id')->unsigned()->index();;
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('desc')->nullable();
             $table->softDeletes();
             $table->timestamps();

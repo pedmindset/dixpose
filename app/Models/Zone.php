@@ -21,5 +21,10 @@ class Zone extends Model
     public function service_zone(){
         return $this->hasMany('App\Models\ServiceZone');
     }
+
+    public function customer(){
+        return $this->hasMany('App\Models\Customer');
+    }
+
 }
 

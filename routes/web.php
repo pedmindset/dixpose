@@ -10,27 +10,73 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Models\Company;
 
-Route::Auth();
 
+
+Route::get('/', function()
+    {
+        if(Auth::user()){
+           return redirect('manager/dashboard');
+        }else{
+            return redirect('login');
+        }
+    }
+);
+
+/**if(Auth::user())
+{
+    $company = Company::where('id', Auth::user()->company_id)
+               ->first();
+    $subdomain = $company->subdomain;
+
+    return $subdomain;
+}
+**/
+
+
+Route::auth();
+
+/**Route::get('manager/dashboard', 'AppController@index')->name('dashboard');
+
+Route::domain('{$subdomain}.dixpose.com')->group(function () {
+
+    Route::middleware('auth')->group(function(){
+      
+       
+        Route::resource('zones', 'ZoneController');
+        Route::resource('servicezones', 'ServiceZoneController');
+        Route::resource('bins', 'BinController');
+        Route::resource('customers', 'CustomerController');
+        Route::resource('classifications', 'ClassificationController');
+        Route::resource('drivers', 'DriverController');
+        Route::resource('trucks', 'TruckController');
+        Route::resource('supervisors', 'SupervisorController');
+        Route::resource('schedules', 'JourneyController');
+        Route::get('/logout', 'AppController@logout')->name('logout');
+    });
+    
+        
+});
+**/
 Route::middleware('auth')->group(function(){
       
-    Route::get('/dashboard', 'AppController@index')->name('dashboard')->middleware('auth');
-    Route::resource('zones', 'ZoneController')->middleware('auth');
-    Route::resource('servicezones', 'ServiceZoneController')->middleware('auth');
-    Route::resource('bins', 'BinController')->middleware('auth');
-    Route::resource('customers', 'CustomerController')->middleware('auth');
+    Route::get('manager/dashboard', 'AppController@index')->name('dashboard');
+    Route::resource('zones', 'ZoneController');
+    Route::resource('servicezones', 'ServiceZoneController');
+    Route::resource('bins', 'BinController');
+    Route::resource('classifications', 'ClassificationController');
+    Route::resource('drivers', 'DriverController');
+    Route::resource('trucks', 'TruckController');
+    Route::resource('supervisors', 'SupervisorController');
+    Route::resource('schedules', 'JourneyController');
+
+    Route::resource('customers', 'CustomerController');
+    Route::get('customers/sort/{key}', 'CustomerController@customerSort');
+    Route::get('customers/search/{value}', 'CustomerController@searchCustomer');
+    Route::get('/logout', 'AppController@logout')->name('logout');
 });
 
-Auth::routes();
 
-Route::get('users/{id}', function ($id) {
-    $zone = App\Models\Zone::where('company_id', Auth::user()->company_id)
-    ->where('id', $id)->first();
-    
-});
-
-
-Route::get('/logout', 'AppController@logout')->name('logout');
 
 

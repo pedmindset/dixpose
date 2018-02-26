@@ -21,9 +21,9 @@ class CreateMessagesTable extends Migration
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('receiver_id')->unsigned()->index()->nullable();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('type')->nullable();
-            $table->longText('message');
+            $table->longText('message')->nullable();
             $table->text('remarks')->nullable();
             $table->softDeletes();
             $table->timestamps();

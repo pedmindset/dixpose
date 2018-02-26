@@ -18,8 +18,8 @@ class CreateServiceZonesTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies');
             $table->integer('zone_id')->unsigned()->index();
             $table->foreign('zone_id')->references('id')->on('zones');
-            $table->string('name');
-            $table->string('desc');
+            $table->string('name')->nullable();
+            $table->string('desc')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

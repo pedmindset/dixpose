@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Auth;
 
 
 class Company extends Model
@@ -20,20 +19,37 @@ class Company extends Model
     }
 
     public function zone(){
-        return $this->hasMany('App\Zone');
+        return $this->hasMany('App\Models\Zone');
     }
 
     public function service_zone(){
-        return $this->hasMany('App\ServiceZone');
+        return $this->hasMany('App\Models\ServiceZone');
     }
 
     public function bin(){
-        return $this->hasMany('App\Bin');
+        return $this->hasMany('App\Models\Bin');
+    }
+    
+    public function customer(){
+        return $this->hasMany('App\Models\Customer');
+    }
+
+    public function supervisor(){
+        return $this->hasMany('App\Models\Supervisor');
+    }
+    
+    public function driver(){
+        return $this->hasMany('App\Models\Driver');
+    }
+
+    public function truck(){
+        return $this->hasMany('App\Models\Truck');
+    }
+
+    public function journey(){
+        return $this->hasMany('App\Models\Journey');
     }
     
 
-    public function customer(){
-        return $this->hasMany('App\Customer');
-    }
 
 }

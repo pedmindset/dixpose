@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Company;
 
 class AppController extends Controller
 {
@@ -26,7 +27,11 @@ class AppController extends Controller
      */
     public function index()
     {
-        return view('manager/dashboard');
+        return view('manager.dashboard');
+    }
+
+    public function login(){
+        return view('auth.login');
     }
 
 
@@ -34,5 +39,11 @@ class AppController extends Controller
         $user = Auth::user();
         Auth::logout($user);
         return redirect('/login');
+    }
+
+    public function getSubdomain(Company $company){
+        $company::where('id', Auth::user()->company_id)->first();
+        $url = $company->subdomain.'.'.'766a0bda.com';
+        return $url;
     }
 }

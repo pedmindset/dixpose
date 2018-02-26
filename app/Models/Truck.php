@@ -13,9 +13,12 @@ class Truck extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function company(){
+        return $this->belongsTo('App\Models\Company');
+    }
 
     public function driver(){
-        return $this->belongsTo('App\Models\Driver');
+        return $this->belongsToMany('App\Models\Driver');
     }
 
 }

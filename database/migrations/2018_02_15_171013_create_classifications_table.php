@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBinsTable extends Migration
+class CreateClassificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,14 @@ class CreateBinsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bins', function (Blueprint $table) {
+        Schema::create('classifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id')->unsigned()->index();;
+            $table->integer('company_id')->index()->unsigned();
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->string('type');
-            $table->biginteger('price');
+            $table->integer('bin_id')->index()->unsigned();
+            $table->foreign('bin_id')->references('id')->on('bins');
+            $table->string('class')->nullable();
+            $table->biginteger('price')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +32,6 @@ class CreateBinsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('bins');
+        Schema::drop('classifications');
     }
 }

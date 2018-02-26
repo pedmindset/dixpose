@@ -23,9 +23,8 @@ class ZoneController extends Controller
     public function index()
     {
         //Show all Zones in Database
-        $zones = Zone::all();
-        $company_zones = $zones->where('company_id', Auth::user()->company_id);
-        return view('zones.index')->with('zones', $company_zones);
+        $zones = Zone::all()->where('company_id', Auth::user()->company_id);
+        return view('zones.index')->with('zones', $zones);
     }
 
     /**
@@ -119,6 +118,8 @@ class ZoneController extends Controller
         $zone->save();
         $url = 'zones/'.$id;
 
+        
+
         return redirect($url)->with('status', 'Zone was successfully updated');
     }
 
@@ -132,9 +133,9 @@ class ZoneController extends Controller
     {
         //softdelete zone
         $zone = Zone::where('company_id', Auth::user()->company_id)
-        ->where('id', $id)->first();
+                     ->where('id', $id)->first();
+
         $zone->destroy($zone->id);
-        
         return redirect('zones')->with('status', 'Zone has been successfully deleted');
         
     }

@@ -1,18 +1,21 @@
 <?php
 
-use App\User;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Driver extends User
+class Driver extends Model
 {
+    use SoftDeletes;
 
-    protected $table = 'users';
+    protected $dates = ['deleted_at'];
 
-    public function truck(){
-        return $this->haveMany('App\Models\Truck');
+    public function company(){
+        return $this->belongsTo('App\Models\Company');
     }
 
-    public function journey(){
-        return $this->hasManyThrough('App\Models\Journey', 'App\Models\Truck');
+    public function truck(){
+        return $this->belongsToMany('App\Models\Truck');
     }
 }

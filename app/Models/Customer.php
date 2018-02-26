@@ -11,6 +11,25 @@ class Customer extends Model
     //
     use SoftDeletes;
 
+
     protected $dates = ['deleted_at'];
+
+    public function company(){
+        return $this->belongsTo('App\Models\Company');
+    }
+
+    public function zone(){
+        return $this->belongsTo('App\Models\Zone');
+    }
+
+    public function service_zone(){
+        return $this->belongsTo('App\Models\ServiceZone');
+    }
+
+    public function bin(){
+        return $this->BelongsToMany('App\Models\Bin');
+    }
+
+
 
 }

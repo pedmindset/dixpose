@@ -20,10 +20,14 @@ class CreateCustomersTable extends Migration
             $table->foreign('zone_id')->references('id')->on('zones');
             $table->integer('service_zone_id')->unsigned()->index()->nullable();
             $table->foreign('service_zone_id')->references('id')->on('service_zones');
-            $table->string('code')->unique();
-            $table->string('name');
-            $table->integer('phone');
-            $table->integer('phone2')->nullable();
+            $table->integer('classification_id')->unsigned()->index()->nullable();
+            $table->foreign('classification_id')->references('id')->on('classifications');
+            $table->string('code')->unique()->nullable();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->BigInteger('phone1')->nullable();
+            $table->BigInteger('phone2')->nullable();
+            $table->string('ghana_gps')->nullable();
             $table->string('address')->nullable();
             $table->float('longitude', 10, 6)->nullable();
             $table->float('latitude', 10, 6)->nullable();

@@ -12,4 +12,28 @@ class Journey extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function company(){
+        return $this->belongsTo('App\Models\Company');
+    }
+
+    public function driver(){
+        return $this->belongsTo('App\Models\Driver');
+    }
+
+    public function supervisor(){
+        return $this->belongsTo('App\Models\Supervisor');
+    }
+
+    public function truck(){
+        return $this->belongsTo('App\Models\Truck');
+    }
+
+    public function zone(){
+        return $this->belongsTo('App\Models\Zone');
+    }
+
+    public function servicezone(){
+        return $this->belongsTo('App\Models\ServiceZone');
+    }
+
 }

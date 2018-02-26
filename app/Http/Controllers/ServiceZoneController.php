@@ -28,9 +28,8 @@ class ServiceZoneController extends Controller
     public function index()
     {
         //show all service zones
-        $service_zones = ServiceZone::all();
-        $company_service_zone = $service_zones->where('company_id', Auth::user()->company_id);
-        return view('servicezones.index')->with('service_zones', $company_service_zone);
+        $service_zones = ServiceZone::all()->where('company_id', Auth::user()->company_id);
+        return view('servicezones.index')->with('service_zones', $service_zones);
     }
 
     /**
@@ -40,10 +39,9 @@ class ServiceZoneController extends Controller
      */
     public function create()
     {
-        $zones = Zone::all();
-        $company_zones = $zones->where('company_id', Auth::user()->company_id);
+        $zones = Zone::all()->where('company_id', Auth::user()->company_id);
         //return a the create view page
-        return view('servicezones.create')->with('zones', $company_zones);
+        return view('servicezones.create')->with('zones', $zones);
     }
 
     /**
@@ -98,7 +96,10 @@ class ServiceZoneController extends Controller
         //return the upadte view for service zone
         $service_zone = ServiceZone::where('company_id', Auth::user()->company_id)
                         ->where('id', $id)->first();
-        return view('servicezones.edit')->with('service_zone', $service_zone);
+
+        $zones = Zone::all()->where('company_id', Auth::user()->company_id);
+
+        return view('servicezones.edit', compact('service_zone', 'zones'));
     }
 
     /**
@@ -123,9 +124,9 @@ class ServiceZoneController extends Controller
         $service_zone->name = $request->name;
         $service_zone->desc = $request->desc;
         $service_zone->save();
-        $url = 'servicezones/'.$id;
+        
 
-        return redirect($url)->with('status', 'Service Zone was successfully updated');
+        return redirect('servicezones')->with('status', 'Service Zone was successfully updated');
 
     }
 

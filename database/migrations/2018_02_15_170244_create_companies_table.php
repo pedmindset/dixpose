@@ -16,10 +16,10 @@ class CreateCompaniesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();;
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('subdomain');
             $table->string('email')->unique();
-            $table->bigInteger('phone1');
+            $table->bigInteger('phone1')->nullable();
             $table->bigInteger('phone2')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
