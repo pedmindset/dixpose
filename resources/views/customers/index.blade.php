@@ -27,7 +27,9 @@
                     </div>
                 </div>
                 <div class="card-body">  
-                        <table class="table table-responsive table-striped table-hover display nowrap table table-hover table-striped table-bordered" id="table1">
+                    <div class="table-responsive m-t-40">
+
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered"  cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -74,6 +76,7 @@
                                 </tbody>
                                 @endforeach
                             </table>
+                        </div>
                         
                         </div>
                     </div>
@@ -93,51 +96,14 @@
  <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
  <!-- end - This is for export functionality only -->
  <script>
- $(document).ready(function() {
-     $('#myTable').DataTable();
-     $(document).ready(function() {
-         var table = $('#table3').DataTable({
-             "columnDefs": [{
-                 "visible": false,
-                 "targets": 2
-             }],
-             "order": [
-                 [2, 'asc']
-             ],
-             "displayLength": 25,
-             "drawCallback": function(settings) {
-                 var api = this.api();
-                 var rows = api.rows({
-                     page: 'current'
-                 }).nodes();
-                 var last = null;
-                 api.column(2, {
-                     page: 'current'
-                 }).data().each(function(group, i) {
-                     if (last !== group) {
-                         $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                         last = group;
-                     }
-                 });
-             }
-         });
-         // Order by the grouping
-         $('#table2 tbody').on('click', 'tr.group', function() {
-             var currentOrder = table.order()[0];
-             if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                 table.order([2, 'desc']).draw();
-             } else {
-                 table.order([2, 'asc']).draw();
-             }
-         });
-     });
- });
- $('#table1').DataTable({
-     dom: 'Bfrtip',
-     buttons: [
-         'copy', 'csv', 'excel', 'pdf', 'print'
-     ]
- });
+     
+    $('#example23').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+
  </script>
 
 @endsection

@@ -13,11 +13,12 @@ class CreateDriverTruckPivotTable extends Migration
     public function up()
     {
         Schema::create('driver_truck', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('driver_id')->unsigned()->index();
             $table->foreign('driver_id')->references('id')->on('drivers')->onDelete('cascade');
             $table->integer('truck_id')->unsigned()->index();
             $table->foreign('truck_id')->references('id')->on('trucks')->onDelete('cascade');
-            $table->primary(['driver_id', 'truck_id']);
+            
         });
     }
 

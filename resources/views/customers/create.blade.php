@@ -3,6 +3,8 @@
 @section('title', 'Add Customer')
 
 @section('styles')
+<link href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+
 @endsection
 
 @section('content')
@@ -110,6 +112,17 @@
                                         <small class="form-control-feedback"> GPS Address. </small> </div>
                                 </div>
                                 <!--/span-->
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                           <h4 class="control-label"> Select Bins</h4>
+                                             <select name="bins[]" class="select2 select2-multiple js-states js-example-events"  style="width: 100%" multiple="multiple" data-placeholder="Choose a type of bin">
+                                                 @foreach($bins as $bin)
+                                                <option value="{{ $bin->id or '' }}">{{ $bin->type or '' }}</option>
+                                                @endforeach
+                                            </select>
+                                            <small class="form-control-feedback text-danger"> If customer has three 240 ltr bins select 240 three times</small>
+                                        </div>
+                                </div>
                             </div>
                             <!--/row-->
     
@@ -125,18 +138,19 @@
                                             <label class="control-label">Service Classification<span class="text-danger">*</span></label>
                                                 <select name="classification" class="form-control custom-select" data-placeholder="Choose a classification" tabindex="1" required>
                                                         @foreach($classifications as $classification)
-                                                        <option value="{{$classification->id or ''}}">{{$classification->class or ''}}</option>
+                                                        <option  value="{{$classification->id or ''}}">{{$classification->class or ''}}</option>
                                                         @endforeach
                                                    
                                              </select>
                                             <small class="form-control-feedback"> Service Classification </small> </div>
                                     </div>
+                                    
                             <!--/row-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Frequency of collection<span class="text-danger">*</span></label>
-                                            <select name="frequency" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" required>
+                                            <select name="frequency" class="form-control custom-select" data-placeholder="Choose a Category" style="width: 100%" tabindex="1" required>
                                                <option value="1">Once per week</option>
                                                <option value="2">Twice per week</option>
                                                <option value="3">thrice per week</option>
@@ -157,6 +171,7 @@
                         </div>
                     </form>
                 </div>
+                </div>
             </div>
         </div>
     </div>
@@ -166,12 +181,66 @@
 
 
 @section('scripts')
-<script src="{{ asset('dist/js/pages/validation.js') }}"></script>
+<script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"  type="text/javascript"> </script>
+<script src="{{ asset('dist/js/pages/validation.js') }}" type="text/javascript"></script>
 <script>
-! function(window, document, $) {
-    "use strict";
-    $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
-}(window, document, jQuery);
-</script>
+jQuery(document).ready(function() {
+        // For select 2
+        $(".select2").select2().val();
+            var $eventLog = $(".js-event-log");
+            var $eventSelect = $(".js-example-events");
+
+            $.fn.select2.defaults.set("width", "100%");
+
+            $eventSelect.on("select2:open", function (e) { log("select2:open", e); });
+            $eventSelect.on("select2:close", function (e) { log("select2:close", e); });
+            $eventSelect.on("change", function (e) { log("change"); });
+
+            $eventSelect.on("select2:select", function (e) { 
+                log("select2:select", e);
+            $eventSelect.append('<option value="'+e.params.data.id+'">' +e.params.data.text + '</option>');
+            });
+            $eventSelect.on("select2:unselect", function (e) { 
+                log("select2:unselect", e); 
+                e.params.data.element.remove();
+            });
+
+            function log (name, evt) {
+            if (!evt) {
+                var args = "{}";
+            } else {
+                var args = JSON.stringify(evt.params, function (key, value) {
+                if (value && value.nodeName) return "[DOM node]";
+                if (value instanceof $.Event) return "[$.Event]";
+                return value;
+                });
+            }
+            var $e = $("<li>" + name + " -> " + args + "</li>");
+            $eventLog.append($e);
+            $e.animate({ opacity: 1 }, 50000, 'linear', function () {
+                $e.animate({ opacity: 0 }, 2000, 'linear', function () {
+                $e.remove();
+                });
+            });
+            }
+
+            function formatResultData (data) {
+            if (!data.id) return data.text;
+            if (data.element.selected) return
+            return data.text;
+            };
+
+            $eventSelect.select2({
+            templateResult: formatResultData,
+            tags: true}
+            );
+       
+ });
+
+        ! function(window, document, $) {
+            "use strict";
+            $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+        }(window, document, jQuery);
+        </script>
 
 @endsection

@@ -13,11 +13,12 @@ class CreateBinRequestPivotTable extends Migration
     public function up()
     {
         Schema::create('bin_request', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('bin_id')->unsigned()->index();
             $table->foreign('bin_id')->references('id')->on('bins')->onDelete('cascade');
             $table->integer('request_id')->unsigned()->index();
             $table->foreign('request_id')->references('id')->on('requests')->onDelete('cascade');
-            $table->primary(['bin_id', 'request_id']);
+           
         });
     }
 

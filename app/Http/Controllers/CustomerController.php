@@ -61,6 +61,7 @@ class CustomerController extends Controller
 
         return $customer;
     }
+  
     /**
      * Show the form for creating a new resource.
      *
@@ -73,9 +74,11 @@ class CustomerController extends Controller
 
         $service_zones = ServiceZone::all()->where('company_id', Auth::user()->company_id);
 
-        $classifications = Classification::all()->where('company_id', Auth::user()->company_id);;
+        $classifications = Classification::all()->where('company_id', Auth::user()->company_id);
 
-        return view('customers.create', compact('zones', 'service_zones', 'classifications'));
+        $bins = Bin::all()->where('company_id', Auth::user()->company_id);
+
+        return view('customers.create', compact('zones', 'service_zones', 'classifications', 'bins'));
     }
 
     /**
@@ -103,6 +106,7 @@ class CustomerController extends Controller
             'address' => 'nullable',
             'ghana_gps' => 'nullable|max:10',
             'frequency' => 'required|string',
+            'bins'  =>  'nullable'
         ]);
 
         $customer = new Customer;
@@ -128,13 +132,17 @@ class CustomerController extends Controller
         $customer->frequency = $request->frequency;
         $customer->save();
 
+        $customer->bin()->attach($request->bins);
+
         $zones = Zone::all()->where('company_id', Auth::user()->company_id);
 
         $service_zones = ServiceZone::all()->where('company_id', Auth::user()->company_id);
 
         $classifications = Classification::all()->where('company_id', Auth::user()->company_id);
 
-        return redirect('customers/create')->with('status', 'Customer has been added successfully');
+        
+
+        return redirect('customers/create')->with('status', "Customer has been successfully added");
 
     }
 
@@ -149,7 +157,7 @@ class CustomerController extends Controller
         //show a single customer
         $customer = Customer::where('company_id', Auth::user()->company_id)
                     ->where('id', $id)->first();
-        return view('customers.show')->with('customer', $customer);
+        return $customer;
     }
 
     /**
@@ -194,6 +202,7 @@ class CustomerController extends Controller
             'classification' => 'required|integer',
             'ghana_gps' => 'nullable',
             'frequency' => 'required|string',
+            'bins' => 'nullable'
         ]);
 
         $zone = Zone::where('company_id', Auth::user()->company_id)
@@ -215,6 +224,8 @@ class CustomerController extends Controller
         $customer->ghana_gps = $request->ghana_gps;
         $customer->frequency = $request->frequency;
         $customer->save();
+
+        $customer->bin()->attach([$request->bins]);
 
         return redirect('customers')->with('status', 'Customer has been updated successfully');
     }

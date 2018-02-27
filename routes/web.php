@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('trucks', 'TruckController');
     Route::resource('supervisors', 'SupervisorController');
     Route::resource('schedules', 'JourneyController');
-
+    Route::resource('collections', 'CollectionController');
     Route::resource('customers', 'CustomerController');
     Route::get('customers/sort/{key}', 'CustomerController@customerSort');
     Route::get('customers/search/{value}', 'CustomerController@searchCustomer');

@@ -20,6 +20,8 @@ class CreateDriversTable extends Migration
             $table->bigInteger('phone1')->nullable();
             $table->bigInteger('phone2')->nullable();
             $table->string('address')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('password')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -13,11 +13,12 @@ class createBinCustomerPivotTable extends Migration
     public function up()
     {
         Schema::create('bin_customer', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('bin_id')->unsigned()->index();
             $table->foreign('bin_id')->references('id')->on('bins')->onDelete('cascade');
             $table->integer('customer_id')->unsigned()->index();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->primary(['bin_id', 'customer_id']);
+            $table->increments('id');
         });
     }
 

@@ -18,8 +18,8 @@ class CreateRequestCollectedTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies');
             $table->integer('request_id')->unsigned()->index();
             $table->foreign('request_id')->references('id')->on('requests');
-            $table->integer('truck_id')->unsigned()->index();
-            $table->foreign('truck_id')->references('id')->on('trucks');
+            $table->integer('driver_id')->unsigned()->index();
+            $table->foreign('driver_id')->references('id')->on('drivers');
             $table->string('status')->nullable();
             $table->string('remarks')->nullable();
             $table->softDeletes();

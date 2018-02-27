@@ -19,6 +19,7 @@ class CreateCollectionsTable extends Migration
             $table->integer('company_id')->unsigned()->index();;
             $table->foreign('company_id')->references('id')->on('companies');
             $table->string('status')->nullable();
+            $table->DATETIME('pick_up_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
