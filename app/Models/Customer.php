@@ -23,7 +23,7 @@ class Customer extends Model
     }
 
     public function service_zone(){
-        return $this->belongsTo('App\Models\ServiceZone', 'id');
+        return $this->belongsTo('App\Models\ServiceZone', 'service_zone_id');
     }
 
     public function classification(){
@@ -32,6 +32,11 @@ class Customer extends Model
 
     public function bin(){
         return $this->BelongsToMany('App\Models\Bin');
+    }
+
+    public function collection()
+    {
+        return $this->hasMany('App\Models\Collection');
     }
 
 

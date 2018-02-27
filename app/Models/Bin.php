@@ -23,4 +23,9 @@ class Bin extends Model
         return $this->belongsToMany('App\Models\Customer');
     }
 
+    public function collection()
+    {
+        return $this->belongsToMany('App\Models\Collection');
+    }
+
 }

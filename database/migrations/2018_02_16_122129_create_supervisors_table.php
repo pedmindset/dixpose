@@ -22,6 +22,8 @@ class CreateSupervisorsTable extends Migration
             $table->string('address')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
+            $table->string('active')->nullable();
+            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });

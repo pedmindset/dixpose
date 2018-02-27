@@ -46,7 +46,9 @@ class AddCustomerCollections extends Command
          * get their company_id and frequency
          * create a collection based on their company id and frequecy
          */
-        $customers = Customer::select('id', 'company_id', 'frequency')->get();
+        $customers = Customer::select('id', 'company_id', 'frequency', 'active')
+                    ->where('active', '1')
+                    ->get();
         foreach ($customers as $customer) {
             
             for ($i=0; $i < $customer->frequency; $i++) { 

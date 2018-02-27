@@ -45,6 +45,25 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'supervisor' => [
+            'driver' => 'session',
+            'provider' => 'supervisors',
+        ],
+
+        'supervisor-api' => [
+            'driver' => 'token',
+            'provider' => 'supervisors',
+        ],
+        'driver' => [
+            'driver' => 'session',
+            'provider' => 'drivers',
+        ],
+
+        'driver-api' => [
+            'driver' => 'token',
+            'provider' => 'drivers',
+        ],
+
     ],
 
     /*
@@ -68,6 +87,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'supervisors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Supervisor::class,
+        ],
+        'drivers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Driver::class,
         ],
 
         // 'users' => [
@@ -94,6 +121,16 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'supervisors' => [
+            'provider' => 'supervisors',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'drivers' => [
+            'provider' => 'drivers',
             'table' => 'password_resets',
             'expire' => 60,
         ],

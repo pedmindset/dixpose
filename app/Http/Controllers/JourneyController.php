@@ -8,11 +8,15 @@ use App\Models\Company;
 use App\Models\Truck;
 use App\Models\Driver;
 use App\Models\Supervisor;
-use App\Models\Zone;
+use App\Models\ServiceZone;
 use Auth;
 
 class JourneyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +38,7 @@ class JourneyController extends Controller
     public function create()
     {
         // return the create view for Journey
-        $zones = Zone::all()->where('company_id', Auth::user()->company_id);
+        $service_zones = ServiceZone::all()->where('company_id', Auth::user()->company_id);
         $trucks = Truck::all()->where('company_id', Auth::user()->company_id);
         $drivers = Driver::all()->where('company_id', Auth::user()->company_id);
         $supervisors = Supervisor::all()->where('company_id', Auth::user()->company_id);
@@ -57,7 +61,7 @@ class JourneyController extends Controller
         //validate and store journey
         $validateData = $request->validate([
             'supervisor' => 'required|integer',
-            'zone' => 'required|integer',
+            'sector' => 'required|integer',
             'driver' => 'required|integer',
             'truck' => 'required|integer',
             'pick_up_date' => 'required',
@@ -68,7 +72,7 @@ class JourneyController extends Controller
         $company = Company::where('id', Auth::user()->company_id)->first();
         $journey = new Journey;
         $journey->company_id = $company->id;
-        $journey->zone_id = $request->zone;
+        $journey->service_zone_id = $request->sector;
         $journey->supervisor_id = $request->supervisor;
         $journey->driver_id = $request->driver;
         $journey->truck_id = $request->truck;
@@ -89,7 +93,11 @@ class JourneyController extends Controller
      */
     public function show($id)
     {
-        //
+        //show a single journey
+        $journey = Journey::where('company_id', Auth::user()->company_id)
+                            ->where('id', $id)
+                            ->first();
+        return view('schedules.show')->with('journey', $journey);
     }
 
     /**
@@ -102,7 +110,7 @@ class JourneyController extends Controller
     {
         //return schedule update page
          // return the create view for Journey
-         $zones = Zone::all()->where('company_id', Auth::user()->company_id);
+         $service_zones = ServiceZone::all()->where('company_id', Auth::user()->company_id);
          $trucks = Truck::all()->where('company_id', Auth::user()->company_id);
          $drivers = Driver::all()->where('company_id', Auth::user()->company_id);
          $supervisors = Supervisor::all()->where('company_id', Auth::user()->company_id);
@@ -111,7 +119,7 @@ class JourneyController extends Controller
  
          return view('schedules.edit', 
                      compact(
-                         'zones', 'trucks', 'drivers', 'supervisors', 'supervisor', 'schedule'
+                         'service_zones', 'trucks', 'drivers', 'supervisors', 'supervisor', 'schedule'
                      )
                  );
     }
@@ -128,7 +136,7 @@ class JourneyController extends Controller
         //validate and update
         $validateData = $request->validate([
             'supervisor' => 'required|integer',
-            'zone' => 'required|integer',
+            'sector' => 'required|integer',
             'driver' => 'required|integer',
             'truck' => 'required|integer',
             'pick_up_date' => 'required',
@@ -138,7 +146,7 @@ class JourneyController extends Controller
 
         $journey = Journey::where('company_id', Auth::user()->company_id)
                             ->where('id', $id)->first();
-        $journey->zone_id = $request->zone;
+        $journey->service_zone_id = $request->sector;
         $journey->supervisor_id = $request->supervisor;
         $journey->driver_id = $request->driver;
         $journey->truck_id = $request->truck;
@@ -158,6 +166,11 @@ class JourneyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //soft delete journey
+        $journey = Journey::where('company_id', Auth::user()->company_id)
+                            ->where('id', $id)->first();
+        $journey->destroy($journey->id);
+
+        return redirect('schedules')->with('status', 'Schedule has been succeesully been deleted');
     }
 }

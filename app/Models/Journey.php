@@ -32,8 +32,13 @@ class Journey extends Model
         return $this->belongsTo('App\Models\Zone');
     }
 
-    public function servicezone(){
-        return $this->belongsTo('App\Models\ServiceZone');
+    public function service_zone(){
+        return $this->belongsTo('App\Models\ServiceZone', 'service_zone_id');
+    }
+
+    public function collection()
+    {
+        return $this->belongsToMany('App\Models\Collection');
     }
 
 }

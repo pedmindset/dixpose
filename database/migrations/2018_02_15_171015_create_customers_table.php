@@ -34,6 +34,7 @@ class CreateCustomersTable extends Migration
             $table->bigInteger('radius')->nullable();
             $table->integer('location_active')->nullable();
             $table->integer('frequency')->nullable();
+            $table->string('active')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

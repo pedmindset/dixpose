@@ -11,6 +11,10 @@ use Auth;
 
 class CollectionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,10 +38,8 @@ class CollectionController extends Controller
         //show a create page to create collection 
         $customers = Customer::all()
                     ->where('company_id', Auth::user()->company_id);
-        $bins = Bins::all()
-                ->where('company_id', Auth::user()->company_id);
 
-        return view('collections.create', compact('customers', 'bins'));
+        return view('collections.create', compact('customers'));
     }
 
     /**
@@ -58,6 +60,7 @@ class CollectionController extends Controller
                    ->first();
         $collection = new Collection;
         $collection->customer_id = $request->customer;
+        $collection->company_id = $company->id;
         $collection->status =$request->status;
         $collection-save();
                  
@@ -72,7 +75,11 @@ class CollectionController extends Controller
      */
     public function show($id)
     {
-        //
+        //show a single collection
+        $collection = Collection::where('company_id', Auth::user()->company_id)
+                      ->where('id', $id)
+                      ->first();
+        return view(collections.show)->with('collection', $collection);
     }
 
     /**
@@ -83,7 +90,12 @@ class CollectionController extends Controller
      */
     public function edit($id)
     {
-        //
+        //show the edit page to update collection 
+        $customers = Customer::where('company_id', Auth::user()->company_id)
+                    ->where('id', $id)
+                    ->first();
+
+        return view('collections.create', compact('customers'));
     }
 
     /**
@@ -95,7 +107,24 @@ class CollectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate and update collection
+        $validateData = $request->validate([
+            'status' => 'required|string',
+            'pick_up_date' => 'required',
+            'bins' => 'required'
+        ]);
+
+        $collection = Collection::where('company_id', Auth::user()->company_id)
+                      ->where('id', $id)
+                      ->first();
+
+        $collection->status = $request->status;
+        $collection->pick_up_date = $request->pick_up_date;
+        $collection->save();
+
+        $collection->bin()->attach($request->bins);
+
+        return redirect('collections/create')->with('status', 'Collections has been successfully updated');
     }
 
     /**
@@ -106,6 +135,12 @@ class CollectionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //delete a collection
+        $collection = Collection::where('company_id', Auth::user()->company_id)
+                      ->where('id', $id)
+                      ->first();
+        $collection->destroy($collection->id);
+
+        return redirect('collections')->with('status', 'Collection has been succefully deleted');
     }
 }

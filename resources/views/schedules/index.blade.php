@@ -34,7 +34,7 @@
                                         <th>Supervisor Name</th>
                                         <th>Driver name </th>
                                         <th>Truck Number</th>
-                                        <th>Zone</th>
+                                        <th>Sector</th>
                                         <th>Pick up date</th>
                                         <th>Status </th>
                                         <th>Remarks</th>
@@ -48,13 +48,13 @@
                                    
                                     <tr>    
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $schedule->supervisor->name }}</td>
-                                            <td>{{ $schedule->driver->name }}</td>
-                                            <td>{{ $schedule->truck->truck_number }}</td>
-                                            <td>{{ $schedule->zone->name }}</td>
-                                            <td>{{ $schedule->pickupdate }}</td>
-                                            <td>{{ $schedule->status }}</td>
-                                            <td>{{ $schedule->remarks }}</td>
+                                            <td>{{ $schedule->supervisor->name or '' }}</td>
+                                            <td>{{ $schedule->driver->name or '' }}</td>
+                                            <td>{{ $schedule->truck->truck_number or '' }}</td>
+                                            <td>{{ $schedule->service_zone->name or '' }}</td>
+                                            <td>{{ $schedule->pickupdate or '' }}</td>
+                                            <td>{{ $schedule->status or ''}}</td>
+                                            <td>{{ $schedule->remarks or ''}}</td>
                                             <td class="text-nowrap">
                                                     <a href="{{ action('JourneyController@edit',$schedule->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     

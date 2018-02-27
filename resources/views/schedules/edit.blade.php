@@ -74,15 +74,15 @@
                                     </div>
                              
                                 <div class="col-md-5">
-                                     <div class="form-group {{ $errors->has('zone') ? ' is-invalid' : '' }}">
-                                        <label class="col-md-5 control-label" for="zone">Zone</label>  
+                                     <div class="form-group {{ $errors->has('sector') ? ' is-invalid' : '' }}">
+                                        <label class="col-md-5 control-label" for="sector">Sector</label>  
                                         
-                                            <select name="zone" class="form-control custom-select {{ $errors->has('zone') ? ' is-invalid' : '' }}" required>
-                                                    @foreach($zones as $zone)
-                                                      <option name="zone" value="{{ $zone->id }}">{{ $zone->name }}</option>
+                                            <select name="sector" class="form-control custom-select {{ $errors->has('sector') ? ' is-invalid' : '' }}" required>
+                                                    @foreach($service_zones as $service_zone)
+                                                      <option value="{{ $service_zone->id }}">{{ $service_zone->name }}</option>
                                                     @endforeach
                                             </select>
-                                        <span class="help-block">Select Zone's Name</span>  
+                                        <span class="help-block">Select Sector's Name</span>  
                                     </div>
                                 </div>
                             </div>

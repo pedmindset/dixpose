@@ -16,5 +16,25 @@ class Collection extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer');
+    }
+
+    public function bin()
+    {
+        return $this->belongsToMany('App\Models\Bin');
+    }
+
+    public function journey()
+    {
+        return $this->belongsToMany('App\Models\Journey');
+    }
     
 }

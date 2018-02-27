@@ -14,40 +14,54 @@ class Company extends Model
     protected $dates = ['deleted_at'];
 
   
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\User', 'user_id');
     }
 
-    public function zone(){
+    public function zone()
+    {
         return $this->hasMany('App\Models\Zone');
     }
 
-    public function service_zone(){
-        return $this->hasMany('App\Models\ServiceZone');
+    public function service_zone()
+    {
+        return $this->hasMany('App\Models\ServiceZone', 'id');
     }
 
-    public function bin(){
+    public function bin()
+    {
         return $this->hasMany('App\Models\Bin');
     }
     
-    public function customer(){
+    public function customer()
+    {
         return $this->hasMany('App\Models\Customer');
     }
 
-    public function supervisor(){
+    public function supervisor()
+    {
         return $this->hasMany('App\Models\Supervisor');
     }
     
-    public function driver(){
+    public function driver()
+    {
         return $this->hasMany('App\Models\Driver');
     }
 
-    public function truck(){
+    public function truck()
+    {
         return $this->hasMany('App\Models\Truck');
     }
 
-    public function journey(){
+    public function journey()
+    {
         return $this->hasMany('App\Models\Journey');
+    }
+
+    public function collection()
+    {
+        return $this->hasMany('App\Models\Collection');
     }
     
 
