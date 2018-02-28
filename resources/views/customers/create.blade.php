@@ -41,27 +41,27 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Name<span class="text-danger">*</span></label>
-                                        <input type="text" id="name" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" placeholder="Jida Asare" required>
+                                        <input type="text" id="name" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" placeholder="Enter name" required>
                                         <small class="form-control-feedback">Name</small> </div>
                                 </div>
                                 <!--/span-->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Email</label>
-                                        <input type="email" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="example@dixposs.com">
+                                        <input type="email" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="abc@email.com">
                                         <small class="form-control-feedback">Email</small> </div>
                                 </div>
                                 <!--/span-->
                                 <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Phone 1</label>
-                                            <input type="tel" id="phone1" name="phone1" class="form-control {{ $errors->has('phone1') ? ' is-invalid' : '' }}" value="{{ old('phone1') }}" placeholder="2332415783">
+                                            <input type="tel" id="phone1" name="phone1" class="form-control {{ $errors->has('phone1') ? ' is-invalid' : '' }}" value="{{ old('phone1') }}" placeholder="+233 2415783">
                                             <small class="form-control-feedback">Phone 1</small> </div>
                                     </div>
                                     <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Phone 2</label>
-                                                <input type="tel" id="phone2" name="phone2" class="form-control {{ $errors->has('phone2') ? ' is-invalid' : '' }}" value="{{ old('phone2') }}" placeholder="2332415783">
+                                                <input type="tel" id="phone2" name="phone2" class="form-control {{ $errors->has('phone2') ? ' is-invalid' : '' }}" value="{{ old('phone2') }}" placeholder="+233 2415783">
                                                 <small class="form-control-feedback">Phone 2</small> </div>
                                         </div>
                                     <div class="col-md-6">
@@ -115,7 +115,7 @@
                                 <div class="col-md-6">
                                         <div class="form-group">
                                            <h4 class="control-label"> Select Bins</h4>
-                                             <select name="bins[]" class="select2 select2-multiple js-states js-example-events"  style="width: 100%" multiple="multiple" data-placeholder="Choose a type of bin">
+                                             <select name="bins[]" class="select2 select2-multiple js-states js-example-events"  style="width: 100%" multiple="multiple" data-placeholder="Choose bin type">
                                                  @foreach($bins as $bin)
                                                 <option value="{{ $bin->id or '' }}">{{ $bin->type or '' }}</option>
                                                 @endforeach
@@ -150,14 +150,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Frequency of collection<span class="text-danger">*</span></label>
-                                            <select name="frequency" class="form-control custom-select" data-placeholder="Choose a Category" style="width: 100%" tabindex="1" required>
+                                            <select name="frequency" class="form-control custom-select" data-placeholder="Frequency of collection" style="width: 100%" tabindex="1" required>
                                                <option value="1">Once per week</option>
                                                <option value="2">Twice per week</option>
                                                <option value="3">thrice per week</option>
                                                <option value="4">Four times per week</option>
                                                <option value="5">Five times per week</option>
                                                <option value="6">Six Times per week</option>
-                                               <option value="7">Service Times per week</option>
+                                               <option value="7">Seven Times per week</option>
                                          </select>
                                         <small class="form-control-feedback"> Collection Frequency </small> </div>
                                 </div>

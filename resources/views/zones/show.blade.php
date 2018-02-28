@@ -11,7 +11,7 @@
 <div class="card">
         <div class="card-header">
            <b>View Zone</b>
-ss                <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                <a class="" data-action="collapse"><i class="ti-minus"></i></a>
                 <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
                 
             </div>
