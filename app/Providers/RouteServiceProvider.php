@@ -39,7 +39,55 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapSupervisorRoutes();
+
+        $this->mapDriverRoutes();
+
+      
+
+
         //
+    }
+
+   
+
+
+    /**
+     * Define the "driver" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapDriverRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'driver', 'auth:driver'],
+            'prefix' => 'driver',
+            'as' => 'driver.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/driver.php');
+        });
+    }
+
+    /**
+     * Define the "supervisor" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapSupervisorRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'supervisor', 'auth:supervisor'],
+            'prefix' => 'supervisor',
+            'as' => 'supervisor.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/supervisor.php');
+        });
     }
 
     /**

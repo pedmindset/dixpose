@@ -13,12 +13,6 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-
 
     /**
      * Show the application dashboard.
@@ -30,8 +24,10 @@ class AppController extends Controller
         return view('manager.dashboard');
     }
 
-    public function login(){
-        return view('auth.login');
+    public function subdomain()
+    {
+        $url = "https://app.dixpose.dev/login";
+        return  redirect($url);
     }
 
 
@@ -43,7 +39,7 @@ class AppController extends Controller
 
     public function getSubdomain(Company $company){
         $company::where('id', Auth::user()->company_id)->first();
-        $url = $company->subdomain.'.'.'766a0bda.com';
+        $url = "$company->subdomain";
         return $url;
     }
 }

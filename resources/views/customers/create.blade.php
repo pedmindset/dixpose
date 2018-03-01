@@ -87,13 +87,13 @@
                                 </div>
                                 <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">Service Zone<span class="text-danger">*</span></label>
+                                            <label class="control-label">Sector<span class="text-danger">*</span></label>
                                             <select name="service_zone" class="form-control custom-select {{ $errors->has('service_zone') ? ' is-invalid' : '' }}" required>
                                                     @foreach($service_zones as $service_zone)
                                                     <option value="{{ $service_zone->id }}">{{ $service_zone->name }}</option>
                                                     @endforeach
                                             </select>
-                                            <small class="form-control-feedback"> Select Zone </small> </div>
+                                            <small class="form-control-feedback"> Select Sector </small> </div>
                                     </div>
                                 <!--/span-->
                                 

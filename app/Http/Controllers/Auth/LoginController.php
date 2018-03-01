@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\Company;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'manager/dashboard';
+   //protected $redirectTo = 'manager/dashboard';
 
     /**
      * Create a new controller instance.
@@ -35,6 +37,16 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function redirectTo()
+    {
+        $company = Company::where('id', Auth::user()->company_id)->first();
+
+        $subdomain = $company->subdomain;
+        $url = "https://$subdomain.dixpose.dev/manager/dashboard";
+
+        return ($url);
     }
 
 

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\Subdomain;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Auth;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -32,7 +34,8 @@ class RegisterController extends Controller
      * @var string
      */
     
-    protected $redirectTo = 'manager/dashboard';
+    //protected $redirectTo = 'manager/dashboard';
+
     /**
      * Create a new controller instance.
      *
@@ -104,6 +107,19 @@ class RegisterController extends Controller
 
         return $user;
 
+    }
+
+    
+
+
+    protected function redirectTo()
+    {
+        
+        $subdomain = request('subdomain');
+
+        $url = "https://$subdomain.dixpose.dev/manager/dashboard";
+
+        return ($url);
     }
 
 

@@ -45,7 +45,7 @@ class JourneyController extends Controller
 
         return view('schedules.create', 
                     compact(
-                        'zones', 'trucks', 'drivers', 'supervisors'
+                        'service_zones', 'trucks', 'drivers', 'supervisors'
                     )
                 );
     }
