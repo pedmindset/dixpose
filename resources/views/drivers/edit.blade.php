@@ -27,7 +27,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="post" action="{{ action('DriverController@update', $driver->id) }}">
+                    <form method="post" action="{{ action('DriverController@update', $driver->id or '') }}">
                          @csrf
                          @method('PUT')
                             <!-- Text input-->
@@ -43,7 +43,7 @@
                                 <div class="form-group {{ $errors->has('phone1') ? ' is-invalid' : '' }}">
                                     <label class="col-md-4 control-label" for="Phone1">Phone 1</label>  
                                     <div class="col-md-4">
-                                    <input id="Phone1" name="phone1" type="text" placeholder="2332415827" value="{{ $driver->phone1 or ''}}" class="form-control input-md">
+                                    <input id="Phone1" name="phone1" type="text" placeholder="2332415827" value="{{ $driver->phone1 or '' }}" class="form-control input-md">
                                     <span class="help-block">Enter Driver's phone</span>  
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                  <div class="form-group {{ $errors->has('phone2') ? ' is-invalid' : '' }}">
                                         <label class="col-md-4 control-label" for="phone2">Phone 2</label>  
                                         <div class="col-md-4">
-                                        <input id="phone2" name="phone2" type="text" placeholder="233414563" value="{{ $driver->phone2 or ''}}" class="form-control input-md">
+                                        <input id="phone2" name="phone2" type="text" placeholder="233414563" value="{{ $driver->phone2 or '' }}" class="form-control input-md">
                                         <span class="help-block">Enter Driver's Phone</span>  
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                 <div class="form-group {{ $errors->has('address') ? ' is-invalid' : '' }}">
                                     <label class="col-md-4 control-label" for="address">Address</label>  
                                     <div class="col-md-4">
-                                    <input id="address" name="address" type="text" placeholder="Osu oxford street Line 5" value="{{ $driver->address or ''}}" class="form-control input-md">
+                                    <input id="address" name="address" type="text" placeholder="Osu oxford street Line 5" value="{{ $driver->address or '' }}" class="form-control input-md">
                                     <span class="help-block">Enter Driver's Address</span>  
                                     </div>
                                 </div>

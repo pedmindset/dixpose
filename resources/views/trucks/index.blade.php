@@ -44,9 +44,9 @@
                                    
                                     <tr>    
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $truck->truck_number }}</td>
-                                            <td>{{ $truck->type }}</td>
-                                            <td>{{ $truck->remarks }}</td>
+                                            <td>{{ $truck->truck_number or ''}}</td>
+                                            <td>{{ $truck->type or ''}}</td>
+                                            <td>{{ $truck->remarks or ''}}</td>
                                             <td class="text-nowrap">
                                                     <a href="{{ action('TruckController@edit',$truck->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     

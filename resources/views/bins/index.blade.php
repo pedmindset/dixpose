@@ -43,8 +43,8 @@
                                    
                                     <tr>    
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $bin->type }} Litre</td>
-                                            <td>{{ $bin->desc }}</td>
+                                            <td>{{ $bin->type or '' }} Litre</td>
+                                            <td>{{ $bin->desc or '' }}</td>
                                             <td class="text-nowrap">
                                                     <a href="{{ action('BinController@edit',$bin->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     

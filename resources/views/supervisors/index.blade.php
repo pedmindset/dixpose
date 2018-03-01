@@ -45,10 +45,10 @@
                                    
                                     <tr>    
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $supervisor->name }} </td>
-                                            <td>{{ $supervisor->phone1 }}</td>
-                                            <td>{{ $supervisor->phone2 }} </td>
-                                            <td>{{ $supervisor->address }}</td>
+                                            <td>{{ $supervisor->name or '' }} </td>
+                                            <td>{{ $supervisor->phone1 or '' }}</td>
+                                            <td>{{ $supervisor->phone2 or '' }} </td>
+                                            <td>{{ $supervisor->address or '' }}</td>
                                             <td class="text-nowrap">
                                                     <a href="{{ action('SupervisorController@edit',$supervisor->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     

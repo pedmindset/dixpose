@@ -34,7 +34,7 @@ class RegisterController extends Controller
      * @var string
      */
     
-    //protected $redirectTo = 'manager/dashboard';
+    protected $redirectTo = 'manager/dashboard';
 
     /**
      * Create a new controller instance.
@@ -112,15 +112,17 @@ class RegisterController extends Controller
     
 
 
-    protected function redirectTo()
+   /**protected function redirectTo()
     {
         
         $subdomain = request('subdomain');
 
-        $url = "https://$subdomain.dixpose.dev/manager/dashboard";
+        $domain = config('app.domain', 'dixpose.dev');
+       
+        $url = "https://$subdomain." . $domain . "/manager/dashboard";
 
-        return ($url);
-    }
+        return $url;
+    }**/
 
 
 }

@@ -45,10 +45,10 @@
                                    
                                     <tr>    
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $driver->name }} </td>
-                                            <td>{{ $driver->phone1 }}</td>
-                                            <td>{{ $driver->phone2 }} </td>
-                                            <td>{{ $driver->address }}</td>
+                                            <td>{{ $driver->name or '' }} </td>
+                                            <td>{{ $driver->phone1 or '' }}</td>
+                                            <td>{{ $driver->phone2 or '' }} </td>
+                                            <td>{{ $driver->address or '' }}</td>
                                             <td class="text-nowrap">
                                                     <a href="{{ action('DriverController@edit',$driver->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     

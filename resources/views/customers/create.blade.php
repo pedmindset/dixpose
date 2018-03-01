@@ -80,7 +80,7 @@
                                         <label class="control-label">Zone<span class="text-danger">*</span></label>
                                         <select name="zone" class="form-control custom-select {{ $errors->has('zone') ? ' is-invalid' : '' }}" required>
                                             @foreach($zones as $zone)
-                                            <option value="{{ $zone->id }}">{{ $zone->name }}</option>
+                                            <option value="{{ $zone->id or ''}}">{{ $zone->name or ''}}</option>
                                             @endforeach
                                         </select>
                                         <small class="form-control-feedback"> Select Zone </small> </div>
@@ -90,7 +90,7 @@
                                             <label class="control-label">Sector<span class="text-danger">*</span></label>
                                             <select name="service_zone" class="form-control custom-select {{ $errors->has('service_zone') ? ' is-invalid' : '' }}" required>
                                                     @foreach($service_zones as $service_zone)
-                                                    <option value="{{ $service_zone->id }}">{{ $service_zone->name }}</option>
+                                                    <option value="{{ $service_zone->id or '' }}">{{ $service_zone->name or '' }}</option>
                                                     @endforeach
                                             </select>
                                             <small class="form-control-feedback"> Select Sector </small> </div>

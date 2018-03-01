@@ -38,20 +38,35 @@ Route::group(['prefix' => 'driver'], function () {
   
 
 
-
-Route::auth();
-
-Route::get('/', 'AppController@subdomain')->name('subdomain');
+//Route::get('/', 'AppController@subdomain')->name('subdomain');
 
 Route::get('/logout', 'AppController@logout')->name('logout');
 
-Route::domain('{subdomain}.dixpose.dev')->group(function () {
+Route::auth();
 
+Route::middleware('auth')->group(function(){
+    // Route::get('subdomain', 'AppController@redirectToDashbaord');
 
+     Route::get('manager/dashboard', 'AppController@index')->name('dashboard');
+     Route::resource('zones', 'ZoneController');
+     Route::resource('servicezones', 'ServiceZoneController');
+     Route::resource('bins', 'BinController');
+     Route::resource('classifications', 'ClassificationController');
+     Route::resource('drivers', 'DriverController');
+     Route::resource('trucks', 'TruckController');
+     Route::resource('supervisors', 'SupervisorController');
+     Route::resource('schedules', 'JourneyController');
+     Route::resource('collections', 'CollectionController');
+     Route::resource('customers', 'CustomerController');
+     Route::get('customers/sort/{key}', 'CustomerController@customerSort');
+     Route::get('customers/search/{value}', 'CustomerController@searchCustomer');
+     Route::get('/logout', 'AppController@logout')->name('logout');
+ });
 
+/**Route::domain('{subdomain}.dixpose.dev')->group(function () {
     Route::middleware('auth')->group(function(){
+       // Route::get('subdomain', 'AppController@redirectToDashbaord');
 
-        
         Route::get('manager/dashboard', 'AppController@index')->name('dashboard');
         Route::resource('zones', 'ZoneController');
         Route::resource('servicezones', 'ServiceZoneController');
@@ -68,7 +83,7 @@ Route::domain('{subdomain}.dixpose.dev')->group(function () {
         Route::get('/logout', 'AppController@logout')->name('logout');
     });
          
-});
+});**/
 
 
 

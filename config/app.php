@@ -52,7 +52,10 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://dixpose.dev'),
+
+    'domain' => env('APP_DOMAIN', 'dixpose.dev'),
+
 
     /*
     |--------------------------------------------------------------------------

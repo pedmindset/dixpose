@@ -38,7 +38,7 @@
                                         
                                         <select name="supervisor" class="form-control  {{ $errors->has('supervisor') ? ' is-invalid' : '' }}" required>
                                                 @foreach($supervisors as $supervisor)
-                                                <option name="supervisor" value="{{ $supervisor->id }}">{{ $supervisor->name }}</option>
+                                                <option name="supervisor" value="{{ $supervisor->id or ''}}">{{ $supervisor->name or ''}}</option>
                                                 @endforeach
                                         </select>
                                         <span class="help-block">Select Supervisor's Name</span>  
@@ -51,7 +51,7 @@
                                     
                                             <select name="driver" class="form-control  {{ $errors->has('driver') ? ' is-invalid' : '' }}" required>
                                                 @foreach($drivers as $driver)
-                                                  <option name="driver" value="{{ $driver->id }}">{{ $driver->name }}</option>
+                                                  <option name="driver" value="{{ $driver->id or ''}}">{{ $driver->name or ''}}</option>
                                                 @endforeach
                                              </select>                                    
                                         <span class="help-block">Select Driver's Name</span>  
@@ -65,7 +65,7 @@
                                             
                                              <select name="truck" class="form-control  {{ $errors->has('truck') ? ' is-invalid' : '' }}" required>
                                                 @foreach($trucks as $truck)
-                                                   <option name="truck" value="{{ $truck->id }}">{{ $truck->truck_number }}</option>
+                                                   <option name="truck" value="{{ $truck->id or ''}}">{{ $truck->truck_number or ''}}</option>
                                                 @endforeach
                                               </select>
                                             <span class="help-block">Select Truck</span>  
@@ -79,7 +79,7 @@
                                             
                                                 <select name="sector" class="form-control custom-select {{ $errors->has('sector') ? ' is-invalid' : '' }}" required>
                                                         @foreach($service_zones as $service_zone)
-                                                          <option name="sector" value="{{ $service_zone->id }}">{{ $service_zone->name }}</option>
+                                                          <option name="sector" value="{{ $service_zone->id or ''}}">{{ $service_zone->name or ''}}</option>
                                                         @endforeach
                                                 </select>
                                             <span class="help-block">Select Sector's Name</span>   

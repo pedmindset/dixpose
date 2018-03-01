@@ -13,7 +13,10 @@ class AppController extends Controller
      *
      * @return void
      */
-
+    public function __construct()
+    {
+        $this->middleware('auth')->except('subdomain');
+    }
     /**
      * Show the application dashboard.
      *
@@ -24,11 +27,27 @@ class AppController extends Controller
         return view('manager.dashboard');
     }
 
-    public function subdomain()
+    /**public function subdomain()
     {
-        $url = "https://app.dixpose.dev/login";
+        $domain = config('app.domain', 'dixpose.dev');
+       
+        $url = "https://app." . $domain . "/login";
+
         return  redirect($url);
-    }
+    }**/
+
+    /**public function redirectToDashbaord()
+    {
+        $company = Company::where('id', Auth::user()->company_id)->first();
+
+        $subdomain = $company->subdomain;
+
+        $domain = config('app.domain', 'dixpose.dev');
+       
+        $url = "https://$subdomain." . $domain . "/manager/dashboard";
+
+        return redirect($url);
+    }**/
 
 
     public function logout(){
