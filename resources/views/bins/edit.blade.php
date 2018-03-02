@@ -18,17 +18,17 @@
                                 {{ session('status') }}
                            </div>
                      @endif
-                    <form method="post" action="{{ action('BinController@update', $bin->id) }}">
+                    <form method="post" action="{{ action('BinController@update', $bin->id or '') }}">
                          @csrf
                          @method('PUT')
                             <div class="form-group">
                                 <label for="type">Bin type<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" id="type" name="type" value="{{ $bin->type }}" placeholder="240 litre" required data-validation-required-message ="Please Enter the Zone Name">
+                                <input type="text" class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" id="type" name="type" value="{{ $bin->type or '' }}" placeholder="240 litre" required data-validation-required-message ="Please Enter the Zone Name">
                             </div>
                             <div class="form-group">
                                 <label for="description">Price per pick-up</label>
                                 
-                                <input type="text"  class=" orm-control{{ $errors->has('desc') ? ' is-invalid' : '' }}" id="desc" value="{{ $bin->desc }}" name="desc" placeholder="Description">
+                                <input type="text"  class=" orm-control{{ $errors->has('desc') ? ' is-invalid' : '' }}" id="desc" value="{{ $bin->desc or '' }}" name="desc" placeholder="Description">
                             </div>
                             
 

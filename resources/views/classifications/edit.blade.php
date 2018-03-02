@@ -18,7 +18,7 @@
                                 {{ session('status') }}
                            </div>
                      @endif
-                     <form method="post" action="{{ action('ClassificationController@update', $classification->id) }}">
+                     <form method="post" action="{{ action('ClassificationController@update', $classification->id or '') }}">
                             @csrf
                             @method('PUT')
                         <div class="form-group {{ $errors->has('class') ? 'has-error' : ''}}">

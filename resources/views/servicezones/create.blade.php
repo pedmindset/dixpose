@@ -29,7 +29,7 @@
                                 <label class="control-label">Zone<span class="text-danger">*</span></label>
                                     <select name="zone" class="form-control custom-select {{ $errors->has('zone') ? ' is-invalid' : '' }}" required data-validation-required-message ="Please Select the Zone Name">
                                         @foreach($zones as $zone)
-                                        <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                        <option value="{{ $zone->idor '' }}">{{ $zone->name or '' }}</option>
                                         @endforeach
                                     </select>
                                 <small class="form-control-feedback text-danger"> Select Zone </small> 

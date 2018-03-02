@@ -23,7 +23,7 @@ class CollectionController extends Controller
     public function index()
     {
         //return all collections
-        $collections = Collection::where('company_id', Auth::user()->company_id)->paginate(20);
+        $collections = Customer::where('company_id', Auth::user()->company_id)->with('collection', 'company', 'bin')->paginate(20);
 
         return $collections;
     }

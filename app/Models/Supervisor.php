@@ -3,15 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Notifications\SupervisorResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
 class Supervisor extends Authenticatable
 {
-    use SoftDeletes, Notifiable;
-
-    protected $guard = 'supervisor';
+    use Notifiable, softDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +20,8 @@ class Supervisor extends Authenticatable
         'name', 'email', 'password', 'phone1', 'phone2', 'address',
     ];
 
+    protected $dates = ['deleted_at'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -31,8 +31,16 @@ class Supervisor extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $dates = ['deleted_at'];
-
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new SupervisorResetPassword($token));
+    }
 
     public function company(){
         return $this->belongsTo('App\Models\Company');

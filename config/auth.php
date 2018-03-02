@@ -45,25 +45,16 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        
         'supervisor' => [
             'driver' => 'session',
             'provider' => 'supervisors',
         ],
 
-        'supervisor-api' => [
-            'driver' => 'token',
-            'provider' => 'supervisors',
-        ],
         'driver' => [
             'driver' => 'session',
             'provider' => 'drivers',
         ],
-
-        'driver-api' => [
-            'driver' => 'token',
-            'provider' => 'drivers',
-        ],
-
     ],
 
     /*
@@ -119,21 +110,24 @@ return [
     */
 
     'passwords' => [
+        'drivers' => [
+            'provider' => 'drivers',
+            'table' => 'driver_password_resets',
+            'expire' => 60,
+        ],
+
+        'supervisors' => [
+            'provider' => 'supervisors',
+            'table' => 'supervisor_password_resets',
+            'expire' => 60,
+        ],
+
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
         ],
-        'supervisors' => [
-            'provider' => 'supervisors',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-        'drivers' => [
-            'provider' => 'drivers',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
+        
     ],
 
 ];

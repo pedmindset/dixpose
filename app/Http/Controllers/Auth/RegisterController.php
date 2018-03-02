@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\Subdomain;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Auth;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -33,6 +35,7 @@ class RegisterController extends Controller
      */
     
     protected $redirectTo = 'manager/dashboard';
+
     /**
      * Create a new controller instance.
      *
@@ -61,7 +64,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed|alpha_dash',
             'company' => 'required|string|max:255',
-            'subdomain' => 'required|string|max:15|alpha_dash|unique:companies,subdomain',
+            'subdomain' => 'required|string|max:20|alpha_dash|unique:companies,subdomain',
             'phone' => 'required|integer|min:13'
         ]);
     }
@@ -105,6 +108,21 @@ class RegisterController extends Controller
         return $user;
 
     }
+
+    
+
+
+   /**protected function redirectTo()
+    {
+        
+        $subdomain = request('subdomain');
+
+        $domain = config('app.domain', 'dixpose.dev');
+       
+        $url = "https://$subdomain." . $domain . "/manager/dashboard";
+
+        return $url;
+    }**/
 
 
 }

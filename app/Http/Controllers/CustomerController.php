@@ -134,14 +134,6 @@ class CustomerController extends Controller
 
         $customer->bin()->attach($request->bins);
 
-        $zones = Zone::all()->where('company_id', Auth::user()->company_id);
-
-        $service_zones = ServiceZone::all()->where('company_id', Auth::user()->company_id);
-
-        $classifications = Classification::all()->where('company_id', Auth::user()->company_id);
-
-        
-
         return redirect('customers/create')->with('status', "Customer has been successfully added");
 
     }

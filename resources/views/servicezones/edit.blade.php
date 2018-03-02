@@ -23,13 +23,13 @@
                          @method('PUT')
                             <div class="form-group">
                                 <label for="name">Sector Name<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" value="{{ $service_zone->name }}" placeholder="Enter Sector Name" required data-validation-required-message ="Please Enter the Zone Name">
+                                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" value="{{ $service_zone->name or ''}}" placeholder="Enter Sector Name" required data-validation-required-message ="Please Enter the Zone Name">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Zone<span class="text-danger">*</span></label>
                                     <select name="zone" class="form-control custom-select {{ $errors->has('zone') ? ' is-invalid' : '' }}" required data-validation-required-message ="Please Select the Zone Name">
                                         @foreach($zones as $zone)
-                                            <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                            <option value="{{ $zone->id or '' }}">{{ $zone->name or '' }}</option>
                                         @endforeach
                                     </select>
                                 <small class="form-control-feedback text-danger"> Select Zone </small> 

@@ -14,17 +14,10 @@ class CreateDriversTable extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id')->index()->unsigned();
-            $table->foreign('company_id')->references('id')->on('companies');
-            $table->string('name')->nullable();
-            $table->bigInteger('phone1')->nullable();
-            $table->bigInteger('phone2')->nullable();
-            $table->string('address')->nullable();
-            $table->string('email')->unique()->nullable();
-            $table->string('password')->nullable();
-            $table->string('active')->nullable();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->rememberToken();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

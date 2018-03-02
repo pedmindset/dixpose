@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Notifications\DriverResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Driver extends Authenticatable
 {
-    use SoftDeletes, Notifiable;
-
-    protected $guard = 'driver';
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +30,18 @@ class Driver extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new DriverResetPassword($token));
+    }
+
 
     public function company(){
         return $this->belongsTo('App\Models\Company');

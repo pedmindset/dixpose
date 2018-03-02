@@ -43,8 +43,8 @@
                                    
                                     <tr>    
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $classification->class }} </td>
-                                            <td>GHS {{ $classification->price }}</td>
+                                            <td>{{ $classification->class or '' }} </td>
+                                            <td>GHS {{ $classification->price or '' }}</td>
                                             <td class="text-nowrap">
                                                     <a href="{{ action('ClassificationController@edit',$classification->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     

@@ -43,8 +43,8 @@
                                    
                                     <tr>    
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $zone->name }}</td>
-                                            <td>{{ $zone->desc }}</td>
+                                            <td>{{ $zone->name or '' }}</td>
+                                            <td>{{ $zone->desc or '' }}</td>
                                             <td class="text-nowrap">
                                                     <a href="{{ action('ZoneController@edit',$zone->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     

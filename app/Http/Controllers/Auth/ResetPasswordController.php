@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Models\Company;
 
 class ResetPasswordController extends Controller
 {
@@ -25,7 +26,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'manager/dashboard';
+    //protected $redirectTo = 'manager/dashboard';
 
     /**
      * Create a new controller instance.
@@ -36,4 +37,17 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    /**protected function redirectTo()
+    {
+        $company= Company::where('id', Auth::user()->company_id)->first();
+
+        $subdomain = $company->subdomain;
+
+        $domain = config('app.domain', 'dixpose.dev');
+       
+        $url = "https://$subdomain." . $domain . "/manager/dashboard";
+
+        return $url;
+    }**/
 }
