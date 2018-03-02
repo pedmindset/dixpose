@@ -27,14 +27,10 @@ class AppController extends Controller
         return view('manager.dashboard');
     }
 
-    /**public function subdomain()
+    public function subdomain()
     {
-        $domain = config('app.domain', 'dixpose.dev');
-       
-        $url = "https://app." . $domain . "/login";
-
-        return  redirect($url);
-    }**/
+        return view('verify.signin');
+    }
 
     /**public function redirectToDashbaord()
     {
@@ -56,9 +52,8 @@ class AppController extends Controller
         return redirect('/login');
     }
 
-    public function getSubdomain(Company $company){
-        $company::where('id', Auth::user()->company_id)->first();
-        $url = "$company->subdomain";
-        return $url;
+    public function login(){
+        
+        return redirect('/login');
     }
 }

@@ -38,14 +38,15 @@ Route::group(['prefix' => 'driver'], function () {
   
 
 
-//Route::get('/', 'AppController@subdomain')->name('subdomain');
+Route::get('/', 'AppController@subdomain');
+
+Route::post('/verify/signin', 'VerifyCompanyController@verifyCompany')->name('signin');
 
 Route::get('/logout', 'AppController@logout')->name('logout');
 
 Route::auth();
 
 Route::middleware('auth')->group(function(){
-    // Route::get('subdomain', 'AppController@redirectToDashbaord');
 
      Route::get('manager/dashboard', 'AppController@index')->name('dashboard');
      Route::resource('zones', 'ZoneController');
@@ -61,8 +62,10 @@ Route::middleware('auth')->group(function(){
      Route::get('customers/sort/{key}', 'CustomerController@customerSort');
      Route::get('customers/search/{value}', 'CustomerController@searchCustomer');
      Route::get('/logout', 'AppController@logout')->name('logout');
- });
-
+});
+//  Route::group(['prefix' => 'api/v1'], function () {
+//     Route::apiResource('collections', 'API/CollectionController');
+//  });
 /**Route::domain('{subdomain}.dixpose.dev')->group(function () {
     Route::middleware('auth')->group(function(){
        // Route::get('subdomain', 'AppController@redirectToDashbaord');

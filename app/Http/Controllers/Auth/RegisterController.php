@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed|alpha_dash',
             'company' => 'required|string|max:255',
-            'subdomain' => 'required|string|max:15|alpha_dash|unique:companies,subdomain',
+            'subdomain' => 'required|string|max:20|alpha_dash|unique:companies,subdomain',
             'phone' => 'required|integer|min:13'
         ]);
     }
