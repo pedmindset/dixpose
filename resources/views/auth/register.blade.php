@@ -40,18 +40,22 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="subdomain" class="col-md-4 col-form-label text-md-right">Sub Domain</label>
-
-                            <div class="col-md-6">
-                                <input id="subdomain" type="text" class="form-control{{ $errors->has('subdomain') ? ' is-invalid' : '' }}" name="subdomain" value="{{ old('subdomain') }}" placeholder="subdomain.dixpose.com" required autofocus>
-
-                                @if ($errors->has('subdomain'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('subdomain') }}</strong>
-                                    </span>
-                                @endif
+                                <label for="subdomain" class="col-sm-4 col-form-label text-md-right">Subdomain name<span class="text-danger">*</span></label>
+                                <div class="input-group col-md-6">
+                                    <input id="subdomain" type="text" class="form-control{{ $errors->has('subdomain') ? ' is-invalid' : '' }}" name="subdomain" value="{{ old('subdomain') }}" placeholder="company"  aria-describedby="subdomain" required autofocus>
+                                      <div class="input-group-append">
+                                            <span class="input-group-text" id="subdomain">.dixpose.com</span>
+                                        </div>
+                                    @if ($errors->has('subdomain'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('subdomain') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+
+
+                        
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
