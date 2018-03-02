@@ -8,6 +8,12 @@
                 <div class="card-header">Login</div>
 
                 <div class="card-body">
+                    @if (session('status'))
+                            <div class="alert alert-danger">
+                                
+                                {{ session('status') }}
+                           </div>
+                     @endif
                     <form method="POST" action="{{ route('signin') }}">
                         @csrf
 
