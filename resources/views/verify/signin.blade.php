@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card card-default">
-                <div class="card-header">Login into Company Acoount</div>
+                <div class="card-header">Sign into Your Company Acoount</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,7 +17,7 @@
                     <form method="POST" action="{{ route('signin') }}">
                         @csrf
                         <div class="form-group row">
-                                <label for="subdomain" class="col-sm-4 col-form-label text-md-right">Company Subdomian<span class="text-danger">*</span></label>
+                                <label for="subdomain" class="col-sm-4 col-form-label text-md-right">Company<span class="text-danger">*</span></label>
                                 <div class="input-group col-md-6">
                                     <input id="subdomain" type="text" class="form-control{{ $errors->has('subdomain') ? ' is-invalid' : '' }}" name="subdomain" value="{{ old('subdomain') }}" placeholder="company"  aria-describedby="subdomain" required autofocus>
                                       <div class="input-group-append">

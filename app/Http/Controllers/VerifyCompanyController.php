@@ -22,7 +22,7 @@ class VerifyCompanyController extends Controller
 
         } catch(\Exception $e) {
 
-             return redirect('/')->with('status', 'Subdomain Not Found');
+             return redirect('/')->with('status', 'Company Sub domain Not Found');
         }
         
         $domain = config('app.domain', 'dixpose.dev');
