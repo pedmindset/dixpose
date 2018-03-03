@@ -137,6 +137,190 @@
     <!-- ============================================================== -->
     <!-- End Info box -->
     <!-- ============================================================== -->
+     <!--START OF THE SCHEDULING CARDS-->
+                <!--TODAY'S SCHEDULES-->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">TODAY'S SCHEDULE</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>SECTOR</th>
+                                        <th>SUPERVISOR</th>
+                                        <th>DRIVER</th>
+                                        <th>NO OF CLIENTS</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 1A</a></td>
+                                        <td>Steve Horton</td>
+                                        <td><span class="text-muted"> Nana Kweku</span></td>
+                                        <td> 200</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 2A</a></td>
+                                        <td>Charles S Boyle</td>
+                                        <td><span class="text-muted"> John Doe </span></td>
+                                        <td> 300</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 1C</a></td>
+                                        <td>Lucy Doe</td>
+                                        <td><span class="text-muted"> Emma Watson</span></td>
+                                        <td> 100</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 2B</a></td>
+                                        <td>Teresa  Doe</td>
+                                        <td><span class="text-muted"> George Osodo</span></td>
+                                        <td> 350</td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+
+
+                <!--END OF TODAY'S SCHEDULE-->
+
+                <!--START OF TOMORROW'S SCHEDULE-->
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">TOMORROW'S SCHEDULE</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>SECTOR</th>
+                                        <th>SUPERVISOR</th>
+                                        <th>DRIVER</th>
+                                        <th>NO OF CLIENTS</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 1A</a></td>
+                                        <td>Steve Horton</td>
+                                        <td><span class="text-muted">Nana Kweku</span></td>
+                                        <td> 200</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 2A</a></td>
+                                        <td>Charles S Boyle</td>
+                                        <td><span class="text-muted">John Doe </span></td>
+                                        <td> 300</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 1C</a></td>
+                                        <td>Lucy Doe</td>
+                                        <td><span class="text-muted"> Emma Watson</span></td>
+                                        <td> 100</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 2B</a></td>
+                                        <td>Teresa  Doe</td>
+                                        <td><span class="text-muted"> George Osodo</span></td>
+                                        <td> 350</td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!--END OF TOMORROW'S SCHEDULE-->
+
+                <!--START OF OVERDUE SCHEDULE-->
+
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">OVERDUE SCHEDULE'S</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>SECTOR</th>
+                                        <th>SUPERVISOR</th>
+                                        <th>DRIVER</th>
+                                        <th>NO OF CLIENTS</th>
+                                        <th>DATE</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 1A</a></td>
+                                        <td>Steve Horton</td>
+                                        <td><span class="text-muted"></i> Nana Kweku</span></td>
+                                        <td> 200</td>
+                                        <td> 20/02/2018</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 2A</a></td>
+                                        <td>Charles S Boyle</td>
+                                        <td><span class="text-muted"></i> John Doe </span></td>
+                                        <td> 300</td>
+                                        <td> 21/2/2018</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 1C</a></td>
+                                        <td>Lucy Doe</td>
+                                        <td><span class="text-muted"> Emma Watson</span></td>
+                                        <td> 100</td>
+                                        <td> 23/2/2018</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><a href="javascript:void(0)" class="link"> 2B</a></td>
+                                        <td>Teresa  Doe</td>
+                                        <td><span class="text-muted"> George Osodo</span></td>
+                                        <td> 350</td>
+                                        <td> 24/2/2018</td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--START OF OVERDUE SCHEDULE-->
+
+
+                <!--END OF THE SCHEDULING CARDS-->
+               
     <!-- ============================================================== -->
     <!-- Advanced search tool-->
     <!-- ============================================================== -->
