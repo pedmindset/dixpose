@@ -17,7 +17,7 @@ You will receive all the pending collections
 
 
 ### Authentication
-2. OAuth Authentication
+1. OAuth Authentication
 *Password Grant Authentication
 
 You can create a new client from  http://domain.com/admin/dashboarb
@@ -70,7 +70,7 @@ axios.put('/api/v1/collection/' + collection_Id),
     });
 ```
 
-*Basic Auth
+2. Basic Auth
 ```javascript
   var session_url = 'http://url/api/v1/collections'
   var username = 'user';
@@ -89,8 +89,8 @@ axios.put('/api/v1/collection/' + collection_Id),
 
 3. REST Endpionts
 
-1. OAuth 2 Authentication: http://url/oauth/token
-2. Get all Customer Collections: http://url/api/v1/collections
-3. Get a single Customer Collection: http://url/api/v1/collections/{id}
-4. Update customer collection: http://url/api/v1/collections{id}
+* OAuth 2 Authentication: http://url/oauth/token
+* Get all Customer Collections: http://url/api/v1/collections
+* Get a single Customer Collection: http://url/api/v1/collections/{id}
+* Update customer collection: http://url/api/v1/collections{id}
 
