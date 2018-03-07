@@ -13,7 +13,14 @@ You will receive all the pending collections
 | ------------------ |:---------------------------:| -------:|:----------------------------------------|
 | all collections    | url/api/v1/collections      | get     | returns json data                       |
 | Single Collection  | url/api/v1/collections/id   | get     | returns json data of a single collection|
-| Update a Collection| url/api/v1/collections/id   | put     | 'collection' => collection_id(integer) eg. ''collection' => 1, 'bins' => 'array of bin ids' eg.bins => [1,4,5,4], 'status' => 'Collected'|
+| Update a Collection| url/api/v1/collections/id   | put     | collection, bins, status                |
+
+Field | Values
+--------- | ----------
+collection | collection_id(integer) eg. 'collection' => 1
+bins |  bin ids' eg.bins => [1,4,5,4]
+status | 'status' => 'Collected'
+
 
 
 ### Authentication
