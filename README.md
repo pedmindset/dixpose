@@ -22,7 +22,15 @@ You will receive all the pending collections
 
 You can create a new client from  http://domain.com/admin/dashboarb
 
-Once you have created a password grant client, you may request an access token by issuing a  POST request to the /oauth/token route with the user's email address and password. 
+Once you have created a password grant client, you may request an access token by issuing a  POST request to the httt://url/oauth/token route with the user's email address and password and theNewProvider. 
+
+**NB: theNewProvider key has 4 predifined values. [users, customer_api, driver_api, supervisor_api].
+Driver App = driver_api
+Supervisor App = supervisor_api
+Customer App = customer_api
+Manager App = users
+
+This is to be used only when building a Mobile App that requires Access to the API to use as a Driver or Supervisor etc**
 
 ```javascript
 
@@ -33,7 +41,7 @@ $response = $http->post('http://dixpose.com/oauth/token', [
         'client_secret' => 'client-secret',
         'username' => 'danny@dixpose.com',
         'password' => 'my-password',
-        'theNewProvider' => 'driver_ap'
+        'theNewProvider' => 'driver_api'
         'scope' => '',
     ],
 ]);
