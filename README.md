@@ -33,6 +33,8 @@ Manager App = users
 This is to be used only when building a Mobile App that requires Access to the API to use as a Driver or Supervisor etc**
 
 ```javascript
+//using GuzzleHttp Client in Php
+$http = new GuzzleHttp\Client;
 
 $response = $http->post('http://dixpose.com/oauth/token', [
     'form_params' => [
