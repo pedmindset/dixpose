@@ -21,14 +21,14 @@ use App\Models\Collection;
         'index', 'show', 'update' ]
     ]);
 
-    Route::get('users/', function () {
-        $collection = Collection::where('company_id', 1)
-        ->where('id', 91)
-        ->first();
-        if($collection){
-            return response()->json([$collection], 200);
-        }
-    });
+    // Route::get('users/', function () {
+    //     $collection = Collection::where('company_id', 1)
+    //     ->where('id', 91)
+    //     ->first();
+    //     if($collection){
+    //         return response()->json([$collection], 200);
+    //     }
+    // });
 
  });
 

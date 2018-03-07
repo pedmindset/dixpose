@@ -10,10 +10,10 @@ When you a get request to url/api/v1/collections
 You will receive all the pending collections
 
 | Request            | url                         | method  | Parameters                              |
-| ------------------ |:---------------------------:| -------:| ---------------------------------------:|
+| ------------------ |:---------------------------:| -------:|:----------------------------------------|
 | all collections    | url/api/v1/collections      | get     | returns json data                       |
 | Single Collection  | url/api/v1/collections/id   | get     | returns json data of a single collection|
-| Update a Collection| url/api/v1/collections/id   | put     | 'collection' => collection_id(integer) eg. 1, 'bins' => 'array of bin ids' eg.[1,4,5,4], 'status' => 'Collected'|
+| Update a Collection| url/api/v1/collections/id   | put     | 'collection' => collection_id(integer) eg. ''collection' => 1, 'bins' => 'array of bin ids' eg.bins => [1,4,5,4], 'status' => 'Collected'|
 
 
 ### Authentication
