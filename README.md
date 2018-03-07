@@ -5,7 +5,7 @@
 2. Authentication
 3. REST API endpoints
 
-###Parameters
+### Parameters
 When you a get request to url/api/v1/collections
 You will receive all the pending collections
 
