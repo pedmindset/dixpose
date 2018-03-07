@@ -14,6 +14,22 @@
 /**
 **/
 
+Route::get('/admin/dashboard', 'AdminController@dashboard');
+
+Route::group(['prefix' => 'customer'], function () {
+  Route::get('/login', 'CustomerAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'CustomerAuth\LoginController@login');
+  Route::post('/logout', 'CustomerAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'CustomerAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'CustomerAuth\RegisterController@register');
+
+  Route::post('/password/email', 'CustomerAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'CustomerAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'CustomerAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'CustomerAuth\ResetPasswordController@showResetForm');
+});
+
 Route::group(['prefix' => 'driver'], function () {
     Route::get('/login', 'DriverAuth\LoginController@showLoginForm')->name('login');
     Route::post('/login', 'DriverAuth\LoginController@login');

@@ -217,7 +217,7 @@ class CustomerController extends Controller
         $customer->frequency = $request->frequency;
         $customer->save();
 
-        $customer->bin()->attach([$request->bins]);
+        //$customer->bin()->attach($request->bins);
 
         return redirect('customers')->with('status', 'Customer has been updated successfully');
     }

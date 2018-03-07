@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\SupervisorResetPassword;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Supervisor extends Authenticatable
 {
-    use Notifiable, softDeletes;
+    use Notifiable, softDeletes, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.

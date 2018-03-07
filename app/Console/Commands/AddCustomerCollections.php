@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
+use Carbon\Carbon;
 
 
 class AddCustomerCollections extends Command
@@ -40,12 +41,14 @@ class AddCustomerCollections extends Command
      */
     public function handle()
     {
-        //raise customer collections
+        //raise customer collections 
         /**
          * find all customers 
          * get their company_id and frequency
-         * create a collection based on their company id and frequecy
+         * create a collection based on their company id and frequency
          */
+        $current = Carbon::now();
+
         $customers = Customer::select('id', 'company_id', 'frequency', 'active')
                     //->where('active', 1)
                     ->get();
@@ -57,7 +60,7 @@ class AddCustomerCollections extends Command
                         'company_id' => $customer->company_id,
                         'customer_id' => $customer->id,
                         'status' => 'Pending',
-                        'created_at' => now()
+                        'created_at' => $current
                     ]);
                 
             };

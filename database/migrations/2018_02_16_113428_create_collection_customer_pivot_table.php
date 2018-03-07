@@ -12,7 +12,7 @@ class CreateCollectionCustomerPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('collection_bin', function (Blueprint $table) {
+        Schema::create('bin_collection', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('collection_id')->unsigned()->index();
             $table->foreign('collection_id')->references('id')->on('collections')->onDelete('cascade');

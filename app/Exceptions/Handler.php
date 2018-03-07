@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
+
 
 class Handler extends ExceptionHandler
 {
@@ -36,6 +38,15 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if ($exception instanceof OAuthServerException) {
+            header('Access-Control-Allow-Origin: *');
+        }
+
+        if ($exception instanceof FatalThrowableError) {
+            header('Access-Control-Allow-Origin: *');
+        }
+
+
         parent::report($exception);
     }
 
@@ -48,6 +59,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        
         return parent::render($request, $exception);
     }
 }

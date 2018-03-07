@@ -35,6 +35,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
             
         ],
 
@@ -52,17 +53,21 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'customer' => \App\Http\Middleware\RedirectIfNotCustomer::class,
+        'customer.guest' => \App\Http\Middleware\RedirectIfCustomer::class,
         'driver' => \App\Http\Middleware\RedirectIfNotDriver::class,
         'driver.guest' => \App\Http\Middleware\RedirectIfDriver::class,
         'supervisor' => \App\Http\Middleware\RedirectIfNotSupervisor::class,
         'supervisor.guest' => \App\Http\Middleware\RedirectIfSupervisor::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'auth.basic.once' => \App\Http\Middleware\AuthenticateOnceWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verify.company' => \App\Http\Middleware\VerifyCompany::class,
+        'ppmd' => \App\Http\Middleware\ProviderDetectorMiddleware::class,
+        
     ];
 }

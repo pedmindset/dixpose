@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\Collection;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,23 @@ use Illuminate\Http\Request;
 |
 */
 
- Route::group(['prefix' => 'v1'], function () {
-     
+
+ Route::group(['prefix' => 'v1', 'middleware' => ['auth.basic.once']], function () {
+
     Route::apiResource('collections', 'API\CustomerCollectionController', ['only' => [
-        'index', 'show', 'update'
-        
-    ]]);
+        'index', 'show', 'update' ]
+    ]);
+
+    Route::get('users/', function () {
+        $collection = Collection::where('company_id', 1)
+        ->where('id', 91)
+        ->first();
+        if($collection){
+            return response()->json([$collection], 200);
+        }
+    });
+
  });
 
+
+ 

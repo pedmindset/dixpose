@@ -36,13 +36,14 @@ return [
     */
 
     'guards' => [
+       
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
         ],
         
@@ -51,10 +52,31 @@ return [
             'provider' => 'supervisors',
         ],
 
+        'supervisor_api' => [
+            'driver' => 'passport',
+            'provider' => 'supervisors_api',
+        ],
+
         'driver' => [
             'driver' => 'session',
             'provider' => 'drivers',
         ],
+
+        'driver_api' => [
+            'driver' => 'passport',
+            'provider' => 'drivers_api',
+        ],
+
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
+
+        'customer_api' => [
+            'driver' => 'passport',
+            'provider' => 'customers_api',
+        ],
+
     ],
 
     /*
@@ -75,17 +97,40 @@ return [
     */
 
     'providers' => [
+       
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+
         'supervisors' => [
             'driver' => 'eloquent',
             'model' => App\Models\Supervisor::class,
         ],
+
+        'supervisors_api' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Supervisor::class,
+        ],
+
         'drivers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Driver::class,
+        ],
+
+        'drivers_api' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Driver::class,
+        ],
+
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
+        ],
+
+        'customers_api' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
         ],
 
         // 'users' => [
@@ -110,6 +155,12 @@ return [
     */
 
     'passwords' => [
+        'customers' => [
+            'provider' => 'customers',
+            'table' => 'customer_password_resets',
+            'expire' => 60,
+        ],
+
         'drivers' => [
             'provider' => 'drivers',
             'table' => 'driver_password_resets',

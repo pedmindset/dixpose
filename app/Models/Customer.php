@@ -2,17 +2,47 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Notifications\CustomerResetPassword;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
-class Customer extends Model
+class Customer extends Authenticatable
 {
-    //
-    use SoftDeletes;
+    use Notifiable, SoftDeletes, HasApiTokens;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    // protected $fillable = [
+    //     'name', 'email', 'password',
+    // ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+ 
     protected $dates = ['deleted_at'];
+
+     /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomerResetPassword($token));
+    }
 
     public function company(){
         return $this->belongsTo('App\Models\Company');

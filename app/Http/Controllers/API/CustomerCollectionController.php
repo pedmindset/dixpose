@@ -21,6 +21,7 @@ use App\Http\Resources\CollectionsResource;
 
 class CustomerCollectionController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -30,12 +31,15 @@ class CustomerCollectionController extends Controller
     {
         //return all collections in database
 
-        $collections = Customer::with('company', 'bin', 'collection', 'classification', 'zone', 'service_zone')->paginate(20);
+        $collections = Customer::where('company_id', Auth::user()->company_id)
+                     ->with('company', 'bin', 'collection', 'classification', 'zone', 'service_zone')->paginate(20);
 
         if (! $collections) {
             return response()->json([
                 'error' => 'Resource not found'
-            ], 404);
+            ], 404)->withHeaders([
+                'Content-Type' => 'application/json',
+            ]);
         }
 
         $resource = CustomerCollectionResource::collection($collections);
@@ -62,12 +66,17 @@ class CustomerCollectionController extends Controller
     public function show($id)
     {
         //return a single collection
-        $collection = Customer::with('company', 'bin', 'collection', 'classification', 'zone', 'service_zone')->find($id);
-
+        
+        $collection = Customer::where('company_id', Auth::user()->company_id)
+                     ->with('company', 'bin', 'collection', 'classification', 'zone', 'service_zone')->find($id);
+        
+        
         if (! $collection) {
             return response()->json([
                 'error' => 'Resource not found'
-            ], 404);
+            ], 404)->withHeaders([
+                'Content-Type' => 'application/json',
+            ]);
         }
         
         $resource = new CustomerCollectionResource($collection);
@@ -84,17 +93,17 @@ class CustomerCollectionController extends Controller
     public function update(Request $request, $id)
     {
         //validate and update
-        $collection = $request->validate([
-            'collection' => 'required',
-            'bins' => 'required',
+        $validateData = $request->validate([
+            'collection' => 'required|integer',
+            'bins' => 'required', //array
+            'status' => 'required',
             'ghanaGPS' => 'nullable',
             'address' => 'nullable',
             'longitude' => 'nullable',
             'latitude' => 'nullable',
             'radius' => 'nullable',
-            'frequency' => 'nullable',
-            'updated' => 'required'
         ]);
+        
 
         // asume it won't work
 
@@ -103,28 +112,45 @@ class CustomerCollectionController extends Controller
             DB::beginTransaction();
 
             try {                
-                    $collections = Collection::where('id', $request->collection)->first();
-                    $collections = $collection->status;
-                    $collections = $collection->updated;
-                    if ($collections->save()) {
-                        $collections->bin()->attach([$request->bins]);
+                    $collection = Collection::where('company_id', Auth::user()->company_id)
+
+                                  ->where('id', $request->input('collection'))
+                                  
+                                  ->first();
+                                  
+
+                    $collection->status = $request->input('status');
+                    
+                    if ($collection->save()) {
+                        
+                        $collection->bin()->attach($request->bins);
+                    
                         $success = true;
                     }
                 
             } catch (\Exception $e) {
+                
                // maybe log this exception, but basically it's just here so we can rollback if we get a surprise
-
+               return  response()->json([
+                'Couldnt find collection',$request->input('bins'),$e->getMessage(), 422
+                ])->withHeaders([
+                    'Content-Type' => 'application/json',
+                ]);
             }
 
             if ($success) {
                 DB::commit();
                 return  response()->json([
                     'Collection was successfully updated to completed', 200
+                    ])->withHeaders([
+                        'Content-Type' => 'application/json',
                     ]);
             } else {
                 DB::rollback();
                 return response()->json([
                     'Something went wrong', 404
+                    ])->withHeaders([
+                        'Content-Type' => 'application/json',
                     ]);
             }
     }

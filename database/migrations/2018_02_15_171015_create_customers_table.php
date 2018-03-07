@@ -1,7 +1,7 @@
 <?php
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+
 
 class CreateCustomersTable extends Migration
 {
@@ -24,7 +24,8 @@ class CreateCustomersTable extends Migration
             $table->foreign('classification_id')->references('id')->on('classifications');
             $table->string('code')->unique()->nullable();
             $table->string('name')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email')->nullable()->unique();
+            $table->string('password');
             $table->BigInteger('phone1')->nullable();
             $table->BigInteger('phone2')->nullable();
             $table->string('ghana_gps')->nullable();
@@ -36,10 +37,10 @@ class CreateCustomersTable extends Migration
             $table->integer('frequency')->nullable();
             $table->integer('active')->nullable();
             $table->softDeletes();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
