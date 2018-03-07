@@ -22,17 +22,35 @@ Vue.use( VueRouter )
 */
 export default new VueRouter({
     routes: [
-        // {
-        //     path: '/',
-        //     name: 'home',
-        //     component: Vue.component( 'Home', require( './pages/Layout.vue' ) ),
-        //     children: [
-        //         {
-        //             path: '/dashboard',
-        //             name: 'dashboard',
-        //             component: Vue.component( 'Dashboard', require('./pages/dashboard.vue'))
-        //         }
-        //     ]
-        // }
-    ]
+                {        
+                            path: '/passport-clients',
+                            name: 'passport-clients',
+                            component: Vue.component(
+                                'passport-clients',
+                                require('./components/passport/Clients.vue')
+                            )
+                },
+                {
+                            
+                
+                            path: '/passport-authorized-clients',
+                            name: 'passport-authorized-clients',
+                            component: Vue.component(
+                                'passport-authorized-clients',
+                                require('./components/passport/AuthorizedClients.vue')
+                            )
+                            
+                },
+                {           
+                            path: '/passport-personal-access-tokens',
+                            name: 'passport-personal-access-tokens',
+                            component: Vue.component(
+                                'passport-personal-access-tokens',
+                                require('./components/passport/PersonalAccessTokens.vue')
+                            )
+                },
+        ]
+
+      
 }); 
+
