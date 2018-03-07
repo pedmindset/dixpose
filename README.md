@@ -96,6 +96,7 @@ axios.put('/api/v1/collection/' + collection_Id),
     console.log('Error on Authentication');
   });
 ```
+**NB: The Api works only when an authenticated user access it**
 
 3. REST Endpionts
 
@@ -103,4 +104,5 @@ axios.put('/api/v1/collection/' + collection_Id),
 * Get all Customer Collections: http://url/api/v1/collections
 * Get a single Customer Collection: http://url/api/v1/collections/{id}
 * Update customer collection: http://url/api/v1/collections{id}
+
 
