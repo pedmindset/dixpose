@@ -25,7 +25,7 @@ class VerifyCompanyController extends Controller
              return redirect('/')->with('status', 'Company Sub domain Not Found');
         }
         
-        $domain = config('app.domain', 'dixpose.dev');
+        $domain = config('app.domain');
 
         $subdomain_url = $request->subdomain;
        

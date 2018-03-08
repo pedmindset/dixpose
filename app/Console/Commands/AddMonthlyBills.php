@@ -50,12 +50,12 @@ class AddMonthlyBills extends Command
         $current = Carbon::now();
 
         $collections = DB::table('collections')->whereBetween(
-                       'created_at',
-                       [
+                       'created_at', [
                            $current->startOfMonth()->toDateTimeString(),
-                           $current->endOfMonth()->toDateTimeString(),
-                        ])
-                        ->get();
+                           $current->endOfMonth()->toDateTimeString()
+                        ]
+                    )->get();
+
         $increment = '';
         
         foreach ($collections as $collection) {

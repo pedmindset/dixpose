@@ -90,7 +90,7 @@
                                 <div class="col-md-5">
                                      <div class="form-group">
                                         <div class="form-group {{ $errors->has('sector') ? ' is-invalid' : '' }}">
-                                            <label class="col-md-5 control-label" for="zone">Sector</label>  
+                                            <label class="col-md-5 control-label" for="sector">Sector</label>  
                                             
                                                 <select name="sector" class="form-control custom-select {{ $errors->has('sector') ? ' is-invalid' : '' }}" required>
                                                         @foreach($service_zones as $service_zone)
@@ -102,16 +102,17 @@
                                 </div>
                             </div>
                                  <!-- Text input-->
+                        </div>
                             <div class="row">   
                                  <div class="col-md-5">
                                     <div class="form-group">
-                                        <label class="m-t-1">Pick up date</label>
-                                            <input type="text" id="date-format" name="pick_up_date" class="form-control  {{ $errors->has('pick_up_date') ? ' is-invalid' : '' }}" value="{{ old('pick_up_date') }}" placeholder="Saturday 24 June 2017 - 21:44">
+                                        <label class="col-md-5">Pick up date</label>
+                                            <input  type="text" id="date-format" name="pick_up_date" class="form-control  {{ $errors->has('pick_up_date') ? ' is-invalid' : '' }}" value="{{ old('pick_up_date') }}" placeholder="Saturday 24 June 2017 - 21:44">
                                              <span class="help-block">Select Pick up date</span>  
                                         </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group ">
+                                </div>
+                            <div class="col-md-5">
+                                    <div class="form-group ">
                                                 <label class="col-md-5 control-label" for="status">Status</label>  
                                                  <select id="status" name="status" class="form-control  {{ $errors->has('status') ? ' is-invalid' : '' }}" required>
                                                        <option value="Created">Created</option>
@@ -119,11 +120,11 @@
                                                        <option value="Completed">Completed</option>
                                                   </select>
                                                 <span class="help-block">Set Schedule Status</span>  
-                                            </div>
                                         </div>
-                              </div>
-                                
-                              <div class="row">
+                                   </div>
+                            </div>
+
+                            <div class="row">
                                     <div class="col-md-5">
                                             <div class="form-group ">
                                                 <label for="desc">Remarks</label>
@@ -131,12 +132,15 @@
                                                 </div>
                                         </div>   
                               </div>
-                                
-                                <!-- Button (Double) -->
-                                <div>
+                               <!-- Button (Double) -->
+                               <div>
                                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                     <button type="submit" class="btn btn-inverse waves-effect waves-light btn btn-danger">Cancel</button>
                                 </div>
+                         </div>    
+                        
+                         
+                               
                         </form>
                     </div>
                 </div>

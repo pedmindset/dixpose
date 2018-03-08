@@ -14,7 +14,7 @@
 /**
 **/
 
-Route::get('/admin/dashboard', 'AdminController@dashboard');
+Route::get('/admin/dashboard', 'SuperAdmin\AdminController@dashboard');
 
 Route::group(['prefix' => 'customer'], function () {
   Route::get('/login', 'CustomerAuth\LoginController@showLoginForm')->name('login');
@@ -64,7 +64,16 @@ Route::auth();
 
 Route::middleware('auth')->group(function(){
 
-     Route::get('manager/dashboard', 'AppController@index')->name('dashboard');
+    
+     
+     Route::group(['prefix' => 'manager'], function () {
+
+        Route::get('dashboard', 'AppController@index')->name('dashboard');
+        Route::get('zones', 'Manager\DashboardController@pending_collections_yearly');
+        Route::get('zones/number', 'Manager\DashboardController@number_of_bins_collected_yearly');
+         
+     });
+
      Route::resource('zones', 'ZoneController');
      Route::resource('servicezones', 'ServiceZoneController');
      Route::resource('bins', 'BinController');

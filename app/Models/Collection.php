@@ -36,5 +36,6 @@ class Collection extends Model
     {
         return $this->belongsToMany('App\Models\Journey');
     }
-    
+
+  
 }

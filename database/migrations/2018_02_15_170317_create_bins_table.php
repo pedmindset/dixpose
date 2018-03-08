@@ -18,7 +18,6 @@ class CreateBinsTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies');
             $table->string('type')->nullable();
             $table->string('desc')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

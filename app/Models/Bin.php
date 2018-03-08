@@ -3,14 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Bin extends Model
 {
     //
 
-    use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
@@ -28,4 +26,7 @@ class Bin extends Model
         return $this->belongsToMany('App\Models\Collection');
     }
 
+
+
+   
 }
