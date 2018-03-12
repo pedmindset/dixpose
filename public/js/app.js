@@ -47324,6 +47324,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     for the app.
 */
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+
     routes: [{
         path: '/passport-clients',
         name: 'passport-clients',
@@ -47341,7 +47342,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     }, {
         path: '/field-form',
         name: 'field-form',
-        component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('field-Form', __webpack_require__(60))
+        component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('field-form', __webpack_require__(60))
     }]
 
 }));
@@ -52198,7 +52199,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nbody{\n   background-color : green;\n}\ntextarea {\n  display: block;\n  margin: auto;\n  padding: auto;\n}\n.customer-box {\n  display: block;\n  margin: auto;\n  padding: 15px;\n  background: #eee;\n}\n.button-box{\n  margin: auto;\n  padding: 15px;\n}\n.make-center{\n  -ms-flex-line-pack: center;\n      align-content: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-top: 40%;\n}\n\n\n", ""]);
+exports.push([module.i, "\nbody {\n  background-color: green;\n}\n.customer-box {\n  display: block;\n  margin: auto;\n  width: 100%;\n  padding: 15px;\n  background: #eee;\n}\n.make-center {\n  -ms-flex-line-pack: center;\n      align-content: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-top: 40%;\n}\n\n\n", ""]);
 
 // exports
 
@@ -52209,6 +52210,13 @@ exports.push([module.i, "\nbody{\n   background-color : green;\n}\ntextarea {\n 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -52262,18 +52270,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var session_url = 'api/v1/collections';
-var username = 'emmarthurson@gmail.com';
-var password = '123456';
+
+
+var session_url = 'http://localhost:8000/api/v1/collections';
+var username = 'kevin@gmail.com';
+var password = 'password';
 var credentials = btoa(username + ':' + password);
 var BasicAuth = 'Basic ' + credentials;
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "fieldForm.vue",
 
   data: function data() {
     return {
       customers: [],
+
       location: '',
+
       status: '',
+
       bins: []
     };
   },
@@ -52281,19 +52296,22 @@ var BasicAuth = 'Basic ' + credentials;
     created: function created() {
       var _this = this;
 
-      axios.get(session_url, {
-        headers: { 'Authorization': BasicAuth }
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/v1/collections/' + this.location, {
+        // headers: {'Authorization': BasicAuth}
       }).then(function (response) {
-        console.log(response.data);
-        _this.customers = response.data.body;
+        // console.log(response);
+        // console.log(response.data.data)
+        _this.customers = response.data.data;
+        // console.log(this.customers["bins"])
+
       }).catch(function (error) {
         console.error(error.message);
       });
     }
   },
   addCollection: function addCollection() {
-    axios.put(session_url, {
-      headers: { 'Authorization': BasicAuth }
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put(session_url, {
+      // headers: {'Authorization': BasicAuth}
     }).then(function (input) {
       this.status = '';
       this.bins = '';
@@ -52319,9 +52337,30 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "panel-body" }, [
           _c("form", [
-            _c("div", { staticClass: "form-group" }, [
-              _c("input", { attrs: { type: "text" } }),
-              _vm._v(" "),
+            _c("div", { staticClass: "form-group form-control" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.location,
+                    expression: "location"
+                  }
+                ],
+                attrs: { type: "text" },
+                domProps: { value: _vm.location },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.location = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", [
               _c("button", { on: { click: _vm.created } }, [_vm._v("Enter")])
             ]),
             _vm._v(" "),
@@ -52332,29 +52371,22 @@ var render = function() {
                 [
                   _c("h4", [_vm._v("Client Info")]),
                   _vm._v(" "),
-                  _vm._l(_vm.customers, function(customer) {
-                    return _c("div", { attrs: { id: "customerInfo" } }, [
-                      _c("h5", [_vm._v(_vm._s(customer.title))]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v(_vm._s(customer.body))])
-                    ])
-                  }),
+                  _c("h5", { staticStyle: { "font-weight": "600" } }, [
+                    _vm._v(_vm._s(_vm.customers.name))
+                  ]),
                   _vm._v(" "),
-                  _vm._l(_vm.bins, function(bin) {
-                    return _c("div", [
+                  _vm._l(_vm.customers.bins, function(bin) {
+                    return _c("div", { attrs: { id: "customerInfo" } }, [
                       _c("input", {
                         attrs: { type: "checkbox", name: "bin-1" }
                       }),
-                      _vm._v(_vm._s(bin.id)),
-                      _c("br"),
-                      _vm._v("-->\n                    "),
-                      _c("input", {
-                        attrs: { type: "checkbox", name: "bin-2" }
-                      }),
-                      _vm._v(" " + _vm._s(bin.id)),
-                      _c("br"),
-                      _vm._v("-->\n                ")
+                      _vm._v(_vm._s(bin.type)),
+                      _c("br")
                     ])
+                  }),
+                  _vm._v(" "),
+                  _vm._l(_vm.customers, function(customer) {
+                    return _c("div")
                   })
                 ],
                 2
@@ -52371,11 +52403,11 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      _vm.addCollection($event)
+                      _vm.addCollection()
                     }
                   }
                 },
-                [_vm._v("Collected ")]
+                [_vm._v("Collected")]
               ),
               _vm._v(" "),
               _c(

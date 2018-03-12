@@ -82,7 +82,7 @@ class CollectionController extends Controller
         $collection = Collection::where('company_id', Auth::user()->company_id)
                       ->where('id', $id)
                       ->first();
-        return view(collections.show)->with('collection', $collection);
+        return view('collections.show')->with('collection', $collection);
     }
 
     /**
@@ -99,6 +99,16 @@ class CollectionController extends Controller
                     ->first();
 
         return view('collections.create', compact('customers'));
+    }
+
+    public function schedule()
+    {
+        return view('collections/API/schedule');
+    }
+
+    public function collection()
+    {
+        return view('collections/API/collection');
     }
 
     /**

@@ -39,6 +39,8 @@ Route::group(['prefix' => 'driver'], function () {
     Route::post('/password/reset', 'DriverAuth\ResetPasswordController@reset')->name('password.email');
     Route::get('/password/reset', 'DriverAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
     Route::get('/password/reset/{token}', 'DriverAuth\ResetPasswordController@showResetForm');
+
+    
   });
   
   Route::group(['prefix' => 'supervisor'], function () {
@@ -87,6 +89,8 @@ Route::auth();
      Route::get('customers/sort/{key}', 'CustomerController@customerSort');
      Route::get('customers/search/{value}', 'CustomerController@searchCustomer');
      Route::get('/logout', 'AppController@logout')->name('logout');
+     Route::get('/mobile/collections/', 'CollectionController@schedule');
+     Route::get('/mobile/collections/customer', 'CollectionController@collection');
 });
 //  Route::group(['prefix' => 'api/v1'], function () {
 //     Route::apiResource('collections', 'API/CollectionController');

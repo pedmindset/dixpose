@@ -14,6 +14,8 @@
 </head>
 <body>
     <div id="app">
+            <div class="card text-center">
+             
     <router-view></router-view>
     </div>
     <!-- Scripts -->

@@ -18,14 +18,10 @@ class CustomerCollectionResource extends JsonResource
         
         
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'company' => $this->company,
-            'zone' => $this->zone,
-            'sector' => $this->service_zone,
-            'classification' => $this->classification,
             'collections' => $this->collection,
             'bins' => $this->bin,
+            'id' => $this->id,
+            'name' => $this->name,
             'code' => $this->code,
             'email' => $this->email,
             'phone1' => $this->phone1,
@@ -36,8 +32,12 @@ class CustomerCollectionResource extends JsonResource
             'latitude' => $this->latitude,
             'radius' => $this->radius,
             'frequency' => $this->frequency,
-            'created' => $this->created_at,
-            'updated' => $this->updated_at,
+            'company' => $this->company,
+            'zone' => $this->zone,
+            'sector' => $this->service_zone,
+            'classification' => $this->classification,
+           
+            
             
         ];
     }

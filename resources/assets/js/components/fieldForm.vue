@@ -3,126 +3,135 @@
   <div class="col-md-4 col-md-offset-4">
     <!--<div class="row">-->
     <div class="make-center">
-        <div class="panel panel-success">
-          <div class="panel-heading">
-            <h3 class="panel-title ">Field Collection</h3>
-          </div>
-            <div class="panel-body">
-              <form>
-                <!--customer id created to run get function created-->
-                <div class="form-group">
-                  <input type="text">
-                  <button @click='created' >Enter</button>
-                </div>
-                <!--customer id created to run get function created-->
-
-                <!--customer information is displayed here-->
-              <div class="card">
-                <div class="customer-box">
-                    <h4>Client Info</h4>
-                    <div id="customerInfo" v-for="customer in customers">
-                      <h5>{{customer.title}}</h5>
-                      <p>{{customer.body}}</p>
-                    </div>
-                  <!--customer information is displayed here-->
-
-                  <!--bin data is loaded here-->
-                  <div v-for= "bin in bins" >
-                      <input type="checkbox" name="bin-1" >{{bin.id}}<br>-->
-                      <input type="checkbox" name="bin-2" > {{bin.id}}<br>-->
-                  </div>
-                  <!--end of bin data-->
-                </div>
-              </div>
-              <div>
-                <textarea name="remarks" placeholder="Enter Remarks"></textarea>
-              </div>
-              <div class="button-box">
-                <button class="btn btn-primary pull-right" v-on:click.prevent="addCollection">Collected </button>
-                <button class="btn btn-primary pull-left" v-on:click.prevent>Not Collected</button>
-              </div>
-              </form>
-          </div>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3 class="panel-title ">Field Collection</h3>
         </div>
-    <!--</div>-->
+        <div class="panel-body">
+          <form>
+            <!--customer id created to run get function created-->
+            <div class="form-group form-control">
+              <input type="text" v-model="location">
+            </div>
+            <div>
+              <button @click='created'>Enter</button>
+            </div>
+            <!--customer id created to run get function created-->
+
+            <!--customer information is displayed here-->
+            <div class="card">
+              <div class="customer-box">
+                <h4>Client Info</h4>
+
+                <h5 style="font-weight: 600;">{{ customers.name }}</h5>
+                <div id="customerInfo" v-for="bin in customers.bins">
+                  <input class="" type="checkbox" name="bin-1">{{bin.type}}<br>
+                  
+                  
+                  <!--<p>{{customer.body}}</p>-->
+                </div>
+                <!--customer information is displayed here-->
+
+                <!--bin data is loaded here-->
+                <div v-for="customer in customers">
+                  <!-- <input class="" type="checkbox" name="bin-1">{{customer.order}}<br> -->
+                </div>
+                <!--end of bin data-->
+              </div>
+            </div>
+            <div>
+              <textarea name="remarks" placeholder="Enter Remarks"></textarea>
+            </div>
+            <div class="button-box">
+              <button class="btn btn-primary pull-right" v-on:click.prevent="addCollection()">Collected</button>
+              <button class="btn btn-primary pull-left" v-on:click.prevent>Not Collected</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--</div>-->
     </div>
   </div>
 
 </template>
 
 <script>
-  var session_url = 'api/v1/collections';
-  var username = 'emmarthurson@gmail.com';
-  var password = '123456';
+  import axios from 'axios'
+
+  var session_url = 'http://localhost:8000/api/v1/collections';
+  var username = 'kevin@gmail.com';
+  var password = 'password';
   var credentials = btoa(username + ':' + password);
   var BasicAuth = 'Basic ' + credentials;
-    export default {
 
-        data: function(){
-          return{
-            customers: [],
-            location: '',
-            status: '',
-            bins:[]
-            }
-          },
-          methods: {
+  export default {
+    name: "fieldForm.vue",
 
-            created() {
-              axios.get(session_url, {
-                headers: {'Authorization': BasicAuth }
-              })
-                .then((response) => {
-                  console.log(response.data);
-                  this.customers = response.data.body;
-                })
-                .catch(error => {
-                  console.error(error.message)
+    data: function () {
+      return {
+        customers: [],
 
-                })
-            }
-          },
-            addCollection: function () {
-              axios.put(session_url,{
-                headers: {'Authorization': BasicAuth}
-              })
-                .then(function (input) {
-                  this.status = '';
-                  this.bins = '';
-                  console.log(input);
-                })
-                .catch(error => {
-                  console.error(error.message)
-                });
-            }
+        location: '',
+
+        status: '',
+
+        bins: []
+      }
+    },
+    methods: {
+
+      created() {
+        axios.get('api/v1/collections/' + this.location, {
+          // headers: {'Authorization': BasicAuth}
+        })
+          .then((response) => {
+            // console.log(response);
+            // console.log(response.data.data)
+            this.customers = response.data.data;
+            // console.log(this.customers["bins"])
+            
+          
+          })
+          .catch(error => {
+            console.error(error.message)
+
+          })
+      }
+    },
+    addCollection: function () {
+      axios.put(session_url, {
+        // headers: {'Authorization': BasicAuth}
+      })
+        .then(function (input) {
+          this.status = '';
+          this.bins = '';
+          console.log(input);
+        })
+        .catch(error => {
+          console.error(error.message)
+        });
     }
-
- 
+  }
 </script>
 
-<style >
-  body{
-     background-color : green;
+<style>
+  body {
+    background-color: green;
   }
-  textarea {
-    display: block;
-    margin: auto;
-    padding: auto;
 
-  }
+
+
   .customer-box {
     display: block;
     margin: auto;
+    width: 100%;
     padding: 15px;
     background: #eee;
 
   }
-  .button-box{
-    margin: auto;
-    padding: 15px;
 
-  }
-  .make-center{
+
+  .make-center {
     align-content: center;
     justify-content: center;
     display: flex;
@@ -139,6 +148,16 @@
 <!--'Access-Control-Allow-Methods'; 'GET, POST, PATCH, PUT, DELETE, OPTIONS',-->
 <!--'Content-Type'; 'application/json'-->
 <!---->
+<!--limit data value to 5 in json api-->
+<!--let newDataSet = {},-->
+<!--i = 0;-->
+<!--for (let key in response.data) {-->
+<!--if (response.data.hasOwnProperty(key) && i < 5) {-->
+<!--newDataSet[key] = response.data[key];-->
+<!--}-->
+<!--i++;-->
+<!--}-->
+<!--<!--limit data value to 5 in json api-->-->
 
 
 
