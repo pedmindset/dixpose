@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce34022fc7506f19fd4d792865df60b5",
+    "content-hash": "deadf045b72d248afd99093050afe6a5",
     "packages": [
+        {
+            "name": "consoletvs/charts",
+            "version": "6.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ConsoleTVs/Charts.git",
+                "reference": "88d84fdebf8ba5305f8775d247fbe10e36236532"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/88d84fdebf8ba5305f8775d247fbe10e36236532",
+                "reference": "88d84fdebf8ba5305f8775d247fbe10e36236532",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ConsoleTVs\\Charts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Èrik Campobadal Forés",
+                    "email": "soc@erik.cat"
+                }
+            ],
+            "description": "The laravel charting package",
+            "time": "2018-03-04T12:38:41+00:00"
+        },
         {
             "name": "defuse/php-encryption",
             "version": "v2.1.0",
@@ -472,6 +516,58 @@
             "time": "2016-07-18T04:51:16+00:00"
         },
         {
+            "name": "fx3costa/laravelchartjs",
+            "version": "2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fxcosta/laravel-chartjs.git",
+                "reference": "21eaf327118ca512b6503979d4ae75ad3a463e68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fxcosta/laravel-chartjs/zipball/21eaf327118ca512b6503979d4ae75ad3a463e68",
+                "reference": "21eaf327118ca512b6503979d4ae75ad3a463e68",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Fx3costa\\LaravelChartJs\\Providers\\ChartjsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fx3costa\\LaravelChartJs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Felix",
+                    "email": "fx3costa@gmail.com"
+                }
+            ],
+            "description": "Simple package to facilitate and automate the use of charts in Laravel 5.x using Chartjs v2 library",
+            "keywords": [
+                "chart",
+                "chartjs",
+                "fx3costa",
+                "graphics",
+                "laravel5",
+                "reports"
+            ],
+            "time": "2018-02-20T17:00:36+00:00"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "6.3.0",
             "source": {
@@ -826,10 +922,6 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
             "version": "v5.6.7",
             "source": {
                 "type": "git",
@@ -840,27 +932,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/18402cd4b83fd1d944f3baa0d8cc26d7dfcce333",
                 "reference": "18402cd4b83fd1d944f3baa0d8cc26d7dfcce333",
-=======
-=======
->>>>>>> 7dc7eb36607eca88c6cb3aa96b32a402d5bf904b
->>>>>>> Stashed changes
-            "version": "v5.6.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "d9bf9d0e103ec536e6c459f3f5400bf6b132bb2f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d9bf9d0e103ec536e6c459f3f5400bf6b132bb2f",
-                "reference": "d9bf9d0e103ec536e6c459f3f5400bf6b132bb2f",
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> 7dc7eb36607eca88c6cb3aa96b32a402d5bf904b
-=======
->>>>>>> 7dc7eb36607eca88c6cb3aa96b32a402d5bf904b
->>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -983,11 +1054,6 @@
                 "framework",
                 "laravel"
             ],
-<<<<<<< Updated upstream
-            "time": "2018-02-27T14:02:09+00:00"
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
             "time": "2018-02-28T14:50:53+00:00"
         },
         {
@@ -1058,13 +1124,6 @@
                 "passport"
             ],
             "time": "2018-01-29T14:30:22+00:00"
-=======
-            "time": "2018-02-27T14:02:09+00:00"
->>>>>>> 7dc7eb36607eca88c6cb3aa96b32a402d5bf904b
-=======
-            "time": "2018-02-27T14:02:09+00:00"
->>>>>>> 7dc7eb36607eca88c6cb3aa96b32a402d5bf904b
->>>>>>> Stashed changes
         },
         {
             "name": "laravel/tinker",
@@ -1618,62 +1677,6 @@
                 "random"
             ],
             "time": "2017-09-27T21:40:39+00:00"
-        },
-        {
-            "name": "pedmindset/laravel-passport-multiauth",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pedmindset/laravel-passport-mutiauth.git",
-                "reference": "c4334b0514cecd7a7343aa5e1bb03ebc1ad5cc31"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pedmindset/laravel-passport-mutiauth/zipball/c4334b0514cecd7a7343aa5e1bb03ebc1ad5cc31",
-                "reference": "c4334b0514cecd7a7343aa5e1bb03ebc1ad5cc31",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/http": "^5.3",
-                "laravel/framework": "5.4.* || 5.5.* || 5.6.*",
-                "vlucas/phpdotenv": "~2.2"
-            },
-            "require-dev": {
-                "fzaninotto/faker": "~1.4",
-                "graham-campbell/testbench": "^5.0",
-                "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "~7.0"
-            },
-            "type": "project",
-            "autoload": {
-                "psr-4": {
-                    "Jsdecena\\LPM\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeff Simons Decena",
-                    "email": "jeff.decena@yahoo.com"
-                }
-            ],
-            "description": "Simple laravel passport multiple user authentication",
-            "keywords": [
-                "Authentication",
-                "auth",
-                "framework",
-                "laravel",
-                "laravel6",
-                "multi",
-                "package",
-                "passport",
-                "token",
-                "user"
-            ],
-            "time": "2018-03-03T17:35:19+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -3621,6 +3624,62 @@
             "time": "2018-02-07T10:42:20+00:00"
         },
         {
+            "name": "pedmindset/laravel-passport-multiauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pedmindset/laravel-passport-mutiauth.git",
+                "reference": "c4334b0514cecd7a7343aa5e1bb03ebc1ad5cc31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pedmindset/laravel-passport-mutiauth/zipball/c4334b0514cecd7a7343aa5e1bb03ebc1ad5cc31",
+                "reference": "c4334b0514cecd7a7343aa5e1bb03ebc1ad5cc31",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "^5.3",
+                "laravel/framework": "5.4.* || 5.5.* || 5.6.*",
+                "vlucas/phpdotenv": "~2.2"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "graham-campbell/testbench": "^5.0",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Jsdecena\\LPM\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeff Simons Decena",
+                    "email": "jeff.decena@yahoo.com"
+                }
+            ],
+            "description": "Simple laravel passport multiple user authentication",
+            "keywords": [
+                "Authentication",
+                "auth",
+                "framework",
+                "laravel",
+                "laravel6",
+                "multi",
+                "package",
+                "passport",
+                "token",
+                "user"
+            ],
+            "time": "2018-03-03T17:35:19+00:00"
+        },
+        {
             "name": "phar-io/manifest",
             "version": "1.0.1",
             "source": {
@@ -5078,9 +5137,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "pedmindset/laravel-passport-multiauth": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

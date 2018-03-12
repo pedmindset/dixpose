@@ -28,7 +28,9 @@ class ServiceZoneController extends Controller
     public function index()
     {
         //show all service zones
-        $service_zones = ServiceZone::all()->where('company_id', Auth::user()->company_id);
+        $service_zones = ServiceZone::where('company_id', Auth::user()->company_id)
+                                    ->orderBy('id', 'desc')
+                                            ->get();
         return view('servicezones.index')->with('service_zones', $service_zones);
     }
 

@@ -114,7 +114,7 @@ class CustomerCollectionController extends Controller
             try {                
                     $collection = Collection::where('company_id', Auth::user()->company_id)
 
-                                  ->where('id', $request->input('collection'))
+                                  ->where('id', $id)
                                   
                                   ->first();
                                   

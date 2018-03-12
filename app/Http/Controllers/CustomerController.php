@@ -40,8 +40,9 @@ class CustomerController extends Controller
 
         $adjusted_key = str_finish($key, '_id');
 
-        $customers = Customer::all()
-                    ->where('company_id', Auth::user()->company_id);
+        $customers = Customer::where('company_id', Auth::user()->company_id)
+                            ->orderBy('id', 'desc')
+                            ->get();
 
         $sorted = $customers->sortBy($adjusted_key);
 
@@ -70,13 +71,19 @@ class CustomerController extends Controller
     public function create()
     {
         //return create customer page
-        $zones = Zone::all()->where('company_id', Auth::user()->company_id);
+        $zones = Zone::where('company_id', Auth::user()->company_id)
+                         ->get(['id', 'name']);
 
-        $service_zones = ServiceZone::all()->where('company_id', Auth::user()->company_id);
+        $service_zones = ServiceZone::where('company_id', Auth::user()->company_id)
+                                        ->get(['id', 'name']);
 
-        $classifications = Classification::all()->where('company_id', Auth::user()->company_id);
+        $classifications = Classification::where('company_id', Auth::user()->company_id)
+                            ->orderBy('id')
+                            ->get(['id','class']);
 
-        $bins = Bin::all()->where('company_id', Auth::user()->company_id);
+
+        $bins = Bin::where('company_id', Auth::user()->company_id)
+                    ->get();
 
         return view('customers.create', compact('zones', 'service_zones', 'classifications', 'bins'));
     }
@@ -111,17 +118,12 @@ class CustomerController extends Controller
 
         $customer = new Customer;
 
-        $zone = Zone::where('company_id', Auth::user()->company_id)
-                ->where('id', $request->zone)->first();
-
-        $serviceZone = ServiceZone::where('company_id', Auth::user()->company_id)
-                ->where('id', $request->service_zone)->first();
-
-        $company = Company::where('id', Auth::user()->company_id)->first();
+        $company = Company::where('id', Auth::user()->company_id)
+                            ->first();
 
         $customer->company_id = $company->id;
-        $customer->zone_id = $zone->id;
-        $customer->service_zone_id = $serviceZone->id;
+        $customer->zone_id =  $request->zone;
+        $customer->service_zone_id = $request->service_zone;
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->phone1 = $request->phone1;
@@ -164,11 +166,15 @@ class CustomerController extends Controller
         $customer = Customer::where('company_id', Auth::user()->company_id)
                     ->where('id', $id)->first();
 
-         $zones = Zone::all()->where('company_id', Auth::user()->company_id);
+         $zones = Zone::where('company_id', Auth::user()->company_id)
+                        ->get(['id', 'name']);
 
-        $service_zones = ServiceZone::all()->where('company_id', Auth::user()->company_id);
+        $service_zones = ServiceZone::where('company_id', Auth::user()->company_id)
+                          ->get(['id', 'name']);
 
-        $classifications = Classification::all()->where('company_id', Auth::user()->company_id);
+        $classifications = Classification::where('company_id', Auth::user()->company_id)
+                            ->distinct()
+                            ->get(['id', 'class']);
 
         return view('customers.edit', compact('customer', 'zones', 'service_zones', 'classifications'));
     }

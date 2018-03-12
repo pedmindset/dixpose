@@ -54,11 +54,18 @@ class AddMonthlyBills extends Command
                            $current->startOfMonth()->toDateTimeString(),
                            $current->endOfMonth()->toDateTimeString()
                         ]
-                    )->get();
+                    )->where('status', 'Collected')
+                    ->get();
+
 
         $increment = '';
+
+     
         
+        DB::beginTransaction();
         foreach ($collections as $collection) {
+          
+            
             //get last record
             $record = Invoice::latest()->orderBy('id', 'DESC')->first();
             if($record){
@@ -69,28 +76,43 @@ class AddMonthlyBills extends Command
                 $nextInvoiceNumber = $splitString[0].'-'.$increment;
                 
             } else{
-                $string = 'INVOICE';
+                $string = 'BILL';
                 $number = 1011;
-                $nextInvoiceNumber = 'INVOICE-'.$number;
+                $nextInvoiceNumber = "$string-$number";
             }
             
-
-
             //now add into database $nextInvoiceNumber as a next number.
+            //assume it will faill
+            
+                $amount = DB::table('bin_collection')
+                                  ->join('bins', 'bins.id', '=', 'bin_collection.bin_id')
+                                  ->where('bin_collection.collection_id', $collection->id)
+                                  ->select('bins.price')
+                                  ->get()->sum('price');
 
-            $invoice = Invoice::firstOrCreate(
-                ['collection_id' => $collection->id],
-                    [
-                        'customer_id' => $collection->customer_id,
-                        'company_id' => $collection->company_id,
-                        'number' => $nextInvoiceNumber,
-                        'due_date' => $current->addDays(7),
-                        'status' => 'Not Paid'
-                    ]
-                );
+                $invoice = Invoice::firstOrCreate(
+                    ['collection_id' => $collection->id],
+                        [
+                            'customer_id' => $collection->customer_id,
+                            'company_id' => $collection->company_id,
+                            'number' => $nextInvoiceNumber,
+                            'amount' => $amount,
+                            'due_date' => $current->addDays(7),
+                            'status' => 'Not Paid'
+                        ]
+                    );
+
+                    if($invoice->created){
+                        DB::commit();
+                    }else{
+                        DB::rollback();
+                    }
+                   
+
+
+          
         }
-       
         
-
+   
     }
 }

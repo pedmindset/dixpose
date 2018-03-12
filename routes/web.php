@@ -62,18 +62,18 @@ Route::get('/logout', 'AppController@logout')->name('logout');
 
 Route::auth();
 
-Route::middleware('auth')->group(function(){
 
-    
-     
-     Route::group(['prefix' => 'manager'], function () {
+  Route::group(['middleware' => ['auth']], function () {
 
-        Route::get('dashboard', 'AppController@index')->name('dashboard');
-        Route::get('zones', 'Manager\DashboardController@pending_collections_yearly');
-        Route::get('zones/number', 'Manager\DashboardController@number_of_bins_collected_yearly');
-         
-     });
+    Route::group(['prefix' => 'manager'], function () {
 
+          Route::get('dashboard', 'Manager\DashboardController@index')->name('dashboard');
+          Route::get('schedules/report', 'Manager\DashboardController@get_schedule_report');
+          Route::get('collections/report', 'Manager\DashboardController@get_collection_report');
+          Route::get('bins/report', 'Manager\DashboardController@get_bin_report');
+        
+    });
+ 
      Route::resource('zones', 'ZoneController');
      Route::resource('servicezones', 'ServiceZoneController');
      Route::resource('bins', 'BinController');

@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="card-body">  
-                        <table class="table table-striped table-hover display nowrap table table-hover table-striped table-bordered table-responsive" id="table1">
+                        <table class="table table-striped table-hover display nowrap table-responsive" id="table1">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -61,9 +61,9 @@
                                         
                                     </tr>
                                 </thead>
-                                @foreach($schedules as $schedule)
+                               
                                 <tbody>
-                                   
+                                        @foreach($schedules as $schedule)
                                     <tr>    
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $schedule->supervisor->name or '' }}</td>
@@ -86,9 +86,9 @@
                                             </td>
                                         
                                         </tr>
-                                    
+                                        @endforeach
                                 </tbody>
-                                @endforeach
+                                
                             </table>
                         
                         </div>

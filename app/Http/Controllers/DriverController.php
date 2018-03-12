@@ -21,7 +21,9 @@ class DriverController extends Controller
     public function index()
     {
         //show all drivers in the database
-        $drivers = Driver::all()->where('company_id', Auth::user()->company_id);
+        $drivers = Driver::where('company_id', Auth::user()->company_id)
+                          ->orderBy('id', 'desc')
+                          ->get();
         return view('drivers.index', compact('drivers'));
     }
 

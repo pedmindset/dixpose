@@ -69,6 +69,16 @@ class Customer extends Authenticatable
         return $this->hasMany('App\Models\Collection');
     }
 
+    public function invoice()
+    {
+        return $this->hasMany('App\Models\Invoice');
+    }
+
+    public function payment()
+    {
+        return $this->hasMany('App\Models\Payment');
+    }
+
 
 
 }

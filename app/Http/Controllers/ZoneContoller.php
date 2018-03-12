@@ -23,7 +23,9 @@ class ZoneController extends Controller
     public function index()
     {
         //Show all Zones in Database
-        $zones = Zone::all()->where('company_id', Auth::user()->company_id);
+        $zones = Zone::where('company_id', Auth::user()->company_id)
+                        ->orderBy('id', 'desc')
+                                ->get();
         return view('zones.index')->with('zones', $zones);
     }
 
@@ -47,7 +49,7 @@ class ZoneController extends Controller
     {
         //validate and store zones
         $validateData = $request->validate([
-            'name' => 'required|unique:zones,name',
+            'name' => 'required',
             'description' => 'nullable',
         ]);
 

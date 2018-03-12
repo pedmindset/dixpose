@@ -21,7 +21,9 @@ class SupervisorController extends Controller
     public function index()
     {
         //show all Supervisors in the database
-        $supervisors = Supervisor::all()->where('company_id', Auth::user()->company_id);
+        $supervisors = Supervisor::where('company_id', Auth::user()->company_id)
+                                    ->orderBy('id', 'desc')
+                                    ->get();
         return view('supervisors.index', compact('supervisors'));
     }
 

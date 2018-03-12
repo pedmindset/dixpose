@@ -18,32 +18,22 @@
                                 {{ session('status') }}
                            </div>
                      @endif
-                     <form method="post" action="{{ action('ClassificationController@update', $classification->id or '') }}">
+                     <form method="post" action="{{ action('ClassificationController@update', $classification->id) }}">
                             @csrf
-                            @method('PUT')
-                        <div class="form-group {{ $errors->has('class') ? 'has-error' : ''}}">
-                                <label for="class" class="col-md-4 control-label">{{ 'Class' }}</label>
+                            @method('PATCH')
+                        <div class="form-group {{ $errors->has('classification') ? 'has-error' : ''}}">
+                                <label for="classification" class="col-md-4 control-label">{{ 'classification' }}</label>
                                 <div class="col-md-6">
-                                    <input class="form-control" name="class" type="text" id="class" value="{{ $classification->class or ''}}" required>
-                                    {!! $errors->first('class', '<p class="help-block">:message</p>') !!}
+                                    <input class="form-control" name="classification" type="text" id="classification" value="{{ $classification->class or ''}}" required>
+                                    {!! $errors->first('classification', '<p class="help-block">:message</p>') !!}
                                 </div>
-                            </div><div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
-                                <label for="price" class="col-md-4 control-label">{{ 'Price' }}</label>
-                                <div class="col-md-6">
-                                    <input class="form-control" name="price" type="number" id="price" value="{{ $classification->price or ''}}" required>
-                                    {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </div><div class="form-group {{ $errors->has('bin_id') ? 'has-error' : ''}}">
-                                <label for="bin_id" class="col-md-4 control-label">{{ 'Bin Id' }}</label>
-                                <div class="col-md-6">
-                                    <select name="bin" class="form-control custom-select {{ $errors->has('bin') ? ' is-invalid' : '' }}" required data-validation-required-message ="Please select the Bin Type">
-                                            @foreach($bins as $bin)
-                                            <option value="{{$bin->id or ''}}">{{$bin->type or ''}}</option>
-                                            @endforeach
-                                        </select>
-                                    <small class="form-control-feedback text-danger"> Select Bin Type </small> 
-                                    {!! $errors->first('bin_id', '<p class="help-block">:message</p>') !!}
-                                </div>
+                            </div>
+                            
+                        
+                            <div class="form-group col-md-5">
+                                <label for="description">Description</label>
+                                
+                                <textarea type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" id="description" name="description" rows="5" placeholder="Description">{{ $classification->description or '' }}</textarea>
                             </div>
                             
                             @if ($errors->any())

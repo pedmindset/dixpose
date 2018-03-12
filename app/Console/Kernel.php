@@ -13,8 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // 'App\Console\Commands\AddCustomerCollections',
-       'App\Console\Commands\AddMonthlyBills'
+        'App\Console\Commands\AddCustomerCollections',
+       'App\Console\Commands\AddMonthlyBills',
+        // 'App\Console\Commands\AddMonthlyInvoice',
     ];
 
     /**
@@ -25,19 +26,27 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('collection:customers')
-        //         // ->weekly()
-        //         // ->sundays()
-        //         // ->at('22:00') 
-        //          ->everyMinute()
-        //          ->sendOutputTo('App/collection.txt');
+        $schedule->command('collection:customers')
+                // ->weekly()
+                // ->sundays()
+                // ->at('21:00') 
+                 ->everyMinute()
+                 ->sendOutputTo('App/collection.txt');
 
        $schedule->command('bills:customers')
-                 // ->weekly()
-                 // ->sundays()
+                 // ->monthlyOn(1, '1:00')
                  // ->at('22:00')
                   ->everyMinute()
                   ->sendOutputTo('App/bills.txt');
+
+
+    //    $schedule->command('invoice:monthly')
+    //              // ->monthlyOn(1, '3:00')
+    //              // ->at('22:00')
+    //               ->everyMinute()
+    //               ->sendOutputTo('App/Invoice.txt');
+
+    
 
 
     }

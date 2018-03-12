@@ -29,33 +29,21 @@
                     @endif
                      <form method="post" action="{{ url('classifications') }}">
                             @csrf
-                        <div class="form-group {{ $errors->has('class') ? 'has-error' : ''}}">
-                                <label for="class" class="col-md-4 control-label">{{ 'Class' }}</label>
+                        <div class="form-group {{ $errors->has('classification') ? 'has-error' : ''}}">
+                                <label for="classification" class="col-md-4 control-label">Class</label>
                                 <div class="col-md-5">
-                                    <input class="form-control" name="class" type="text" id="class" value="{{ old('class') }}" required>
-                                    {!! $errors->first('class', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </div><div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
-                                <label for="price" class="col-md-4 control-label">{{ 'Price' }}</label>
-                                <div class="col-md-5 input-group mb-3">
-                                  <div class="input-group-prepend">
-                                    <input class="form-control input-group-prepend" name="price" type="number" id="price" value="{{ old('price') }}" required  aria-describedby="price" ">
-                                    <span class="input-group-text" id="price">GHS</span>
-                             </div>
-                                    {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </div><div class="form-group {{ $errors->has('bin_id') ? 'has-error' : ''}}">
-                                <label for="bin_id" class="col-md-4 control-label">{{ 'Bin Type' }}</label>
-                                <div class="col-md-5">
-                                    <select name="bin" class="form-control custom-select {{ $errors->has('bin') ? ' is-invalid' : '' }}" required data-validation-required-message ="Please select the Bin Type">
-                                            @foreach($bins as $bin)
-                                            <option value="{{$bin->id or ''}}">{{$bin->type or ''}}</option>
-                                            @endforeach
-                                        </select>
-                                    <small class="form-control-feedback text-danger"> Select Bin Type </small> 
-                                    {!! $errors->first('bin_id', '<p class="help-block">:message</p>') !!}
+                                    <input class="form-control" name="classification" type="text" id="classification" value="{{ old('classification') }}" placeholder="First Class" required>
+                                    {!! $errors->first('classification', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
+                            
+                            <div class="form-group col-md-5">
+                                <label for="description">Description</label>
+                                
+                                <textarea type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" id="description" name="description" rows="5" placeholder="Description">{{ old('description') }}</textarea>
+                            </div>
+                        
+                         
                             
                    
                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>

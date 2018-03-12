@@ -22,7 +22,9 @@ class ClassificationController extends Controller
     public function index()
     {
         //show all classifications in database
-        $classifications = Classification::all()->where('company_id', Auth::user()->company_id);
+        $classifications = Classification::where('company_id', Auth::user()->company_id)
+                                          ->orderBy('id', 'desc')
+                                          ->get();
 
         return view('classifications.index')->with('classifications', $classifications);
     }
@@ -35,8 +37,7 @@ class ClassificationController extends Controller
     public function create()
     {
         //return the page to create a classification
-        $all_bins = Bin::all()->where('company_id', Auth::user()->company_id);
-        return view('classifications.create')->with('bins', $all_bins);
+        return view('classifications.create');
     }
 
     /**
@@ -49,17 +50,15 @@ class ClassificationController extends Controller
     {
         //validate and store classification
         $validateData = $request->validate([
-            'class' => 'required|string|unique:classifications,class',
-            'price' => 'required|integer',
-            'bin' => 'required|integer'
+            'classification' => 'required|string',
+            'description' => 'nullable'
         ]);
         
         $company = Company::where('id', Auth::user()->company_id)->first();
         $classification = new Classification;
         $classification->company_id = $company->id;
-        $classification->bin_id = $request->bin;
-        $classification->class  = $request->class;
-        $classification->price = $request->price;
+        $classification->class  = $request->classification;
+        $classification->description = $request->description;
         $classification->save();
 
         return redirect('classifications/create')->with('status', 'Classifications has been added successfully');
@@ -85,12 +84,12 @@ class ClassificationController extends Controller
     public function edit($id)
     {
         //return the page to update a classification
-        $bins = Bin::all()->where('company_id', Auth::user()->company_id);
 
         $classification = Classification::where('company_id', Auth::user()->company_id)
-                          ->where('id', $id)->first();
+                                         ->where('id', $id)
+                                         ->first();
 
-        return view('classifications.edit', compact('classification', 'bins'));
+        return view('classifications.edit', compact('classification'));
     }
 
     /**
@@ -104,18 +103,18 @@ class ClassificationController extends Controller
     {
         //validate and update classification
         $validateData = $request->validate([
-            'class' => 'required|string',
-            'price' => 'required|numeric',
-            'bin' => 'required|integer'
+            'classification' => 'required|string',
+            'description' => 'nullable'
         ]);
+
         
         $classification = Classification::where('company_id', Auth::user()->company_id)
-                         ->where('id', $id)->first();
-        $classification->bin_id = $request->bin;
-        $classification->class  = $request->class;
-        $classification->price = $request->price;
+                                         ->where('id', $id)
+                                         ->first();
+        $classification->class = $request->classification;
+        $classification->description = $request->description;
         $classification->save();
-
+       
         return redirect('classifications')->with('status', 'Classifications has been updated successfully');
     }
 

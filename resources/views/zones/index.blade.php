@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="card-body">  
-                        <table class="table table-striped table-hover display nowrap table table-hover table-striped table-bordered" id="table1">
+                        <table class="table table-striped table-hover display nowrap table table-hover" id="table1">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -38,9 +38,9 @@
                                         
                                     </tr>
                                 </thead>
-                                @foreach($zones as $zone)
+                             
                                 <tbody>
-                                   
+                                        @foreach($zones as $zone)
                                     <tr>    
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $zone->name or '' }}</td>
@@ -58,9 +58,9 @@
                                             </td>
                                         
                                         </tr>
-                                    
+                                        @endforeach
                                 </tbody>
-                                @endforeach
+                               
                             </table>
                         
                         </div>

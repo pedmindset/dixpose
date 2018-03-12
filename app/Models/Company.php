@@ -63,6 +63,17 @@ class Company extends Model
     {
         return $this->hasMany('App\Models\Collection');
     }
+
+    public function invoice()
+    {
+        return $this->hasMnay('App\Models\Invoice');
+    }
+
+
+    public function payment()
+    {
+        return $this->hasMnay('App\Models\Payment');
+    }
     
 
 

@@ -9,6 +9,8 @@ use App\Models\Zone;
 use App\Models\Truck;
 use App\Models\Driver;
 use App\Models\Journey;
+use App\Models\Payment;
+use App\Models\Invoice;
 use App\Models\Customer;
 use App\Models\Supervisor;
 use App\Models\Collection;
@@ -57,7 +59,7 @@ class DashboardController extends Controller
         }
 
 
-        public function dashbaord()
+        public function index()
         {
             
             //show the number and list of zones by company
@@ -86,23 +88,63 @@ class DashboardController extends Controller
 
             //Get schedules for the year
             $schedulesYearly = $this->schedules_yearly();
-            $numberOfschedulesYearly = $this->number_of_schedules_yearly();
+            $numberOfSchedulesYearly = $this->number_of_schedules_yearly();
 
             //Get schedules for the quarter
             $schedulesQuarterly = $this->schedules_quarterly();
-            $numberOfschedulesQuarterly = $this->number_of_schedules_quarterly();
+            $numberOfSchedulesQuarterly = $this->number_of_schedules_quarterly();
 
             //Get schedules for the month 
             $schedulesMonthly = $this->schedules_monthly(); 
-            $numberOfschedulesMonthly = $this->number_of_schedules_monthly();
+            $numberOfSchedulesMonthly = $this->number_of_schedules_monthly();
 
             //Get schedules for the week
             $schedulesWeekly = $this->schedules_weekly();
-            $numberOfschedulesWeekly = $this->number_of_schedules_weekly();
+            $numberOfSchedulesWeekly = $this->number_of_schedules_weekly();
 
             //Get schedules for the day
             $schedulesDaily = $this->schedules_daily();
-            $numberOfschedulesDaily = $this->number_of_schedules_daily();
+            $numberOfSchedulesDaily = $this->number_of_schedules_daily();
+
+            //Get Pending Schedules Yearly
+            $pendingSchedulesYearly = $this->pending_schedules_yearly();
+            $numberOfPendingSchedulesYearly = $this->number_of_pending_schedules_yearly();
+
+            //Get Pending Schedules quarterly
+            $pendingSchedulesQuarterly = $this->pending_schedules_quarterly();
+            $numberOfPendingSchedulesQuarterly = $this->pending_schedules_quarterly();
+
+            //Get Pending Schedules Monthly
+            $pendingSchedulesMonthly = $this->pending_schedules_monthly();
+            $numberOfPendingSchedulesMonthly = $this->number_of_pending_schedules_monthly();
+
+            //Get Pending Schedules weekly
+            $pendingSchedulesWeekly = $this->pending_schedules_weekly();
+            $numberOfPendingSchedulesWeekly = $this->number_of_pending_schedules_weekly();
+
+            //Get Pending Schedules Daily
+            $pendingSchedulesDaily = $this->pending_schedules_daily();
+            $numberOfPendingSchedulesDaily = $this->number_of_pending_schedules_daily();
+
+            //Get completed Schedules Yearly
+            $completedSchedulesYearly = $this->completed_schedules_yearly();
+            $numberOfCompletedSchedulesYearly = $this->number_of_completed_schedules_yearly();
+
+            //Get completed Schedules quarterly
+            $completedSchedulesQuarterly = $this->completed_schedules_quarterly();
+            $numberOfCompletedSchedulesQuarterly = $this->completed_schedules_quarterly();
+
+            //Get completed Schedules Monthly
+            $completedSchedulesMonthly = $this->completed_schedules_monthly();
+            $numberOfCompletedSchedulesMonthly = $this->number_of_completed_schedules_monthly();
+
+            //Get completed Schedules weekly
+            $completedSchedulesWeekly = $this->completed_schedules_weekly();
+            $numberOfCompletedSchedulesWeekly = $this->number_of_completed_schedules_weekly();
+
+            //Get completed Schedules Daily
+            $completedSchedulesDaily = $this->completed_schedules_daily();
+            $numberOfCompletedSchedulesDaily = $this->number_of_completed_schedules_daily();
 
 
             //Collections Reports
@@ -146,6 +188,26 @@ class DashboardController extends Controller
             $pendingCollectionsDaily = $this->pending_collections_daily();
             $numberOfPendingCollectionsDaily = $this->number_of_pending_collections_daily();
 
+             //Get all  collections Yearly
+            $collectionsYearly = $this->collections_yearly();
+            $numberOfCollectionsYearly = $this->number_of_collections_yearly();
+
+            //Get  collections Quarterly
+            $collectionsQuarterly = $this->collections_quarterly();
+            $numberOfCollectionsQuarterly = $this->number_of_collections_quarterly();
+
+            //Get  collections Monthly
+            $collectionsMonthly = $this->collections_monthly();
+            $numberOfCollectionsMonthly= $this->number_of_collections_monthly();
+   
+            //Get  collections Weekly
+            $collectionsWeekly = $this->collections_weekly();
+            $numberOfCollectionsWeekly = $this->number_of_collections_weekly();
+
+            //Get  collections Daily
+            $collectionsDaily = $this->collections_daily();
+            $numberOfCollectionsDaily = $this->number_of_collections_daily();
+
 
             //Bins Report
             //Bins Collected Yearly
@@ -167,22 +229,45 @@ class DashboardController extends Controller
             //Total Bins Collected Daily
             $binsCollectedDaily = $this->bins_collected_daily();
             $numberOfBinsCollectedDaily = $this->number_of_bins_collected_daily();
+
+            //customer numbers
+            $customers = $this->get_all_customers();
+            $numberOfCustomers = $this->total_customers();
+
+            //charts
+            //collections
+            $pieCollectionsDaily = $this->pie_collections_daily();
+            $pieCollectionsWeekly = $this->pie_collections_weekly();
+            $barCollectionsStatistics = $this->bar_collection_statictics();
+
+            //Schedules
+            $pieSchedulesDaily = $this->pie_schedules_daily();
+            $pieSchedulesWeekly = $this->pie_schedules_weekly();
         
 
-
-            
             return view('manager/dashboard', 
                                     compact(
                                         //general operations data
-                                        'zones', '$numberOfZones',
+                                        'zones', 'numberOfZones',
                                         'sectors', 'numberOfSectors', 
                                         'bins', 'numberOfBins', 
                                         'classifications', 'numberOfClassifications',
                                         //scheduling
-                                        'schedulesYearly', 'numberOfschedulesYearly', 
-                                        'schedulesQuarterly', 'numberOfschedulesQuarterly', 
-                                        'schedulesMonthly', 'numberOfschedulesMonthly', 
-                                        'schedulesWeekly', 'numberOfschedulesWeekly',
+                                        'schedulesYearly', 'numberOfSchedulesYearly', 
+                                        'schedulesQuarterly', 'numberOfSchedulesQuarterly', 
+                                        'schedulesMonthly', 'numberOfSchedulesMonthly', 
+                                        'schedulesWeekly', 'numberOfSchedulesWeekly',
+                                        'schedulesDaily', 'numberOfSchedulesDaily',
+                                        'pendingSchedulesYearly', 'numberOfPendingSchedulesYearly',
+                                        'pendingSchedulesQuarterly', 'numberOfPendingSchedulesQuarterly',
+                                        'pendingSchedulesMonthly', 'numberOfPendingSchedulesMonthly',
+                                        'pendingSchedulesWeekly', 'numberOfPendingSchedulesWeekly',
+                                        'pendingSchedulesDaily', 'numberOfPendingSchedulesDaily',
+                                        'completedSchedulesYearly', 'numberOfCompletedSchedulesYearly',
+                                        'completedSchedulesQuarterly', 'numberOfCompletedSchedulesQuarterly',
+                                        'completedSchedulesMonthly', 'numberOfCompletedSchedulesMonthly',
+                                        'completedSchedulesWeekly', 'numberOfCompletedSchedulesWeekly',
+                                        'completedSchedulesDaily', 'numberOfCompletedSchedulesDaily',
                                         //collections
                                         'completedCollectionsYearly', 'numberOfCompletedCollectionsYearly',
                                         'pendingCollectionsYearly', 'numberOfpendingCollectionsYearly',
@@ -190,15 +275,29 @@ class DashboardController extends Controller
                                         'pendingCollectionsQuarterly', 'numberOfPendingCollectionsQuarterly',
                                         'completedCollectionsMonthly', 'numberOfCompletedCollectionsMonthly',
                                         'pendingCollectionsMonthly', 'numberOfPendingCollectionsMonthly',
+                                        'completedCollectionsWeekly', 'numberOfCompletedCollectionsWeekly',
+                                        'pendingCollectionsWeekly','numberOfPendingCollectionsWeekly',
                                         'completedCollectionsDaily', 'numberOfCompletedCollectionsDaily',
                                         'pendingCollectionsDaily', 'numberOfPendingCollectionsDaily',
+                                        'collectionsYearly', 'numberOfCollectionsYearly',
+                                        'collectionsQuarterly', 'numberOfCollectionsQuarterly',
+                                        'collectionsMonthly', 'numberOfCollectionsMonthly',
+                                        'collectionsWeekly', 'numberOfCollectionsWeekly',
+                                        'collectionsDaily', 'numberOfCollectionsDaily',
                                         //bins
                                         'binsCollectedYearly', 'numberOfBinsCollectedYearly',
                                         'binsCollectedQuarterly', 'numberOfBinsCollectedQuarterly',
                                         'binsCollectedMonthly', 'numberOfBinsCollectedMonthly',
                                         'binsCollectedWeekly', 'numberOfBinsCollectedWeekly',
-                                        'binsCollectedDaily', 'numberOfBinsCollectedDaily'
-
+                                        'binsCollectedDaily', 'numberOfBinsCollectedDaily',
+                                        //customers
+                                        'customers', 'numberOfCustomers',
+                                        //charts
+                                        //collections
+                                        'pieCollectionsDaily', 'pieCollectionsWeekly',
+                                        'pieSchedulesDaily', 'pieSchedulesWeekly',
+                                        'barCollectionsStatistics'
+                                        
                                         
                                     )
                     );
@@ -227,7 +326,7 @@ class DashboardController extends Controller
         public function sectors()
         {
             //show the list of sectors by company
-            $sectors = SectorZone::where('company_id', Auth::user()->company_id)
+            $sectors = ServiceZone::where('company_id', Auth::user()->company_id)
                                  ->get();
             return $sectors;
             
@@ -239,7 +338,7 @@ class DashboardController extends Controller
             //show the number of sectors by company
             $numberOfSectors = $this->sectors()->count();
 
-            return $numberOfZones;
+            return $numberOfSectors;
         }
 
         public function bins()
@@ -263,7 +362,7 @@ class DashboardController extends Controller
         public function classifications()
         {
             //show the list of classifications by company
-            $bins = Classification::where('company_id', Auth::user()->company_id)
+            $classifications = Classification::where('company_id', Auth::user()->company_id)
                                  ->get();
             return $classifications;
             
@@ -273,7 +372,7 @@ class DashboardController extends Controller
         public function number_of_classifications()
         {
             //show the number of classifications by company
-            $numberOfBins = $this->classifications()->count();
+            $numberOfClassifications = $this->classifications()->count();
 
             return $numberOfClassifications;
         }
@@ -327,7 +426,7 @@ class DashboardController extends Controller
             return $weeklyScope;
         }
 
-        public function dialy_scope($between, $method)
+        public function daily_scope($between, $method)
         {
             $dailyScope = $method->whereBetween(
                 $between, [
@@ -339,14 +438,18 @@ class DashboardController extends Controller
             return $dailyScope;
         }
 
+       
+
 
         public function schedules()
         {
             //Get all schedules till date
-            $schedules = DB::table('journeys')->where('company_id', Auth::user()->company_id);
+            $schedules = Journey::where('company_id', Auth::user()->company_id)
+                                  ->orderBy('id', 'desc');
 
             return $schedules;
         }
+
 
         public function schedules_yearly()
         {
@@ -355,30 +458,31 @@ class DashboardController extends Controller
 
             return $schedulesYearly;
         }
+        
 
         public function number_of_schedules_yearly()
         {
             //Get the number of schedules for the year
-            $numberOfschedulesYearly = $this->schedules_yearly()
+            $numberOfSchedulesYearly = $this->schedules_yearly()
                                                  ->count();
 
-            return $numberOfschedulesYearly;
+            return $numberOfSchedulesYearly;
         }
 
         public function schedules_quarterly()
         {
             //Get schedules for the Quarter
-            $schedulesForTheQuarter = $this->quarterly_scope('pickupdate', $this->schedules());
+            $schedulesQuarterly = $this->quarterly_scope('pickupdate', $this->schedules());
 
-            return $schedulesForTheQuarter;
+            return $schedulesQuarterly;
         }
 
         public function number_of_schedules_quarterly()
         {
             //Get the number of schedules for the Quarter
-            $numberOfschedulesForTheQuarter = $this->schedules_quarterly()
+            $numberOfSchedulesQuarterly = $this->schedules_quarterly()
                                                  ->count();
-            return $numberOfschedulesQuarterly;
+            return $numberOfSchedulesQuarterly;
         }
 
         public function schedules_monthly()
@@ -392,9 +496,9 @@ class DashboardController extends Controller
         public function number_of_schedules_monthly()
         {
             //Get the number of schedules for the Month
-            $numberOfschedulesMonthly = $this->schedules_monthly()
+            $numberOfSchedulesMonthly = $this->schedules_monthly()
                                                  ->count();
-            return $numberOfschedulesMonthly;
+            return $numberOfSchedulesMonthly;
         }
 
         public function schedules_weekly()
@@ -408,15 +512,15 @@ class DashboardController extends Controller
         public function number_of_schedules_weekly()
         {
             //Get the number of schedules for the Week
-            $numberOfschedulesWeekly = $this->schedules_weekly()
+            $numberOfSchedulesWeekly = $this->schedules_weekly()
                                                  ->count();
-            return $numberOfschedulesWeekly;
+            return $numberOfSchedulesWeekly;
         }
 
         public function schedules_daily()
         {
             //Get schedules for the Day
-            $schedulesDaily = $this->dialy_scope('pickupdate', $this->schedules());
+            $schedulesDaily = $this->daily_scope('pickupdate', $this->schedules());
 
             return $schedulesDaily;
         }
@@ -424,9 +528,282 @@ class DashboardController extends Controller
         public function number_of_schedules_daily()
         {
             //Get the number of schedules for the Day
-            $numberOfschedulesDaily = $this->schedules_daily()
+            $numberOfSchedulesDaily = $this->schedules_daily()
                                                  ->count();
-            return $numberOfschedulesDaily;
+            return $numberOfSchedulesDaily;
+        }
+
+        public function pending_schedules()
+        {
+            //Get all unstarted pending_schedules till date
+            $pending_schedules = Journey::where('company_id', Auth::user()->company_id)
+                                              ->where('status', 'created');
+
+            return $pending_schedules;
+        }
+
+        public function pending_schedules_yearly()
+        {
+            //Get pending_schedules for the year
+            $pendingSchedulesYearly = $this->yearly_scope('pickupdate', $this->pending_schedules());
+
+            return $pendingSchedulesYearly;
+        }
+        
+
+        public function number_of_pending_schedules_yearly()
+        {
+            //Get the number of pending_schedules for the year
+            $numberOfPendingSchedulesYearly = $this->pending_schedules_yearly()
+                                                 ->count();
+
+            return $numberOfPendingSchedulesYearly;
+        }
+
+        public function pending_schedules_quarterly()
+        {
+            //Get pending_schedules for the Quarter
+            $pendingSchedulesQuarterly = $this->quarterly_scope('pickupdate', $this->pending_schedules());
+
+            return $pendingSchedulesQuarterly;
+        }
+
+        public function number_of_pending_schedules_quarterly()
+        {
+            //Get the number of pending_schedules for the Quarter
+            $numberOfPendingSchedulesQuarterly = $this->pending_schedules_quarterly()
+                                                 ->count();
+            return $numberOfPendingSchedulesQuarterly;
+        }
+
+        public function pending_schedules_monthly()
+        {
+            //Get pending_schedules for the Month
+            $pendingSchedulesMonthly = $this->monthly_scope('pickupdate', $this->pending_schedules());
+
+            return $pendingSchedulesMonthly;
+        }
+
+        public function number_of_pending_schedules_monthly()
+        {
+            //Get the number of pending_schedules for the Month
+            $numberOfPendingSchedulesMonthly = $this->pending_schedules_monthly()
+                                                 ->count();
+            return $numberOfPendingSchedulesMonthly;
+        }
+
+        public function pending_schedules_weekly()
+        {
+            //Get pending_schedules for the Week
+            $pendingSchedulesWeekly = $this->weekly_scope('pickupdate', $this->pending_schedules());
+
+            return $pendingSchedulesWeekly;
+        }
+
+        public function number_of_pending_schedules_weekly()
+        {
+            //Get the number of pending_schedules for the Week
+            $numberOfPendingSchedulesWeekly = $this->pending_schedules_weekly()
+                                                 ->count();
+            return $numberOfPendingSchedulesWeekly;
+        }
+
+        public function pending_schedules_daily()
+        {
+            //Get pending_schedules for the Day
+            $pendingSchedulesDaily = $this->daily_scope('pickupdate', $this->pending_schedules());
+
+            return $pendingSchedulesDaily;
+        }
+
+        public function number_of_pending_schedules_daily()
+        {
+            //Get the number of pending_schedules for the Day
+            $numberOfPendingSchedulesDaily = $this->pending_schedules_daily()
+                                                 ->count();
+            return $numberOfPendingSchedulesDaily;
+        }
+
+        public function started_schedules()
+        {
+            //Get all unstarted started_schedules till date
+            $started_schedules = Journey::where('company_id', Auth::user()->company_id)
+                                              ->where('status', 'Started');
+
+            return $started_schedules;
+        }
+
+        public function started_schedules_yearly()
+        {
+            //Get started_schedules for the year
+            $startedSchedulesYearly = $this->yearly_scope('pickupdate', $this->started_schedules());
+
+            return $startedSchedulesYearly;
+        }
+        
+
+        public function number_of_started_schedules_yearly()
+        {
+            //Get the number of started_schedules for the year
+            $numberOfStartedSchedulesYearly = $this->started_schedules_yearly()
+                                                 ->count();
+
+            return $numberOfStartedSchedulesYearly;
+        }
+
+        public function started_schedules_quarterly()
+        {
+            //Get started_schedules for the Quarter
+            $startedSchedulesQuarterly = $this->quarterly_scope('pickupdate', $this->started_schedules());
+
+            return $startedSchedulesQuarterly;
+        }
+
+        public function number_of_started_schedules_quarterly()
+        {
+            //Get the number of started_schedules for the Quarter
+            $numberOfStartedSchedulesQuarterly = $this->started_schedules_quarterly()
+                                                 ->count();
+            return $numberOfStartedSchedulesQuarterly;
+        }
+
+        public function started_schedules_monthly()
+        {
+            //Get started_schedules for the Month
+            $startedSchedulesMonthly = $this->monthly_scope('pickupdate', $this->started_schedules());
+
+            return $startedSchedulesMonthly;
+        }
+
+        public function number_of_started_schedules_monthly()
+        {
+            //Get the number of started_schedules for the Month
+            $numberOfStartedSchedulesMonthly = $this->started_schedules_monthly()
+                                                 ->count();
+            return $numberOfStartedSchedulesMonthly;
+        }
+
+        public function started_schedules_weekly()
+        {
+            //Get started_schedules for the Week
+            $startedSchedulesWeekly = $this->weekly_scope('pickupdate', $this->started_schedules());
+
+            return $startedSchedulesWeekly;
+        }
+
+        public function number_of_started_schedules_weekly()
+        {
+            //Get the number of started_schedules for the Week
+            $numberOfStartedSchedulesWeekly = $this->started_schedules_weekly()
+                                                 ->count();
+            return $numberOfStartedSchedulesWeekly;
+        }
+
+        public function started_schedules_daily()
+        {
+            //Get started_schedules for the Day
+            $startedSchedulesDaily = $this->daily_scope('pickupdate', $this->started_schedules());
+
+            return $startedSchedulesDaily;
+        }
+
+        public function number_of_started_schedules_daily()
+        {
+            //Get the number of started_schedules for the Day
+            $numberOfStartedSchedulesDaily = $this->started_schedules_daily()
+                                                 ->count();
+            return $numberOfStartedSchedulesDaily;
+        }
+
+        public function completed_schedules()
+        {
+            //Get all unstarted completed_schedules till date
+            $completed_schedules = Journey::where('company_id', Auth::user()->company_id)
+                                              ->where('status', 'Completed');
+
+            return $completed_schedules;
+        }
+
+        public function completed_schedules_yearly()
+        {
+            //Get completed_schedules for the year
+            $completedSchedulesYearly = $this->yearly_scope('pickupdate', $this->completed_schedules());
+
+            return $completedSchedulesYearly;
+        }
+        
+
+        public function number_of_completed_schedules_yearly()
+        {
+            //Get the number of completed_schedules for the year
+            $numberOfCompletedSchedulesYearly = $this->completed_schedules_yearly()
+                                                 ->count();
+
+            return $numberOfCompletedSchedulesYearly;
+        }
+
+        public function completed_schedules_quarterly()
+        {
+            //Get completed_schedules for the Quarter
+            $completedSchedulesQuarterly = $this->quarterly_scope('pickupdate', $this->completed_schedules());
+
+            return $completedSchedulesQuarterly;
+        }
+
+        public function number_of_completed_schedules_quarterly()
+        {
+            //Get the number of completed_schedules for the Quarter
+            $numberOfCompletedSchedulesQuarterly = $this->completed_schedules_quarterly()
+                                                 ->count();
+            return $numberOfCompletedSchedulesQuarterly;
+        }
+
+        public function completed_schedules_monthly()
+        {
+            //Get completed_schedules for the Month
+            $completedSchedulesMonthly = $this->monthly_scope('pickupdate', $this->completed_schedules());
+
+            return $completedSchedulesMonthly;
+        }
+
+        public function number_of_completed_schedules_monthly()
+        {
+            //Get the number of completed_schedules for the Month
+            $numberOfCompletedSchedulesMonthly = $this->completed_schedules_monthly()
+                                                 ->count();
+            return $numberOfCompletedSchedulesMonthly;
+        }
+
+        public function completed_schedules_weekly()
+        {
+            //Get completed_schedules for the Week
+            $completedSchedulesWeekly = $this->weekly_scope('pickupdate', $this->completed_schedules());
+
+            return $completedSchedulesWeekly;
+        }
+
+        public function number_of_completed_schedules_weekly()
+        {
+            //Get the number of completed_schedules for the Week
+            $numberOfCompletedSchedulesWeekly = $this->completed_schedules_weekly()
+                                                 ->count();
+            return $numberOfCompletedSchedulesWeekly;
+        }
+
+        public function completed_schedules_daily()
+        {
+            //Get completed_schedules for the Day
+            $completedSchedulesDaily = $this->daily_scope('pickupdate', $this->completed_schedules());
+
+            return $completedSchedulesDaily;
+        }
+
+        public function number_of_completed_schedules_daily()
+        {
+            //Get the number of completed_schedules for the Day
+            $numberOfCompletedSchedulesDaily = $this->completed_schedules_daily()
+                                                 ->count();
+            return $numberOfCompletedSchedulesDaily;
         }
 
         public function get_schedule_report($dateFrom, $dateTo)
@@ -446,7 +823,8 @@ class DashboardController extends Controller
         public function collections()
         {
             //Get all collections
-            $collections = DB::table('collections')->where('company_id', Auth::user()->company_id);
+            $collections = Collection::where('company_id', Auth::user()->company_id)
+                                         ->orderBy('id', 'desc');
             return $collections;
         }
 
@@ -491,7 +869,7 @@ class DashboardController extends Controller
             return $numberOfCompletedCollectionsYearly;
         }
 
-        public function number_of_pending_collection_yearly()
+        public function number_of_pending_collections_yearly()
         {
             //Get the number of pending collections for the year
             $numberOfPendingCollectionsYearly = $this->pending_collections_yearly()->count();
@@ -503,33 +881,34 @@ class DashboardController extends Controller
         public function completed_collections_quarterly()
         {
             //Get collections for the quartey
-            $CompletedCollectionsForTheQuarter = $this->quarterly_scope('created_at', $this->get_all_completed_collections());
-            return $CompletedCollectionsForTheQuarter;
+            $CompletedCollectionsQuarterly = $this->quarterly_scope('created_at', $this->get_all_completed_collections());
+            return $CompletedCollectionsQuarterly;
         }
 
         public function pending_collections_quarterly()
         {
             //Get collections for the Quarter
-            $PendingCollectionsForTheQuarter = $this->quarterly_scope('created_at', $this->get_all_pending_collections());
-            return $PendingCollectionsForTheQuarter;
+            $PendingCollectionsQuarterly = $this->quarterly_scope('created_at', $this->get_all_pending_collections());
+            return $PendingCollectionsQuarterly;
         }
 
         public function number_of_completed_collections_quarterly()
         {
             //Get the number of completd collections for the Quarter
-            $numberOfCompletedCollectionsForTheQuarter = $this->completed_collections_quarterly()->count();
+            $numberOfCompletedCollectionsQuarterly = $this->completed_collections_quarterly()->count();
 
-            return $numberOfCompletedCollectionsForTheQuarter;
+            return $numberOfCompletedCollectionsQuarterly;
         }
 
         public function number_of_pending_collections_quarterly()
         {
             //Get the number of pending collections for the Quarter
-            $numberOfPendingCollectionsForTheQuarter = $this->pending_collections_quarterly()->count();
+            $numberOfPendingCollectionsQuarterly = $this->pending_collections_quarterly()->count();
 
-            return $numberOfPendingCollectionsForTheQuarter;
+            return $numberOfPendingCollectionsQuarterly;
 
         }
+
 
         public function completed_collections_monthly()
         {
@@ -596,14 +975,14 @@ class DashboardController extends Controller
         public function completed_collections_daily()
         {
             //Get collections for the day
-            $CompletedCollectionsDaily =  $this->dialy_scope('created_at', $this->get_all_completed_collections());
+            $CompletedCollectionsDaily =  $this->daily_scope('created_at', $this->get_all_completed_collections());
             return $CompletedCollectionsDaily;
         }
 
         public function pending_collections_daily()
         {
             //Get collections for the Day
-            $PendingCollectionsDaily =  $this->dialy_scope('created_at', $this->get_all_pending_collections());
+            $PendingCollectionsDaily =  $this->daily_scope('created_at', $this->get_all_pending_collections());
             return $PendingCollectionsDaily;
         }
 
@@ -635,6 +1014,101 @@ class DashboardController extends Controller
                         ]
                     )->get();
             return $PendingCollectionsForTheTomorrow;
+
+        }
+
+        public function collections_yearly()
+        {
+            //Get collections for the year
+            $collectionsYearly = $this->yearly_scope('created_at', $this->collections());
+            return $collectionsYearly;
+        }
+
+      
+
+        public function number_of_collections_yearly()
+        {
+            //Get the number of  collections for the year
+            $numberOfCollectionsYearly = $this->collections_yearly()->count();
+
+            return $numberOfCollectionsYearly;
+
+        }
+
+       
+        public function collections_quarterly()
+        {
+            //Get collections for the Quarter
+            $collectionsQuarterly = $this->quarterly_scope('created_at', $this->collections());
+            return $collectionsQuarterly;
+        }
+
+      
+
+        public function number_of_collections_quarterly()
+        {
+            //Get the number of  collections for the Quarter
+            $numberOfCollectionsQuarterly = $this->collections_quarterly()->count();
+
+            return $numberOfCollectionsQuarterly;
+
+        }
+
+       
+
+        public function collections_monthly()
+        {
+            //Get collections for the Month
+            $collectionsMonthly =  $this->monthly_scope('created_at', $this->collections());
+            return $collectionsMonthly;
+        }
+
+      
+
+        public function number_of_collections_monthly()
+        {
+            //Get the number of  collections for the Month
+            $numberOfCollectionsMonthly = $this->collections_monthly()->count();
+
+            return $numberOfCollectionsMonthly;
+
+        }
+
+      
+        public function collections_weekly()
+        {
+            //Get collections for the Week
+            $collectionsWeekly =  $this->weekly_scope('created_at', $this->collections());
+            return $collectionsWeekly;
+        }
+
+       
+
+        public function number_of_collections_weekly()
+        {
+            //Get the number of  collections for the Week
+            $numberOfCollectionsWeekly = $this->collections_weekly()->count();
+
+            return $numberOfCollectionsWeekly;
+
+        }
+
+       
+
+        public function collections_daily()
+        {
+            //Get collections for the Day
+            $collectionsDaily =  $this->daily_scope('created_at', $this->collections());
+            return $collectionsDaily;
+        }
+
+      
+        public function number_of_collections_daily()
+        {
+            //Get the number of  collections for the Day
+            $numberOfCollectionsDaily = $this->collections_daily()->count();
+
+            return $numberOfCollectionsDaily;
 
         }
 
@@ -757,6 +1231,216 @@ class DashboardController extends Controller
             return $numberOfBinsCollectedDaily;
 
         }
+
+
+        public function get_bin_report($dateFrom, $dateTo)
+        {
+            //Get the Total Bins Collected
+            //custom reports based on dates
+             $binReport = $this->bins_collected()
+                    ->whereBetween(
+                        'created_at', [
+                            $dateFrom, 
+                            $dateTo
+                        ]
+                    )->get();
+            return $binReport;
+        }
+
+        public function get_all_customers(){
+
+            $customers = Customer::where('company_id', Auth::user()->company_id)->get();
+            return $customers;
+        }
+
+        public function total_customers()
+        {
+            $numberOfCustomers = $this->get_all_customers()->count();
+
+            return $numberOfCustomers;
+        }
+
+    //    public function chart_pie_collections_daily()
+    //    {
+    //         $chart =  Charts::create('pie', 'chartjs')
+    //                 ->title('Collection Ratio Per Day')
+    //                 ->labels(['Collected', 'Pending', ])
+    //                 ->values([number_of_completed_collections_daily(),number_of_pending_collections_daily()])
+    //                 ->dimensions(1000,500)
+    //                 ->responsive(true)
+    //                 ->loader(true)
+    //                 ->loaderDuration(2000)
+    //                 ->loaderColor('#FF0000')
+    //                 ->colors(['#ff0000', '#00ff00']);
+
+    //         return $chart;
+    //    }
+
+    //    public function chart_bar_collections_all()
+    //    {
+    //        $chart = Charts::create('bar', 'chartjs')
+    //                 ->title('Collections Analysis')
+    //                 ->loader(true)
+    //                 ->colors(['#ff0000', '#00ff00', '#0000ff','#f0ff00', '#f000ff'])
+    //                 ->labels(['Year', 'Quarter', 'Month', 'Week', 'Today'])
+    //                 ->dataset('Test 1', [1,2,3])
+    //                 ->dataset('Test 2', [0,6,0])
+    //                 ->dataset('Test 3', [3,4,1])
+    //                 ->dataset('Test 4', [0,6,0])
+    //                 ->dataset('Test 5', [3,4,1]);
+
+    //         return $chart;
+    //    }
+
+    public function pie_collections_daily()
+    {
+        $chart = app()->chartjs
+        ->name('CollectionRatioDaily')
+        ->type('pie')
+        ->labels(['Completed', 'Pending'])
+        ->size(['width' => 0, 'height' => 300])
+        ->datasets([
+            [
+                'backgroundColor' => ['rgba(152,235,239,0.8)', 'rgba(243,245,246,5.9)'],
+                'hoverBackgroundColor' => ['rgba(152,235,239,1.8)', 'rgba(243,245,246,7.9)'],
+                'data' => [
+                    $this->number_of_completed_collections_daily(), 
+                    $this->number_of_pending_collections_daily()
+                    ]
+            ]
+        ])
+        ->options([
+            'responsive' => true,
+        ]);
+
+              
+        return $chart;
+    }
+
+    public function pie_collections_weekly()
+    {
+        $chart = app()->chartjs
+        ->name('CollectionRatioWeekly')
+        ->type('pie')
+        ->labels(['Completed', 'Pending'])
+        ->size(['width' => 0, 'height' => 300])
+        ->datasets([
+            [
+                'backgroundColor' => ['rgba(152,235,239,0.8)', 'rgba(243,245,246,0.9)'],
+                'hoverBackgroundColor' => ['rgba(152,235,239,1.8)', 'rgba(243,245,246,1.9)'],
+                'data' => [
+                    $this->number_of_completed_collections_weekly(), 
+                    $this->number_of_pending_collections_weekly()
+                    ]
+            ]
+        ])
+        ->options([
+            'responsive' => true,
+        ]);
+
+              
+        return $chart;
+    }
+
+    public function pie_schedules_daily()
+    {
+        $chart = app()->chartjs
+        ->name('ScheduleRatioDaily')
+        ->type('pie')
+        ->labels(['Completed','Started', 'Pending'])
+        ->size(['width' => 0, 'height' => 300])
+        ->datasets([
+            [
+                'backgroundColor' => ['rgba(54, 162, 235, 0.2)','rgba(243,245,246,5.9)', 'rgba(255, 99, 132, 0.3'],
+                'hoverBackgroundColor' => ['rgba(54, 162, 235, 4.2)','rgba(243,245,246,9.9)', 'rgba(255, 99, 132, 4.3'],
+                'data' => [
+                    $this->number_of_completed_schedules_daily(),
+                    $this->number_of_started_schedules_daily(), 
+                    $this->number_of_pending_schedules_daily()
+                    ]
+            ]
+        ])
+        ->options([
+            'responsive' => true,
+        ]);
+
+              
+        return $chart;
+    }
+
+
+    public function pie_schedules_weekly()
+    {
+        $chart = app()->chartjs
+        ->name('ScheduleRatioWeekly')
+        ->type('pie')
+        ->labels(['Completed', 'Started', 'Pending'])
+        ->size(['width' => 0, 'height' => 300])
+        ->datasets([
+            [
+                'backgroundColor' => ['rgba(54, 162, 235, 0.2)', 'rgba(243,245,246,5.9)', 'rgba(255, 99, 132, 0.3'],
+                'hoverBackgroundColor' => ['rgba(54, 162, 235, 4.2)', 'rgba(243,245,246,9.9)', 'rgba(255, 99, 132, 4.3'],
+                'data' => [
+                    $this->number_of_completed_schedules_weekly(),
+                    $this->number_of_started_schedules_weekly(), 
+                    $this->number_of_pending_schedules_weekly()
+                    ]
+            ]
+        ])
+        ->options([
+            'responsive' => true,
+        ]);
+
+              
+        return $chart;
+    }
+
+        
+    public function bar_collection_statictics()
+    {
+        $dataset_one = [
+            $this->number_of_completed_collections_yearly(),
+            $this->number_of_completed_collections_quarterly(),
+            $this->number_of_completed_collections_monthly(),
+            $this->number_of_completed_collections_weekly(),
+            $this->number_of_completed_collections_daily()
+        ];
+
+        $dataset_two = [
+            $this->number_of_pending_collections_yearly(),
+            $this->number_of_pending_collections_quarterly(),
+            $this->number_of_pending_collections_monthly(),
+            $this->number_of_pending_collections_weekly(),
+            $this->number_of_pending_collections_daily()
+        ];
+
+        $chart = app()->chartjs
+         ->name('CollectionStatictics')
+         ->type('bar')
+         ->size(['width' => 0, 'height' => 300])
+         ->labels(['Year', 'Quarter', 'Month', 'Week', 'Day'])
+         ->datasets([
+             [
+                 "label" => "Completed",
+                 'backgroundColor' => ['rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)','rgba(54, 162, 235, 0.2)'],
+                 'data' => $dataset_one,
+             ],
+             [
+                 "label" => "Pending",
+                 'backgroundColor' => ['rgba(255, 99, 132, 0.3)','rgba(255, 99, 132, 0.3)','rgba(255, 99, 132, 0.3)','rgba(255, 99, 132, 0.3)','rgba(255, 99, 132, 0.3)'],
+                 'data' => $dataset_two,
+             ],
+            
+           
+         ])
+         ->options([
+            'responsive' => true,
+         ]);
+
+         return $chart;
+
+
+    }
 
 
 

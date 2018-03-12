@@ -24,12 +24,12 @@ class CreateCustomersTable extends Migration
             $table->foreign('classification_id')->references('id')->on('classifications');
             $table->string('code')->unique()->nullable();
             $table->string('name')->nullable();
-            $table->string('email')->nullable()->unique();
-            $table->string('password');
+            $table->string('email')->nullable()->unique()->nullable();
+            $table->string('password')->nullable();
             $table->BigInteger('phone1')->nullable();
             $table->BigInteger('phone2')->nullable();
-            $table->string('ghana_gps')->nullable();
             $table->string('address')->nullable();
+            $table->string('ghana_gps')->nullable();
             $table->float('longitude', 10, 6)->nullable();
             $table->float('latitude', 10, 6)->nullable();
             $table->bigInteger('radius')->nullable();

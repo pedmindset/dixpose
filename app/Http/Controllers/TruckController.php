@@ -21,7 +21,9 @@ class TruckController extends Controller
     public function index()
     {
         //return all the trucks in the database
-        $trucks = Truck::all()->where('company_id', Auth::user()->company_id);
+        $trucks = Truck::where('company_id', Auth::user()->company_id)
+                            ->orderBy('id', 'desc')
+                                    ->get();
         return view('trucks.index', compact('trucks'));
     }
 

@@ -37,5 +37,10 @@ class Classification extends Model
         return $this->hasMany('App\Models\Customer');
     }
 
+    public function bin()
+    {
+        return $this->hasMany('App\Models\Bin');
+    }
+
     
 }

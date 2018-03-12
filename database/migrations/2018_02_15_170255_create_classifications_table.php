@@ -16,10 +16,8 @@ class CreateClassificationsTable extends Migration
             $table->increments('id');
             $table->integer('company_id')->index()->unsigned();
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->integer('bin_id')->index()->unsigned();
-            $table->foreign('bin_id')->references('id')->on('bins');
             $table->string('class')->nullable();
-            $table->biginteger('price')->nullable();
+            $table->string('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

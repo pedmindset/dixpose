@@ -26,6 +26,11 @@ class Bin extends Model
         return $this->belongsToMany('App\Models\Collection');
     }
 
+    public function classification()
+    {
+        return $this->belongsTo('App\Models\Classification');
+    }
+
 
 
    

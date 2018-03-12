@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="card-body">  
-                        <table class="table table-striped table-hover display nowrap table table-hover table-striped table-bordered" id="table1">
+                        <table class="table table-striped table-hover display nowrap table table-hover" id="table1">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -40,9 +40,9 @@
                                         
                                     </tr>
                                 </thead>
-                                @foreach($supervisors as $supervisor)
+                               
                                 <tbody>
-                                   
+                                        @foreach($supervisors as $supervisor)
                                     <tr>    
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $supervisor->name or '' }} </td>
@@ -62,9 +62,9 @@
                                             </td>
                                         
                                         </tr>
-                                    
+                                        @endforeach
                                 </tbody>
-                                @endforeach
+                                
                             </table>
                         
                         </div>

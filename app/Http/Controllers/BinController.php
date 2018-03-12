@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Auth;
-use App\Models\Company;
 use App\Models\Bin;
+use App\Models\Company;
+use Illuminate\Http\Request;
+use App\Models\Classification;
 
 
 class BinController extends Controller
@@ -22,7 +23,9 @@ class BinController extends Controller
     public function index()
     {
         //show all bins in the database
-        $bins = Bin::all()->where('company_id', Auth::user()->company_id);
+        $bins = Bin::where('company_id', Auth::user()->company_id)
+                ->orderBy('id', 'desc')
+                ->get();
         return view('bins.index')->with('bins', $bins);
     }
 
@@ -34,7 +37,9 @@ class BinController extends Controller
     public function create()
     {
         //return a view to store bins
-        return view('bins.create');
+        $classifications = Classification::where('company_id', Auth::user()->company_id)
+                                          ->get(['id', 'class']);
+        return view('bins.create', compact('classifications'));
     }
 
     /**
@@ -48,7 +53,9 @@ class BinController extends Controller
         //validate and store
         $validateData = $request->validate([
             'type' => 'required',
-            'desc' => 'nullable'
+            'desc' => 'nullable',
+            'classification' => 'required|integer',
+            'price' => 'required|integer'
         ]);
 
         $bin = new Bin;
@@ -56,6 +63,8 @@ class BinController extends Controller
         $bin->company_id = $company->id;
         $bin->type = $request->type;
         $bin->desc = $request->desc;
+        $bin->price = $request->price;
+        $bin->classification_id = $request->classification;
         $bin->save();
 
         return redirect('bins/create')->with('status', 'Bin has been successfully created');
@@ -82,9 +91,11 @@ class BinController extends Controller
     public function edit($id)
     {
         $bin = Bin::where('company_id', Auth::user()->company_id)
-        ->where('id', $id)->first();
+                    ->where('id', $id)->first();
+        $classifications = Classification::where('company_id', Auth::user()->company_id)
+                                         ->get(['id', 'class']);
        //return the edit page
-       return view('bins.edit')->with('bin', $bin);
+       return view('bins.edit', compact('bin', 'classifications'));
     }
 
     /**
@@ -100,13 +111,17 @@ class BinController extends Controller
         //validate and edit bin
          $validateData = $request->validate([
             'type' => 'required',
-            'desc' => 'nullable'
+            'desc' => 'nullable',
+            'classification' => 'required|integer',
+            'price' => 'required|integer'
         ]);
 
         $bin = Bin::where('company_id', Auth::user()->company_id)
                ->where('id', $id)->first();
         $bin->type = $request->type;
-        $bin->desc = $request->price;
+        $bin->desc = $request->desc;
+        $bin->price = $request->price;
+        $bin->classification_id = $request->classification;
         $bin->save();
 
         return redirect('bins')->with('status', 'Bin was successfully updated');

@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="card-body">  
-                        <table class="table table-striped table-hover display nowrap table table-hover table-striped table-bordered" id="table1">
+                        <table class="table table-striped table-hover display nowrap table table-hover" id="table1">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
@@ -54,9 +54,9 @@
                                         
                                     </tr>
                                 </thead>
-                                @foreach($trucks as $truck)
+                              
                                 <tbody>
-                                   
+                                        @foreach($trucks as $truck)
                                     <tr>    
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $truck->truck_number or ''}}</td>
@@ -75,9 +75,9 @@
                                             </td>
                                         
                                         </tr>
-                                    
+                                        @endforeach
                                 </tbody>
-                                @endforeach
+                               
                             </table>
                         
                         </div>

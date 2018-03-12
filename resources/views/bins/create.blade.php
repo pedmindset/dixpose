@@ -20,16 +20,42 @@
                      @endif
                     <form method="post" action="{{ url('bins') }}">
                          @csrf
-                            <div class="form-group ">
+                            <div class="form-group col-md-5  ">
                                 <label for="type">Bin type<span class="text-danger">*</span></label>
-                                 <div class="input-group col-md-3">
-                                <input type="text" class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" id="type" name="type" value="{{ old('type') }}" placeholder="240" required aria-label="240" aria-describedby="bintype">
+                                 <div class="input-group ">
+                                    <input type="text" class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" id="type" name="type" value="{{ old('type') }}" placeholder="240" required aria-label="240" aria-describedby="bintype">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="bintype">litre</span>
                                 </div>
-                                 </div>
-
                             </div>
+
+                        </div>
+
+                        <div class="form-group {{ $errors->has('classification_id') ? 'has-error' : ''}}">
+                            <label for="classification" class="col-md-4 control-label">Classification</label>
+                            <div class="col-md-5">
+                                <select name="classification" class="form-control custom-select {{ $errors->has('bin') ? ' is-invalid' : '' }}" required data-validation-required-message ="Please select the Bin Type">
+                                        @foreach($classifications as $classification)
+                                        <option value="{{$classification->id or ''}}">{{$classification->class or ''}}</option>
+                                        @endforeach
+                                    </select>
+                                <small class="form-control-feedback text-danger"> Select Customer Classification</small> 
+                                {!! $errors->first('classification_id', '<p class="help-block">:message</p>') !!}
+                            </div>
+                        </div>
+                    
+                    <div class="form-group col-md-6  {{ $errors->has('price') ? 'has-error' : ''}}">
+                            <label for="price" class="control-label">Price</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <input class="form-control input-group-prepend" name="price" type="number" id="price" value="{{ old('price') }}" required  aria-describedby="price" >
+                                <span class="input-group-text" id="price">GHS</span>
+                         </div>
+                                {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
+                            </div>
+                        </div>
+
+
                             <div class="form-group col-md-5">
                                 <label for="desc">Description</label>
                                 

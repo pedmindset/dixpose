@@ -33,7 +33,7 @@
                             <div class="form-group {{ $errors->has('name') ? ' is-invalid' : '' }}">
                                     <label class="col-md-5 control-label" for="Driver">Supervisor</label>  
                                     <div class="col-md-5">
-                                    <input id="Driver" name="name" type="text" placeholder="Eyram Dixpose" class="form-control input-md" value="{{ old('name') }}" required="">
+                                    <input id="Driver" name="name" type="text" placeholder="Name" class="form-control input-md" value="{{ old('name') }}" required="">
                                     <span class="help-block">Enter Supervisor's Name</span>  
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                 <div class="form-group {{ $errors->has('phone1') ? ' is-invalid' : '' }}">
                                     <label class="col-md-5 control-label" for="Phone1">Phone 1</label>  
                                     <div class="col-md-5">
-                                    <input id="Phone1" name="phone1" type="text" placeholder="2332415827" value="{{ old('phone1') }}" class="form-control input-md">
+                                    <input id="Phone1" name="phone1" type="text" placeholder="Phone 1" value="{{ old('phone1') }}" class="form-control input-md">
                                     <span class="help-block">Enter Supervisor's phone</span>  
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                  <div class="form-group {{ $errors->has('phone2') ? ' is-invalid' : '' }}">
                                         <label class="col-md-5 control-label" for="phone2">Phone 2</label>  
                                         <div class="col-md-5">
-                                        <input id="phone2" name="phone2" type="text" placeholder="233414563" value="{{ old('phone2') }}" class="form-control input-md">
+                                        <input id="phone2" name="phone2" type="text" placeholder="Phone 2" value="{{ old('phone2') }}" class="form-control input-md">
                                         <span class="help-block">Enter Supervisor's Phone</span>  
                                         </div>
                                     </div>
@@ -60,7 +60,7 @@
                                 <div class="form-group {{ $errors->has('address') ? ' is-invalid' : '' }}">
                                     <label class="col-md-5 control-label" for="address">Address</label>  
                                     <div class="col-md-5">
-                                    <input id="address" name="address" type="text" placeholder="Osu oxford street Line 5" value="{{ old('address') }}" class="form-control input-md">
+                                    <input id="address" name="address" type="text" placeholder="Address" value="{{ old('address') }}" class="form-control input-md">
                                     <span class="help-block">Enter Supervisor's Address</span>  
                                     </div>
                                 </div>

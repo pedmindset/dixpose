@@ -25,7 +25,9 @@ class JourneyController extends Controller
     public function index()
     {
         //show all schedule in database
-        $schedules = Journey::all()->where('company_id', Auth::user()->company_id);
+        $schedules = Journey::where('company_id', Auth::user()->company_id)
+                            ->orderBy('id', 'desc')
+                                    ->get();
 
         return view('schedules.index')->with('schedules', $schedules);
     }

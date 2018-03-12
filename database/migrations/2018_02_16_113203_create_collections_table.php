@@ -14,7 +14,8 @@ class CreateCollectionsTable extends Migration
     {
         Schema::create('collections', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id')->unsigned()->index();;
+            $table->String('code')->nullable();
+            $table->integer('customer_id')->unsigned()->index();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->integer('company_id')->unsigned()->index();;
             $table->foreign('company_id')->references('id')->on('companies');

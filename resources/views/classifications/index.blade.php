@@ -27,24 +27,24 @@
                     </div>
                 </div>
                 <div class="card-body">  
-                        <table class="table table-striped table-hover display nowrap table table-hover table-striped table-bordered" id="table1">
+                        <table class="table table-hover display nowrap table table-hover table-striped" id="table1">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
                                         <th>Classification</th>
-                                        <th>Price</th>
+                                        <th>Description</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                         
                                     </tr>
                                 </thead>
-                                @foreach($classifications as $classification)
+                               
                                 <tbody>
-                                   
+                                        @foreach($classifications as $classification)
                                     <tr>    
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $classification->class or '' }} </td>
-                                            <td>GHS {{ $classification->price or '' }}</td>
+                                            <td>{{ $classification->description or '' }} </td>
                                             <td class="text-nowrap">
                                                     <a href="{{ action('ClassificationController@edit',$classification->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     
@@ -58,9 +58,9 @@
                                             </td>
                                         
                                         </tr>
-                                    
+                                        @endforeach
                                 </tbody>
-                                @endforeach
+                              
                             </table>
                         
                         </div>

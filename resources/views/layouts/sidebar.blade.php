@@ -44,13 +44,6 @@
                         
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"aria-expanded="false"><i class="fa fa-pause"></i><span class="hide-menu">Bins </span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{ url('bins/create') }}">Add Bin</a></li>
-                        <li><a href="{{ url('bins') }}">Manage Bins</a></li>
-                        
-                    </ul>
-                </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"aria-expanded="false"><i class="fa fa-map"></i><span class="hide-menu">Classification </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ url('classifications/create') }}">Add Classification </a></li>
@@ -58,6 +51,14 @@
                         
                     </ul>
                 </li>
+                <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"aria-expanded="false"><i class="fa fa-pause"></i><span class="hide-menu">Bins </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ url('bins/create') }}">Add Bin</a></li>
+                        <li><a href="{{ url('bins') }}">Manage Bins</a></li>
+                        
+                    </ul>
+                </li>
+               
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Customers </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ url('customers/create') }}">Add Customer </a></li>

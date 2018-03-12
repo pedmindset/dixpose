@@ -132,7 +132,7 @@
                                            <h4 class="control-label"> Select Bins</h4>
                                              <select name="bins[]" class="select2 select2-multiple js-states js-example-events"  style="width: 100%" multiple="multiple" data-placeholder="Choose bin type">
                                                  @foreach($bins as $bin)
-                                                <option value="{{ $bin->id or '' }}">{{ $bin->type or '' }}</option>
+                                             <option value="{{ $bin->id or '' }}">{{ $bin->type or '' }} - {{ $bin->classification->class }}</option>
                                                 @endforeach
                                             </select>
                                             <small class="form-control-feedback text-danger"> If customer has three 240 ltr bins select 240 three times</small>
@@ -153,7 +153,7 @@
                                             <label class="control-label">Service Classification<span class="text-danger">*</span></label>
                                                 <select name="classification" class="form-control custom-select" data-placeholder="Choose a classification" tabindex="1" required>
                                                         @foreach($classifications as $classification)
-                                                        <option  value="{{$classification->id or ''}}">{{$classification->class or ''}}</option>
+                                                <option  value="{{$classification->id or ''}}">{{$classification->class or ''}}</option>
                                                         @endforeach
                                                    
                                              </select>

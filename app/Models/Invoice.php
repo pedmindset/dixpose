@@ -15,10 +15,19 @@ class Invoice extends Model
     ];
 
     public function company(){
-        $this->belongTo('App\Models\Company');
+       return $this->belongTo('App\Models\Company');
     }
 
-    public function collection(){
-        $this->hasMany('App\Models\Collection');
+
+    public function payment()
+    {
+        return $this->hasMany('App\Models\Payment');
     }
+
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer');
+    }
+    
 }

@@ -107,7 +107,7 @@
                                  <div class="col-md-5">
                                     <div class="form-group">
                                         <label class="col-md-5">Pick up date</label>
-                                            <input  type="text" id="date-format" name="pick_up_date" class="form-control  {{ $errors->has('pick_up_date') ? ' is-invalid' : '' }}" value="{{ old('pick_up_date') }}" placeholder="Saturday 24 June 2017 - 21:44">
+                                            <input  type="text" id="mdate" name="pick_up_date" class="form-control  {{ $errors->has('pick_up_date') ? ' is-invalid' : '' }}" value="{{ old('pick_up_date') }}" placeholder="Select Date">
                                              <span class="help-block">Select Pick up date</span>  
                                         </div>
                                 </div>

@@ -11,11 +11,17 @@ class Payment extends Model
     use softDeletes;
 
     public function company(){
-        $this->belongTo('App\Models\Company');
+        return $this->belongTo('App\Models\Company');
     }
 
     public function invoice(){
-        $this->belongTo('App\Models\Invoice');
+        return $this->belongTo('App\Models\Invoice');
+    }
+
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer');
     }
 
 

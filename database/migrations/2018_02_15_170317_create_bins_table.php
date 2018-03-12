@@ -16,6 +16,9 @@ class CreateBinsTable extends Migration
             $table->increments('id');
             $table->integer('company_id')->unsigned()->index();;
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->integer('classification_id')->unsigned()->index();;
+            $table->foreign('classification_id')->references('id')->on('classifications');
+            $table->biginteger('price')->nullable();
             $table->string('type')->nullable();
             $table->string('desc')->nullable();
             $table->timestamps();

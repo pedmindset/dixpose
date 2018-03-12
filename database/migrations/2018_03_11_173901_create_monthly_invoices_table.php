@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentsTable extends Migration
+class CreateMonthlyInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,17 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('monthlyinvoices', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id')->unsigned();
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->integer('invoice_id')->unsigned();
-            $table->foreign('invoice_id')->references('id')->on('invoices');
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers');
-            $table->biginteger('amount_paid');            
+            $table->string('number')->nullable();
+            $table->string('status')->nullable();
+            $table->string('remarks')->nullable();
+            $table->biginteger('amount')->nullable();
+            $table->date('due_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +35,6 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('payments');
+        Schema::drop('monthlyinvoices');
     }
 }
