@@ -22,7 +22,7 @@ class CreateSupervisorsTable extends Migration
             $table->BigInteger('phone1')->nullable();
             $table->BigInteger('phone2')->nullable();
             $table->string('address')->nullable();
-            $table->sofDeletes();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         'App\Console\Commands\AddCustomerCollections',
-       'App\Console\Commands\AddMonthlyBills',
+    //    'App\Console\Commands\AddMonthlyBills',
         // 'App\Console\Commands\AddMonthlyInvoice',
     ];
 
@@ -33,11 +33,11 @@ class Kernel extends ConsoleKernel
                  ->everyMinute()
                  ->sendOutputTo('App/collection.txt');
 
-       $schedule->command('bills:customers')
-                 // ->monthlyOn(1, '1:00')
-                 // ->at('22:00')
-                  ->everyMinute()
-                  ->sendOutputTo('App/bills.txt');
+    //    $schedule->command('bills:customers')
+    //              // ->monthlyOn(1, '1:00')
+    //              // ->at('22:00')
+    //               ->everyMinute()
+    //               ->sendOutputTo('App/bills.txt');
 
 
     //    $schedule->command('invoice:monthly')

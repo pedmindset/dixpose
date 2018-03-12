@@ -49,6 +49,14 @@ export default new VueRouter({
                                 require('./components/passport/PersonalAccessTokens.vue')
                             )
                 },
+                {           
+                            path: '/field-form',
+                            name: 'field-form',
+                            component: Vue.component(
+                                'field-Form',
+                                require('./components/fieldForm.vue')
+                            )
+        },
         ]
 
       

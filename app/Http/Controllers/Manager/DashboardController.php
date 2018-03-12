@@ -857,8 +857,8 @@ class DashboardController extends Controller
         public function pending_collections_yearly()
         {
             //Get collections for the year
-            $PendingCollectionsYearly = $this->yearly_scope('created_at', $this->get_all_pending_collections());
-            return $PendingCollectionsYearly;
+            $pendingCollectionsYearly = $this->yearly_scope('created_at', $this->get_all_pending_collections());
+            return $pendingCollectionsYearly;
         }
 
         public function number_of_completed_collections_yearly()
@@ -1414,6 +1414,30 @@ class DashboardController extends Controller
             $this->number_of_pending_collections_daily()
         ];
 
+
+        $options = [];
+        $options['scales']
+                ['yAxes'][]['linear'] = true;
+        $options['scales']['yAxes'][]['linear'] = true;
+        $options['responsive'] = true;
+
+
+        // scales: {
+        //     yAxes: [{
+        //         type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+        //         display: true,
+        //         position: 'left',
+        //         id: 'y-axis-1',
+        //     }, {
+        //         type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+        //         display: true,
+        //         position: 'right',
+        //         id: 'y-axis-2',
+        //         gridLines: {
+        //             drawOnChartArea: false
+        //         }
+        //     }],
+
         $chart = app()->chartjs
          ->name('CollectionStatictics')
          ->type('bar')
@@ -1433,9 +1457,7 @@ class DashboardController extends Controller
             
            
          ])
-         ->options([
-            'responsive' => true,
-         ]);
+         ->options($options);
 
          return $chart;
 

@@ -14,7 +14,7 @@
 /**
 **/
 
-Route::get('/admin/dashboard', 'SuperAdmin\AdminController@dashboard');
+Route::get('/dashboard', 'SuperAdmin\AdminController@dashboard');
 
 Route::group(['prefix' => 'customer'], function () {
   Route::get('/login', 'CustomerAuth\LoginController@showLoginForm')->name('login');
