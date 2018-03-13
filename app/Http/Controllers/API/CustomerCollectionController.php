@@ -32,7 +32,7 @@ class CustomerCollectionController extends Controller
         //return all collections in database
 
         $collections = Customer::where('company_id', Auth::user()->company_id)
-                     ->with('company', 'bin', 'collection', 'classification', 'zone', 'service_zone')->paginate(20);
+                     ->with('bin', 'collection')->paginate(20);
 
         if (! $collections) {
             return response()->json([
@@ -68,7 +68,7 @@ class CustomerCollectionController extends Controller
         //return a single collection
         
         $collection = Customer::where('company_id', Auth::user()->company_id)
-                     ->with('company', 'bin', 'collection', 'classification', 'zone', 'service_zone')->find($id);
+                        ->with('bin', 'collection')->find($id);
         
         
         if (! $collection) {

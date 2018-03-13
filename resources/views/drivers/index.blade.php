@@ -27,13 +27,14 @@
                     </div>
                 </div>
                 <div class="card-body">  
-                        <table class="table table-striped table-hover display nowrap table table-hover table-striped table-bordered" id="table1">
+                        <table class="table table-striped table-hover display nowrap table table-responsive table-bordered" id="table1">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
                                         <th>Driver Name</th>
                                         <th>Phone 1</th>
                                         <th>Phone 2</th>
+                                        <th>Email</th>
                                         <th>Address</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -48,6 +49,7 @@
                                             <td>{{ $driver->name or '' }} </td>
                                             <td>{{ $driver->phone1 or '' }}</td>
                                             <td>{{ $driver->phone2 or '' }} </td>
+                                            <td>{{ $driver->email or '' }} </td>
                                             <td>{{ $driver->address or '' }}</td>
                                             <td class="text-nowrap">
                                                     <a href="{{ action('DriverController@edit',$driver->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>

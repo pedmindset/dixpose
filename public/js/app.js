@@ -52206,121 +52206,9 @@ exports.push([module.i, "\nbody {\n  background-color: green;\n}\n.customer-box 
 
 /***/ }),
 /* 63 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-var session_url = 'http://localhost:8000/api/v1/collections';
-var username = 'kevin@gmail.com';
-var password = 'password';
-var credentials = btoa(username + ':' + password);
-var BasicAuth = 'Basic ' + credentials;
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "fieldForm.vue",
-
-  data: function data() {
-    return {
-      customers: [],
-
-      location: '',
-
-      status: '',
-
-      bins: []
-    };
-  },
-  methods: {
-    created: function created() {
-      var _this = this;
-
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/v1/collections/' + this.location, {
-        // headers: {'Authorization': BasicAuth}
-      }).then(function (response) {
-        // console.log(response);
-        // console.log(response.data.data)
-        _this.customers = response.data.data;
-        // console.log(this.customers["bins"])
-
-      }).catch(function (error) {
-        console.error(error.message);
-      });
-    }
-  },
-  addCollection: function addCollection() {
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put(session_url, {
-      // headers: {'Authorization': BasicAuth}
-    }).then(function (input) {
-      this.status = '';
-      this.bins = '';
-      console.log(input);
-    }).catch(function (error) {
-      console.error(error.message);
-    });
-  }
-});
+throw new Error("Module build failed: SyntaxError: Unexpected token (102:15)\n\n\u001b[0m \u001b[90m 100 | \u001b[39m    axios\u001b[33m.\u001b[39mput(session_url\u001b[33m,\u001b[39m {\n \u001b[90m 101 | \u001b[39m      \u001b[90m// headers: {'Authorization': BasicAuth}\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 102 | \u001b[39m        status \u001b[33m=\u001b[39m \u001b[32m\"collected\"\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m     | \u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 103 | \u001b[39m        bins \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcollectedBins\u001b[33m,\u001b[39m\n \u001b[90m 104 | \u001b[39m        collectionId \u001b[33m=\u001b[39m\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcollectionId\u001b[33m.\u001b[39mid\u001b[33m,\u001b[39m\n \u001b[90m 105 | \u001b[39m    })\u001b[0m\n");
 
 /***/ }),
 /* 64 */
@@ -52376,17 +52264,24 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm._l(_vm.customers.bins, function(bin) {
-                    return _c("div", { attrs: { id: "customerInfo" } }, [
-                      _c("input", {
-                        attrs: { type: "checkbox", name: "bin-1" }
-                      }),
-                      _vm._v(_vm._s(bin.type)),
-                      _c("br")
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _vm._l(_vm.customers, function(customer) {
-                    return _c("div")
+                    return _c(
+                      "div",
+                      {
+                        attrs: { id: "customerInfo" },
+                        model: {
+                          value: _vm.collectedBins,
+                          callback: function($$v) {
+                            _vm.collectedBins = $$v
+                          },
+                          expression: "collectedBins"
+                        }
+                      },
+                      [
+                        _c("input", { attrs: { type: "checkbox" } }),
+                        _vm._v(_vm._s(bin.type)),
+                        _c("br")
+                      ]
+                    )
                   })
                 ],
                 2

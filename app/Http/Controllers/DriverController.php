@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Auth;
 use App\Models\Driver;
 use App\Models\Company;
+use App\Models\Journey;
+use App\Models\Customer;
+use Illuminate\Http\Request;
 
 class DriverController extends Controller
 {
@@ -49,6 +51,8 @@ class DriverController extends Controller
         //validate and store driver's data
         $validateData = $request->validate([
             'name' => 'required|string',
+            'email' => 'required|string|email|max:255|unique:drivers',
+            'password' => 'required|string|min:6|alpha_dash',
             'phone1' => 'nullable|numeric',
             'phone2' => 'nullable|numeric',
             'address' => 'nullable'
@@ -58,6 +62,8 @@ class DriverController extends Controller
         $driver = new Driver;
         $driver->company_id = $company->id; 
         $driver->name = $request->name;
+        $driver->email = $request['email'];
+        $driver->password = bcrypt($request['password']);
         $driver->phone1 = $request->phone1;
         $driver->phone2 = $request->phone2;
         $driver->address = $request->address;
@@ -104,6 +110,7 @@ class DriverController extends Controller
         //validate and update driver's data
         $validateData = $request->validate([
             'name' => 'required|string',
+            'password' => 'required|string|min:6|alpha_dash',
             'phone1' => 'nullable|numeric',
             'phone2' => 'nullable|numeric',
             'address' => 'nullable'
@@ -113,6 +120,7 @@ class DriverController extends Controller
         ->where('id', $id)->first();
 
         $driver->name = $request->name;
+        $driver->password = bcrypt($request['password']);
         $driver->phone1 = $request->phone1;
         $driver->phone2 = $request->phone2;
         $driver->address = $request->address;
@@ -137,5 +145,69 @@ class DriverController extends Controller
         $driver->destroy($driver->id);
 
         return redirect('drivers')->with('status', 'Driver has been successfully Deleted');
+    }
+
+    public function schedule()
+    {
+        $assigned_schedules = $this->assigned_schedules();
+        $number_of_assigned_schedules = $this->number_of_assigned_schedules();
+        return view('driver/schedule', compact('assigned_schedules', 'number_of_assigned_schedules'));
+    }
+
+    public function collection()
+    {
+        return view('driver/collection');
+    }
+
+    public function startSchedule(Request $request, $id)
+    {
+        //validate and update
+        $validateData = $request->validate([
+            'status' => 'required|string',
+            'startpoint_lg' => 'nullable',
+            'startpoint_lt' => 'nullable',
+            'startpoint_time' => 'nullable'
+        ]);
+
+        $journey = Journey::where('company_id', Auth::user()->company_id)
+                            ->where('id', $id)->first();
+        $journey->startpoint_lg = $request->startpoint_lg;
+        $journey->startpoint_lt = $request->startpoint_lt;
+        $journey->startpoint = $request->startpoint_time;
+        $journey->status = $request->status;
+        $journey->save();
+
+        return redirect('driver/mobile/collections/customer')->with('status', 'Schedule was Started Updated');
+    }
+
+    public function assigned_schedules()
+    {
+        $assigned_schedules = Journey::where('company_id', Auth::user()->company_id)
+                            ->where('driver_id', Auth::user()->id)
+                            ->where('status', 'created')
+                            ->get();
+        return $assigned_schedules;
+    }
+
+    public function number_of_assigned_schedules()
+    {
+        $number_of_asigned_schedules = Journey::where('company_id', Auth::user()->company_id)
+                            ->where('driver_id', Auth::user()->id)
+                            ->where('status', 'created')
+                            ->get()->count();
+        return $number_of_asigned_schedules;
+    }
+
+    public function get_customer_collection($id)
+    {
+        //return a single collection
+        
+        $collection = Customer::where('company_id', Auth::user()->company_id)
+                        ->with('bin', 'collection')->find($id);
+        
+        
+        
+        
+        return view('driver/edit', compact('collection'));
     }
 }

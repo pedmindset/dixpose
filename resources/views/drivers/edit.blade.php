@@ -56,6 +56,14 @@
                                         <span class="help-block">Enter Driver's Phone</span>  
                                         </div>
                                     </div>
+                                   <!-- Text input-->
+                                   <div class="form-group {{ $errors->has('password') ? ' is-invalid' : '' }}">
+                                        <label class="col-md-5 control-label" for="password">Password</label>  
+                                        <div class="col-md-5">
+                                        <input id="password" name="password" type="text" placeholder="Password" value="" class="form-control input-md">
+                                        <span class="help-block">Enter Driver's Password</span>  
+                                        </div>
+                                    </div>
                                 
                                 <!-- Text input-->
                                 <div class="form-group {{ $errors->has('address') ? ' is-invalid' : '' }}">

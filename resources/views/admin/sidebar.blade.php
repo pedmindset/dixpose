@@ -8,15 +8,7 @@
         <div class="panel-body">
             <ul class="nav" role="tablist">
 
-                    <router-link to='/passport-clients' tag='li'>
-                        <a>Passport Client</a>
-                    </router-link>
-
-                    
-                    <router-link to='/passport-personal-access-tokens' tag='li'>
-                        <a>Passport Personal Access Tokens</a>
-                    </router-link>
-
+                
                     <router-link to='/field-form' tag='li'>
                         <a>Collection</a>
                     </router-link>

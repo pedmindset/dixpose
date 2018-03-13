@@ -101,15 +101,7 @@ class CollectionController extends Controller
         return view('collections.create', compact('customers'));
     }
 
-    public function schedule()
-    {
-        return view('collections/API/schedule');
-    }
-
-    public function collection()
-    {
-        return view('collections/API/collection');
-    }
+   
 
     /**
      * Update the specified resource in storage.

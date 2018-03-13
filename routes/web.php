@@ -89,8 +89,7 @@ Route::auth();
      Route::get('customers/sort/{key}', 'CustomerController@customerSort');
      Route::get('customers/search/{value}', 'CustomerController@searchCustomer');
      Route::get('/logout', 'AppController@logout')->name('logout');
-     Route::get('/mobile/collections/', 'CollectionController@schedule');
-     Route::get('/mobile/collections/customer', 'CollectionController@collection');
+ 
 });
 //  Route::group(['prefix' => 'api/v1'], function () {
 //     Route::apiResource('collections', 'API/CollectionController');

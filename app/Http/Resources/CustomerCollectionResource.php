@@ -32,6 +32,8 @@ class CustomerCollectionResource extends JsonResource
             'latitude' => $this->latitude,
             'radius' => $this->radius,
             'frequency' => $this->frequency,
+            'collections' => $this->collection,
+            'bins' => $this->bin,
             'company' => $this->company,
             'zone' => $this->zone,
             'sector' => $this->service_zone,

@@ -48,6 +48,24 @@
                                 </div>
 
                                  <!-- Text input-->
+                                 <div class="form-group {{ $errors->has('email') ? ' is-invalid' : '' }}">
+                                        <label class="col-md-5 control-label" for="Email">Email</label>  
+                                        <div class="col-md-5">
+                                        <input id="email" name="email" type="text" placeholder="Email" value="{{ old('email') }}" class="form-control input-md">
+                                        <span class="help-block">Enter Driver's Email</span>  
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                 <div class="form-group {{ $errors->has('password') ? ' is-invalid' : '' }}">
+                                        <label class="col-md-5 control-label" for="password">Password</label>  
+                                        <div class="col-md-5">
+                                        <input id="password" name="password" type="text" placeholder="Password" value="{{ old('password') }}" class="form-control input-md">
+                                        <span class="help-block">Enter Driver's Password</span>  
+                                        </div>
+                                    </div>
+
+                                 <!-- Text input-->
                                  <div class="form-group {{ $errors->has('phone2') ? ' is-invalid' : '' }}">
                                         <label class="col-md-5 control-label" for="phone2">Phone 2</label>  
                                         <div class="col-md-5">

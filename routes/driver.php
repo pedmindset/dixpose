@@ -7,6 +7,9 @@ Route::get('/home', function () {
 
     //dd($users);
 
-    return view('driver.home');
+    return redirect('/driver/mobile/collections');
 })->name('home');
 
+Route::get('/mobile/collections/', 'DriverController@schedule');
+Route::get('/mobile/collections/customer', 'DriverController@collection');
+Route::put('/mobile/schedule/{id}', 'DriverController@startSchedule')->name('updateSchedule');;

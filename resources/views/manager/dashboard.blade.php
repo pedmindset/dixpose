@@ -4,11 +4,12 @@
 
 @section('styles')
 
-<link href="{{ asset('node_modules/chartist-js/dist/chartist.min.css') }}" rel="stylesheet">
-<link href="{{ asset('node_modules/chartist-js/dist/chartist-init.css') }} rel="stylesheet">
+<link href="{{ asset('node_modules/chartist-js/dist/chartist.min.css') }}" rel="stylesheet"/>
+<link href="{{ asset('node_modules/chartist-js/dist/chartist-init.css') }}" rel="stylesheet"/>
 <link href="{{ asset('node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css')}}" rel="stylesheet">
 <link href="{{ asset('node_modules/css-chart/css-chart.css')}}" rel="stylesheet">
 <link href="{{ asset('dist/css/pages/widget-page.css') }}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ asset('node_modules/datatables/jquery.dataTables.min.css') }}" />
 {{--  <link href="{{ asset('dist/css/pages/easy-pie-chart.css') }}" rel="stylesheet">  --}}
 
 
@@ -107,7 +108,7 @@
             <div class="card-body ">
                 <div class="d-flex m-b-40 align-items-center ">
                     <div class="row p-15">
-                    <h5 class="card-title p-l-15">SCHEDULE FOR THE DAY</h5>
+                    <h5 class="card-title p-l-15">CUSTOMERS NOT SERVED FOR TODAY</h5>
                     <div class="white-box">
                             </div>
                             <div class="table-responsive">
@@ -115,26 +116,26 @@
                     <table class="table table-hover" id="table1">
                             <thead>
                                 <tr>
-                                    <th>Supervisor Name</th>
-                                    <th>Driver name </th>
+                                    <th>Code</th>
+                                    <th>Customer name </th>
                                     <th>Sector</th>
                                     <th>Status </th>
-                                    <th class="text-nowrap">Edit</th>
+                                    {{--  <th class="text-nowrap">Edit</th>  --}}
                                     
                                 </tr>
                             </thead>
                            
                             <tbody>
-                                    @foreach($schedulesYearly as $schedule)
+                                    @foreach($pendingCollectionsDaily as $collection)
                                 <tr>    
-                                        <td>{{ $schedule->supervisor->name or '' }}</td>
-                                        <td>{{ $schedule->driver->name or '' }}</td>
-                                        <td>{{ $schedule->service_zone->name or '' }}</td>
-                                        <td>{{ $schedule->status or ''}}</td>
-                                        <td class="text-nowrap">
+                                        <td>{{ $collection->code or '' }}</td>
+                                        <td>{{ $collection->customer->name or '' }}</td>
+                                        <td>{{ $collection->customer->service_zone->name or '' }}</td>
+                                        <td>{{ $collection->status or '' }}</td>
+                                        {{--  <td class="text-nowrap">
                                                 <a href="{{ action('JourneyController@edit',$schedule->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="text-left fa fa-pencil text-inverse m-r-10"></i> </a>
 
-                                        </td>
+                                        </td>  --}}
                                                 
                                        
                                     
@@ -502,6 +503,64 @@
 <!-- Chart JS --> --}}
 <script src=//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js charset=utf-8></script>
 {{--   {!! $PieCollectionsDaily->script() !!}  --}}
+
+<script src="{{ asset('node_modules/datatables/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+ <!-- start - This is for export functionality only -->
+ <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+ <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+ <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+ <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+ <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+ <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+ <!-- end - This is for export functionality only -->
+ <script>
+ $(document).ready(function() {
+     $('#myTable').DataTable();
+     $(document).ready(function() {
+         var table = $('#table3').DataTable({
+             "columnDefs": [{
+                 "visible": false,
+                 "targets": 2
+             }],
+             "order": [
+                 [2, 'asc']
+             ],
+             "displayLength": 25,
+             "drawCallback": function(settings) {
+                 var api = this.api();
+                 var rows = api.rows({
+                     page: 'current'
+                 }).nodes();
+                 var last = null;
+                 api.column(2, {
+                     page: 'current'
+                 }).data().each(function(group, i) {
+                     if (last !== group) {
+                         $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                         last = group;
+                     }
+                 });
+             }
+         });
+         // Order by the grouping
+         $('#table2 tbody').on('click', 'tr.group', function() {
+             var currentOrder = table.order()[0];
+             if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                 table.order([2, 'desc']).draw();
+             } else {
+                 table.order([2, 'asc']).draw();
+             }
+         });
+     });
+ });
+ $('#table1').DataTable({
+     dom: 'Bfrtip',
+     buttons: [
+         'copy', 'csv', 'excel', 'pdf', 'print'
+     ]
+ });
+ </script
 
 
 @endsection
