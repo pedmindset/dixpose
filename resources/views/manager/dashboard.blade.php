@@ -43,7 +43,7 @@
     <div class="col-lg-3 col-sm-6 col-xs-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-uppercase">Zoness</h5>
+                <h5 class="card-title text-uppercase">Zones</h5>
                 <div class="d-flex align-items-center no-block m-t-20 m-b-10">
                     <h1><i class="ti-map-alt text-info"></i></h1>
                     <div class="ml-auto">
