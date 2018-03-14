@@ -107,9 +107,9 @@ class CustomerController extends Controller
             'zone' => 'required|integer',
             'service_zone' => 'required|integer',
             'classification' => 'required|integer',
-            'email' => 'nullable|email',
-            'phone1' => 'nullable|numeric',
-            'phone2' => 'nullable|numeric',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone1' => 'nullable|alpha_num',
+            'phone2' => 'nullable|alpha_num',
             'address' => 'nullable',
             'ghana_gps' => 'nullable|max:10',
             'frequency' => 'required|string',
@@ -126,8 +126,8 @@ class CustomerController extends Controller
         $customer->service_zone_id = $request->service_zone;
         $customer->name = $request->name;
         $customer->email = $request->email;
-        $customer->phone1 = $request->phone1;
-        $customer->phone2 = $request->phone2;
+        $customer->phone1 = "$request->phone1";
+        $customer->phone2 = "$request->phone2";
         $customer->address = $request->address;
         $customer->classification_id = $request->classification;
         $customer->ghana_gps = $request->ghana_gps;

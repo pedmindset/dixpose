@@ -53,26 +53,43 @@
 @endsection
 
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/geolocator/2.1.1/geolocator.min.js"></script>
+
+
 
 <script>
-        var x = document.getElementById("demo");
-      
-        var locationNotSupported;
+
+     geolocator.config({
+        language: "en",
+        google: {
+            version: "3",
+            key: "AIzaSyDxcZOndF-d3WVLWh4XsayTLTbVv-QtoYU"
+        }
+    });
+
+    window.onload = function () {
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumWait: 10000,     // max wait time for desired accuracy
+            maximumAge: 0,          // disable cache
+            desiredAccuracy: 5,    // meters
+            fallbackToIP: true,     // fallback to IP if Geolocation fails or rejected
+            addressLookup: true,    // requires Google API key if true
+            timezone: true,         // requires Google API key if true
+            map: "map-canvas",      // interactive map element id (or options object)
+            staticMap: true         // map image URL (boolean or options object)
+        };
+        geolocator.locate(options, function (err, location) {
+            if (err) return console.log(err);
+            console.log(location);
+        });
+    };
 
         
-        (function  () {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else { 
-                locationNotSupported = "Geolocation is not supported by this browser.";
-            }
-        })();
         
-        function showPosition(position) {
-            var latitude = document.getElementById('ld').value = position.coords.latitude;
-            var longitude = document.getElementById('lg').value =  position.coords.longitude;
-          
-        }
-        </script>
+       
+</script>
 
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Auth;
+use Notification;
 use App\Models\Bin;
 use App\Models\Zone;
 use App\Models\Company;
@@ -10,13 +11,13 @@ use App\Models\Customer;
 use App\Models\Collection;
 use App\Models\ServiceZone;
 use Illuminate\Http\Request;
+use Sms;
 use App\Models\Classification;
 use Illuminate\Support\Facades\DB;
 use App\Notifications\BinCollected;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CollectionsResource;
 use App\Http\Resources\CustomerCollectionResource;
-use Notification;
 
 
 
@@ -142,7 +143,13 @@ class CustomerCollectionController extends Controller
 
             if ($success) {
                 DB::commit();
-
+                //send sms
+                $customerName = $collection->customer->name;
+                $customerPhone = $collection->customer->phone1;
+                $message  = "Hello $customerName, Your bins were collected Today. Thank You";
+                $to       = $customerPhone;
+                $from     = env('TWILIO_FROM');
+                $response = Sms::send($message,$to,$from);
 
                 return  response()->json([
                     'Collection was successfully updated to completed', 200

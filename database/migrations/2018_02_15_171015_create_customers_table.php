@@ -26,8 +26,8 @@ class CreateCustomersTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable()->unique()->nullable();
             $table->string('password')->nullable();
-            $table->BigInteger('phone1')->nullable();
-            $table->BigInteger('phone2')->nullable();
+            $table->string('phone1')->nullable();
+            $table->string('phone2')->nullable();
             $table->string('address')->nullable();
             $table->string('ghana_gps')->nullable();
             $table->float('longitude', 10, 6)->nullable();

@@ -9,11 +9,12 @@
         "consoletvs/charts": "^6.1",
         "fideloper/proxy": "~4.0",
         "fx3costa/laravelchartjs": "^2.5",
+        "guzzlehttp/guzzle": "^6.3",
         "hesto/multi-auth": "^2.0",
         "laravel/framework": "5.6.*",
         "laravel/passport": "^5.0",
         "laravel/tinker": "~1.0",
-        "nexmo/client": "^1.2"
+        "zenapply/laravel-sms": "^2.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
