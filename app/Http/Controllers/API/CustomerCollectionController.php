@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Models\Bin;
+use App\Models\Zone;
 use App\Models\Company;
 use App\Models\Customer;
-use App\Models\Zone;
-use App\Models\ServiceZone;
-use App\Models\Bin;
-use App\Models\Classification;
 use App\Models\Collection;
-use App\Http\Resources\CustomerCollectionResource;
+use App\Models\ServiceZone;
+use Illuminate\Http\Request;
+use App\Models\Classification;
+use Illuminate\Support\Facades\DB;
+use App\Notifications\BinCollected;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\CollectionsResource;
+use App\Http\Resources\CustomerCollectionResource;
+use Notification;
+
 
 
 
@@ -79,8 +82,8 @@ class CustomerCollectionController extends Controller
             ]);
         }
         
-        $resource = new CustomerCollectionResource($collection);
-        return $resource->response()->setStatusCode(200);
+       
+        return $collection;
     }
 
     /**
@@ -94,7 +97,6 @@ class CustomerCollectionController extends Controller
     {
         //validate and update
         $validateData = $request->validate([
-            'collection' => 'required|integer',
             'bins' => 'required', //array
             'status' => 'required',
             'ghanaGPS' => 'nullable',
@@ -123,7 +125,7 @@ class CustomerCollectionController extends Controller
                     
                     if ($collection->save()) {
                         
-                        $collection->bin()->attach($request->bins);
+                        $collection->bin()->attach($request->input('bins'));
                     
                         $success = true;
                     }
@@ -140,6 +142,8 @@ class CustomerCollectionController extends Controller
 
             if ($success) {
                 DB::commit();
+
+
                 return  response()->json([
                     'Collection was successfully updated to completed', 200
                     ])->withHeaders([

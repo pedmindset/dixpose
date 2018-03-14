@@ -15,7 +15,7 @@ use App\Models\Collection;
 */
 
 
- Route::group(['prefix' => 'v1', 'middleware' => ['auth.basic.once', 'cors']], function () {
+ Route::group(['prefix' => 'v1', 'middleware' => ['auth:api', 'cors']], function () {
 
     Route::apiResource('collections', 'API\CustomerCollectionController', ['only' => [
         'index', 'show', 'update' ]

@@ -8,7 +8,7 @@
         <h4 class="card-title">You have {{ $number_of_assigned_schedules }} Schedules Today</h4>
         <h6 class="card-subtitle">View Below to start Schedule</h6>
         @if (session('status'))
-        <div class="alert alert-success">
+        <div class="alert alert-warning">
             
             {{ session('status') }}
        </div>

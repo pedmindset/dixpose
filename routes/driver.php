@@ -12,4 +12,6 @@ Route::get('/home', function () {
 
 Route::get('/mobile/collections/', 'DriverController@schedule');
 Route::get('/mobile/collections/customer', 'DriverController@collection');
-Route::put('/mobile/schedule/{id}', 'DriverController@startSchedule')->name('updateSchedule');;
+Route::put('/mobile/schedule/{id}', 'DriverController@startSchedule')->name('updateSchedule');
+Route::get('/logout/', 'DriverController@logout');
+

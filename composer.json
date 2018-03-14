@@ -12,7 +12,8 @@
         "hesto/multi-auth": "^2.0",
         "laravel/framework": "5.6.*",
         "laravel/passport": "^5.0",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "nexmo/client": "^1.2"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

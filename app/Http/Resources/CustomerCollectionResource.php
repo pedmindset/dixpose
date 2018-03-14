@@ -34,10 +34,6 @@ class CustomerCollectionResource extends JsonResource
             'frequency' => $this->frequency,
             'collections' => $this->collection,
             'bins' => $this->bin,
-            'company' => $this->company,
-            'zone' => $this->zone,
-            'sector' => $this->service_zone,
-            'classification' => $this->classification,
            
             
             

@@ -33,12 +33,16 @@ class Customer extends Authenticatable
  
     protected $dates = ['deleted_at'];
 
+   
+    
      /**
      * Send the password reset notification.
      *
      * @param  string  $token
      * @return void
      */
+
+ 
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomerResetPassword($token));

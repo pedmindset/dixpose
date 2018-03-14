@@ -177,7 +177,7 @@ class DriverController extends Controller
         $journey->status = $request->status;
         $journey->save();
 
-        return redirect('driver/mobile/collections/customer')->with('status', 'Schedule was Started Updated');
+        return redirect('driver/mobile/collections/customer')->with('status', 'Schedule has been Started Successfully');
     }
 
     public function assigned_schedules()
@@ -210,4 +210,14 @@ class DriverController extends Controller
         
         return view('driver/edit', compact('collection'));
     }
+
+    public function logout()
+    {
+        $user = Auth::user();
+        Auth::logout($user);
+        return redirect('/driver/login');
+    }
+
+
+    
 }
