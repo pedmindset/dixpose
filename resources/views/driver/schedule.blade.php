@@ -43,51 +43,57 @@
                         </form>
                     </td>
                 </tr>
+
+               
                 
                
                 @endforeach
             </tbody>
         </table>
+       
     </div>
-
+    <div id="map" class="map col-m-12"></div>
 @endsection
 
 @section('script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/geolocator/2.1.1/geolocator.min.js"></script>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJzm4i6XEWNpWOrqluaF_olV1vs_DT8oc&callback=" async defer></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js"></script>
 
 
 <script>
 
-     geolocator.config({
-        language: "en",
-        google: {
-            version: "3",
-            key: "AIzaSyDxcZOndF-d3WVLWh4XsayTLTbVv-QtoYU"
+$(document).ready(function(){
+  var element =  document.getElementById('map');
+    if (typeof(element) != 'undefined' && element != null)
+  {
+    var map = new GMaps({
+        el: '#map',
+        lat: -12.043333,
+        lng: -77.028333
+        });
+
+        GMaps.geolocate({
+        success: function(position) {
+        map.setCenter(position.coords.latitude, position.coords.longitude);
+        
+  },
+        error: function(error) {
+            alert('Geolocation failed: '+error.message);
+        },
+        not_supported: function() {
+            alert("Your browser does not support geolocation");
+        },
+        always: function() {
+            alert("Done!");
         }
     });
+  }
+});
 
-    window.onload = function () {
-        var options = {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumWait: 10000,     // max wait time for desired accuracy
-            maximumAge: 0,          // disable cache
-            desiredAccuracy: 5,    // meters
-            fallbackToIP: true,     // fallback to IP if Geolocation fails or rejected
-            addressLookup: true,    // requires Google API key if true
-            timezone: true,         // requires Google API key if true
-            map: "map-canvas",      // interactive map element id (or options object)
-            staticMap: true         // map image URL (boolean or options object)
-        };
-        geolocator.locate(options, function (err, location) {
-            if (err) return console.log(err);
-            console.log(location);
-        });
-    };
 
-        
         
        
 </script>

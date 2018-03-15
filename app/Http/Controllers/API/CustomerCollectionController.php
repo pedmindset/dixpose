@@ -72,8 +72,13 @@ class CustomerCollectionController extends Controller
         //return a single collection
         
         $collection = Customer::where('company_id', Auth::user()->company_id)
-                        ->with('bin', 'collection')->find($id);
-        
+                        ->where('id', $id)
+                        ->with(['collection' => function ($query) {
+                                        $query->where('status', 'Pending');
+                        }, 'bin'])
+                        ->first();
+
+                
         
         if (! $collection) {
             return response()->json([
@@ -105,6 +110,8 @@ class CustomerCollectionController extends Controller
             'longitude' => 'nullable',
             'latitude' => 'nullable',
             'radius' => 'nullable',
+            'customer' => 'nullable',
+            'collection' => 'nullable'
         ]);
         
 
@@ -118,6 +125,8 @@ class CustomerCollectionController extends Controller
                     $collection = Collection::where('company_id', Auth::user()->company_id)
 
                                   ->where('id', $id)
+
+                                  ->where('customer_id', $request->customer)
                                   
                                   ->first();
                                   
@@ -125,8 +134,28 @@ class CustomerCollectionController extends Controller
                     $collection->status = $request->input('status');
                     
                     if ($collection->save()) {
+
+                        $customerName = $collection->customer->name;
+                        $customerPhone = $collection->customer->phone1;
+                        $bins = $request->input('bins');
+
+                        $decodeBins = json_decode($bins, true);
+
+                        $myBin = [];
+                        $arrayBinLenght = sizeof($bins);
+                       
+                        foreach ($decodeBins as $bin => $value) {
+                            $myBin += $value;
+                        }
+
+                        $binsValue = implode(",", $myBin);
                         
-                        $collection->bin()->attach($request->input('bins'));
+                        $collection->bin()->attach($myBin);
+                    
+                        $message  = "Hello $customerName, Your were collected Today.   Thank You";
+                        $to       = $customerPhone;
+                        $from     = env('TWILIO_FROM');
+                        $response = Sms::send($message,$to,$from);
                     
                         $success = true;
                     }
@@ -135,7 +164,7 @@ class CustomerCollectionController extends Controller
                 
                // maybe log this exception, but basically it's just here so we can rollback if we get a surprise
                return  response()->json([
-                'Couldnt find collection',$request->input('bins'),$e->getMessage(), 422
+                'Couldnt find collection',$e->getMessage(), 422
                 ])->withHeaders([
                     'Content-Type' => 'application/json',
                 ]);
@@ -143,13 +172,7 @@ class CustomerCollectionController extends Controller
 
             if ($success) {
                 DB::commit();
-                //send sms
-                $customerName = $collection->customer->name;
-                $customerPhone = $collection->customer->phone1;
-                $message  = "Hello $customerName, Your bins were collected Today. Thank You";
-                $to       = $customerPhone;
-                $from     = env('TWILIO_FROM');
-                $response = Sms::send($message,$to,$from);
+              
 
                 return  response()->json([
                     'Collection was successfully updated to completed', 200

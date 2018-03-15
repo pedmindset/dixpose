@@ -1,6 +1,5 @@
 @yield('script')
   <!-- Scripts -->
-  <script src="{{ asset('node_modules/jquery/jquery-3.2.1.min.js') }}"></script>
   <!-- Bootstrap tether Core JavaScript -->
   <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   <!-- slimscrollbar scrollbar JavaScript -->

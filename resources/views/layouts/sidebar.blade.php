@@ -30,6 +30,13 @@
             <ul id="sidebarnav">
                 <!--<li class="nav-small-cap">--- OPERATIONS</li>-->
                 <li><a class="waves-effect waves-dark" href="{{ url('manager/dashboard' )}}" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Schedule</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ url('schedules/create') }}">Add Schedule </a></li>
+                        <li><a href="{{ url('schedules') }}">Manage schedules</a></li>
+                        
+                    </ul>
+                </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"aria-expanded="false"><i class="fa fa-globe"></i><span class="hide-menu">Zones </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ url('zones/create') }}">Add Zone </a></li>

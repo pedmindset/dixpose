@@ -60,7 +60,7 @@
 @endsection
 
 @section('script')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{ asset('node_modules/jquery/jquery-3.2.1.min.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/geolocator/2.1.1/geolocator.min.js"></script>
 
 
@@ -90,11 +90,11 @@
 
                  var access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQ0ZmIzMDE5NjkyNGEyYjQ5OGU2NTFiMDhkNDFmZjBmMTk1NzY0Zjg5NzViOTJmMjQwNTFhYmZlZGFlOTQ3YzkxOGU5ZTBiMWQ2Nzc4NjQzIn0.eyJhdWQiOiIxIiwianRpIjoiZDRmYjMwMTk2OTI0YTJiNDk4ZTY1MWIwOGQ0MWZmMGYxOTU3NjRmODk3NWI5MmYyNDA1MWFiZmVkYWU5NDdjOTE4ZTllMGIxZDY3Nzg2NDMiLCJpYXQiOjE1MjA5NzY1MDMsIm5iZiI6MTUyMDk3NjUwMywiZXhwIjoxNTUyNTEyNTAzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.XEA9Qo6YklOqe1Sqh7-I0EhxfHSwd3wAbqHc8mhIffjW_b3NkgV_HEPnLes6luexeo4qMX2sgtuOFxSQ6elS8jFDDQ51hETRuG6CgwsChew3IW8hRdtVnK051AJBYOu4N1dGJe3F9nW1NDyIKJXdjY0X0ymO1Csd9GwhLgRqb4WT2RSYPj5E9Um-VDtmIbXxyRjxsuREmqLrWZ-75cwyDUs5PT1wMu23sfW-cfj-PEVAjhXfND53dd-4KkYbKkMgcy5RmBcP4gF6NgOL6R-Xj5k1aLqcsmAwp2jcR-a0GRJT3gluUUMArGpEklwPLr6vYme5GeZ5K2R_IydASa01Lz1tHQhHs5C4yIvD9SyBEkleuwR1KikiM-HwCJacHpRuIGZrycWJKjv9OQ-DEIJErsn4GlBSHMbCJq5zExMPGYhOlscxD5FOWaQywWh6rJ66TBX5bZ5QEee223dlt8RkCNbQ6ZS7ynj-A9xllRueT0hxfZqXJyqBFrjmAd102Q_QnvGPxZufsXK9ddu81g_jWC4fOyg81RiMJz_Xaqo6YEYep7jiPWvQsp5zv8KKAKFXtegnz80LNEoy8-ncYD6bbusnNMslXaJa1ytVl9fFqmIihP3P_AZFjhUuu6Gp6PQ04Y38oHHTH3n9MBiGX_sbmjCWuJ48EdZ00QAkEfeewfM"
 
-                //var location = window.location.host;
+                var location = window.location.host;
                 $.ajax({
                     
                     beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + access_token); } ,
-                    url: 'https://dixpose.dev/api/v1/collections/'+id, 
+                    url: 'https://'+location+'/api/v1/collections/'+id, 
                    
                 })
                 .then(
@@ -109,7 +109,7 @@
                         var customerBinsHtml = ''
                         
                         for (let index = 0; index < bin.length; index++) {
-                            customerBinsHtml += '<input type=' + ' "checkbox" ' + ' name = "bins[]"' + ' id = "binscheckbox"' + ' value="' + bin[index].id +'"> '+ bin[index].type + ' litre bin<br>';   
+                            customerBinsHtml += '<input type=' + ' "checkbox" ' + ' name = "bins"' + ' id = "binscheckbox"' + ' value="' + bin[index].id +'"> '+ bin[index].type + ' litre bin<br>';   
                         }
 
                         customerBins.innerHTML = customerBinsHtml;
@@ -120,30 +120,39 @@
                                 var name = data.name;
                                 var collection = data.collection[0].id;
                                 var status = 'Collected';
-                                var bins = [];
 
-                                var checkedBins = { 'bins[]' : []};
+                                //  $("input[name='bins']:checked").each(function(){
+                                //         bins.push(this.value);
+                                //     });
+
+
+                                var checkedBins = { 'bins' : []};
                                 $(":checked").each(function() {
-                                checkedBins['bins[]'].push($(this).val());
+                                checkedBins['bins'].push($(this).val());
                                 });
+
+                                var $newCheckedBins = JSON.stringify(checkedBins);
 
                                 var formData = {
                                     status: status,
-                                    bins: checkedBins
+                                    bins: JSON.stringify(checkedBins),
+                                    customer: data.id,
+                                    collection: collection
                                 }
 
                                 
 
-
+                                console.log(formData.bins);
+                                
                                 // var username = 'emmanueloduro@hotmail.com';
                                 // var password = '123456';
                                 // var credentials = btoa(username + ':' + password);
                                 // var BasicAuth = 'Basic ' + credentials;
-                                        
+                                var location = window.location.host;
                                 $.ajax({
                                   
                                     beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + access_token); } ,
-                                    url: 'https://dixpose.dev/api/v1/collections/'+collection,
+                                    url: 'https://'+location+'/api/v1/collections/'+collection,
                                     type: 'PUT',
                                     dataType: 'json',
                                     data: formData,
@@ -156,7 +165,7 @@
                                             button: "Add next!",
                                         }).
                                         then((result)=>{
-                                            location.reload();
+                                            window.location.reload();
                                         });
                                     },
                                     error: function(error){
@@ -167,7 +176,7 @@
                                             button: "try again again!",
                                             }). 
                                             then((result)=>{
-                                                location.reload();
+                                                window.location.reload();
                                         });
                                     }
 
@@ -182,7 +191,10 @@
                             text: "Customer was not found",
                             icon: "warning",
                             button: "Search again!",
-                            });
+                            }).
+                            then((result)=>{
+                                 window.location.reload();
+                          });
                  }
                 );
             };

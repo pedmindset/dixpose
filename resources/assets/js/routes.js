@@ -26,41 +26,34 @@ export default new VueRouter({
     routes: [
                            
                 
-    //                     {        
-    //                                 path: '/passport-clients',
-    //                                 name: 'passport-clients',
-    //                                 component: Vue.component(
-    //                                     'passport-clients',
-    //                                     require('./components/passport/Clients.vue')
-    //                                 )
-    //                     },
-    //                     {
+                        {        
+                                    path: '/passport-clients',
+                                    name: 'passport-clients',
+                                    component: Vue.component(
+                                        'passport-clients',
+                                        require('./components/passport/Clients.vue')
+                                    )
+                        },
+                        {
                                     
                         
-    //                                 path: '/passport-authorized-clients',
-    //                                 name: 'passport-authorized-clients',
-    //                                 component: Vue.component(
-    //                                     'passport-authorized-clients',
-    //                                     require('./components/passport/AuthorizedClients.vue')
-    //                                 )
+                                    path: '/passport-authorized-clients',
+                                    name: 'passport-authorized-clients',
+                                    component: Vue.component(
+                                        'passport-authorized-clients',
+                                        require('./components/passport/AuthorizedClients.vue')
+                                    )
                                     
-    //                     },
-    //                     {           
-    //                                 path: '/passport-personal-access-tokens',
-    //                                 name: 'passport-personal-access-tokens',
-    //                                 component: Vue.component(
-    //                                     'passport-personal-access-tokens',
-    //                                     require('./components/passport/PersonalAccessTokens.vue')
-    //                                 )
-    //                     },
-    //                     {           
-    //                                 path: '/field-form',
-    //                                 name: 'field-form',
-    //                                 component: Vue.component(
-    //                                     'field-form',
-    //                                     require('./components/fieldForm.vue')
-    //                                 )
-    //             },
+                        },
+                        {           
+                                    path: '/passport-personal-access-tokens',
+                                    name: 'passport-personal-access-tokens',
+                                    component: Vue.component(
+                                        'passport-personal-access-tokens',
+                                        require('./components/passport/PersonalAccessTokens.vue')
+                                    )
+                        },
+                        
         ]
 
       
